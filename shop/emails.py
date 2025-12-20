@@ -11,6 +11,8 @@ logger = logging.getLogger("shop.emails")
 def send_order_confirmation_email(order):
     """Send order confirmation email to customer."""
     try:
+        logger.info(f"Preparing order confirmation email for order {order.order_id}")
+
         items_data = [
             {
                 "name": item.product.title,
@@ -27,11 +29,14 @@ def send_order_confirmation_email(order):
             "email": order.email,
             "items": items_data,
             "total": order.total_price,
-            "site_url": settings.SITE_URL,
+            "site_url": getattr(settings, "SITE_URL", "https://www.todiane.com"),
             "user_name": order.user.get_full_name() if order.user else None,
             "date_created": order.created.strftime("%Y-%m-%d %H:%M:%S"),
         }
 
+        logger.info(f"Rendering template for order {order.order_id}")
+
+        # Use correct template path
         html_content = render_to_string(
             "account/email/order_confirmation.html", context
         )
@@ -41,6 +46,8 @@ def send_order_confirmation_email(order):
         from_email = settings.DEFAULT_FROM_EMAIL
         recipient_list = [order.email]
 
+        logger.info(f"Sending email from {from_email} to {recipient_list}")
+
         msg = EmailMultiAlternatives(subject, text_content, from_email, recipient_list)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
@@ -48,9 +55,11 @@ def send_order_confirmation_email(order):
         logger.info(
             f"Order confirmation email sent successfully for order {order.order_id} to {order.email}"
         )
+
     except Exception as e:
         logger.error(
-            f"Failed to send order confirmation email for order {order.order_id}: {str(e)}"
+            f"Failed to send order confirmation email for order {order.order_id}: {str(e)}",
+            exc_info=True,  # This logs the full stack trace
         )
         raise
 
@@ -58,6 +67,8 @@ def send_order_confirmation_email(order):
 def send_admin_new_order_email(order):
     """Send notification email to admin when a new order is placed."""
     try:
+        logger.info(f"Preparing admin notification email for order {order.order_id}")
+
         items_data = [
             {
                 "name": item.product.title,
@@ -73,10 +84,13 @@ def send_admin_new_order_email(order):
             "customer_name": order.user.get_full_name() if order.user else "Guest",
             "items": items_data,
             "total": order.total_price,
-            "site_url": settings.SITE_URL,
+            "site_url": getattr(settings, "SITE_URL", "https://www.todiane.com"),
             "date_created": order.created.strftime("%Y-%m-%d %H:%M:%S"),
         }
 
+        logger.info(f"Rendering admin template for order {order.order_id}")
+
+        # Use correct template path
         html_content = render_to_string("account/email/admin_new_order.html", context)
         text_content = strip_tags(html_content)
 
@@ -84,13 +98,17 @@ def send_admin_new_order_email(order):
         from_email = settings.DEFAULT_FROM_EMAIL
         admin_email = getattr(settings, "ADMIN_EMAIL", settings.DEFAULT_FROM_EMAIL)
 
+        logger.info(f"Sending admin email from {from_email} to {admin_email}")
+
         msg = EmailMultiAlternatives(subject, text_content, from_email, [admin_email])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
         logger.info(f"Admin notification sent for order {order.order_id}")
+
     except Exception as e:
         logger.error(
-            f"Failed to send admin notification for order {order.order_id}: {str(e)}"
+            f"Failed to send admin notification for order {order.order_id}: {str(e)}",
+            exc_info=True,  # This logs the full stack trace
         )
         raise

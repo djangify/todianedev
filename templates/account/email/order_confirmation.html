@@ -1,6 +1,6 @@
-{% extends "base_email.html" %}
+{% extends "account/base_email.html" %}
 
-{% block title %}Order Confirmation #{{ order.id }}{% endblock %}
+{% block title %}Order Confirmation #{{ order_id }}{% endblock %}
 
 {% block content %}
 <p>Hello {% if first_name %}{{ first_name }}{% else %}there{% endif %},</p>
@@ -16,12 +16,12 @@
 
 <p><strong>Total: £{{ total|floatformat:2 }}</strong></p>
 
-<p>You can <a href="https://www.todiane.com/accounts/login/">Login HERE </a> to download your purchase.</p>
+<p>You can <a href="https://www.todiane.com/accounts/login/">Login HERE</a> to download your purchase.</p>
 
 <p>If you have any questions, please don't hesitate to contact us at diane@todiane.com.</p>
 
 <p>Best regards,<br>
 To Diane<br>
-www.todiane.com
+www.todiane.com<br>
 @todianedev</p>
 {% endblock %}
