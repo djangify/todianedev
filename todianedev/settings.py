@@ -34,7 +34,7 @@ CORS_ALLOWED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
-    "adminita",
+    # "adminita",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -107,9 +107,11 @@ AUTH_USER_MODEL = "accounts.User"
 ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_SIGNUP_FIELDS = [
     "email*",
+    "first_name*",
     "password1*",
     "password2*",
 ]
+ACCOUNT_ADAPTER = "accounts.adapters.CustomAccountAdapter"
 
 LOGIN_REDIRECT_URL = "/accounts/dashboard/"
 LOGOUT_REDIRECT_URL = "/"
@@ -192,6 +194,7 @@ EMAIL_HOST_USER = env("EMAIL_HOST_USER")  # noqa: F405
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")  # noqa: F405
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="hello@todiane.com")
 
 
 TINYMCE_DEFAULT_CONFIG = {

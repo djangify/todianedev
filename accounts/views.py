@@ -3,10 +3,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth import logout
 from allauth.account.models import EmailAddress
 from shop.models import WishList
 
-from .forms import SupportForm
+from .forms import SupportForm, ProfileForm
 from .models import MemberResource
 from shop.models import OrderItem
 
@@ -32,24 +33,65 @@ def dashboard_view(request):
 
     member_resources = MemberResource.objects.filter(is_active=True)
 
-    # ✅ WISHLIST DATA (THIS WAS MISSING)
     wishlist_items = WishList.objects.filter(user=user).select_related("product")
-
     favourite_products = [item.product for item in wishlist_items]
 
     context = {
         "is_verified": is_verified,
         "purchased_count": purchased_count,
         "member_resources": member_resources,
-        "favourite_products": favourite_products,  # ✅ REQUIRED
+        "favourite_products": favourite_products,
     }
 
     return render(request, "accounts/dashboard.html", context)
 
 
-# -------------------------
-# Support
-# -------------------------
+@login_required
+def profile_view(request):
+    """
+    Allow users to update their name.
+    Email changes go through allauth's email management.
+    """
+    user = request.user
+
+    if request.method == "POST":
+        form = ProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your profile has been updated.")
+            return redirect("accounts:profile")
+    else:
+        form = ProfileForm(instance=user)
+
+    context = {
+        "form": form,
+        "user": user,
+    }
+
+    return render(request, "accounts/profile.html", context)
+
+
+@login_required
+def delete_account_view(request):
+    """
+    Allow users to delete their account.
+    Requires confirmation via POST.
+    """
+    user = request.user
+
+    if request.method == "POST":
+        confirm = request.POST.get("confirm_delete", "")
+        if confirm == "DELETE":
+            user.delete()
+            logout(request)
+            messages.success(request, "Your account has been permanently deleted.")
+            return redirect("core:home")
+        else:
+            messages.error(request, "Please type DELETE to confirm account deletion.")
+
+    return render(request, "accounts/delete_account.html")
+
+
 @login_required
 def support(request):
     user = request.user
