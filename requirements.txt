@@ -12,3 +12,4 @@ Pillow
 psycopg[binary]
 stripe
 beautifulsoup4
+adminita
