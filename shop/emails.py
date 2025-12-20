@@ -9,6 +9,7 @@ logger = logging.getLogger("shop.emails")
 
 
 def send_order_confirmation_email(order):
+    """Send order confirmation email to customer."""
     try:
         items_data = [
             {
@@ -32,7 +33,7 @@ def send_order_confirmation_email(order):
         }
 
         html_content = render_to_string(
-            "accounts/email/order_confirmation.html", context
+            "account/email/order_confirmation.html", context
         )
         text_content = strip_tags(html_content)
 
@@ -55,7 +56,7 @@ def send_order_confirmation_email(order):
 
 
 def send_admin_new_order_email(order):
-    """Send notification email to admin when a new order is placed"""
+    """Send notification email to admin when a new order is placed."""
     try:
         items_data = [
             {
@@ -76,10 +77,10 @@ def send_admin_new_order_email(order):
             "date_created": order.created.strftime("%Y-%m-%d %H:%M:%S"),
         }
 
-        html_content = render_to_string("accounts/email/admin_new_order.html", context)
+        html_content = render_to_string("account/email/admin_new_order.html", context)
         text_content = strip_tags(html_content)
 
-        subject = f"New Order #{order.order_id}"
+        subject = f"💰 New Order #{order.order_id}"
         from_email = settings.DEFAULT_FROM_EMAIL
         admin_email = getattr(settings, "ADMIN_EMAIL", settings.DEFAULT_FROM_EMAIL)
 
@@ -92,3 +93,4 @@ def send_admin_new_order_email(order):
         logger.error(
             f"Failed to send admin notification for order {order.order_id}: {str(e)}"
         )
+        raise

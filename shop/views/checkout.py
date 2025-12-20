@@ -109,9 +109,22 @@ def payment_success(request):
 
         # Create order items
         for item in cart:
+            # Get the purchased download if specified
+            purchased_download = None
+            if item.get("download_id"):
+                from ..models import ProductDownload
+
+                try:
+                    purchased_download = ProductDownload.objects.get(
+                        id=item["download_id"]
+                    )
+                except ProductDownload.DoesNotExist:
+                    pass
+
             OrderItem.objects.create(
                 order=order,
                 product=item["product"],
+                purchased_download=purchased_download,
                 price_paid_pence=int(item["price"] * 100),
                 quantity=item["quantity"],
                 downloads_remaining=item["product"].download_limit,

@@ -18,7 +18,7 @@ logger = logging.getLogger("shop")
 def secure_download(request, order_item_id, download_id):
     """
     Secure download view that serves files for purchased products.
-    Uses the new ProductDownload model with custom labels.
+    Only allows downloading the specific variant that was purchased.
     """
     order_item = get_object_or_404(OrderItem, id=order_item_id)
 
@@ -28,6 +28,13 @@ def secure_download(request, order_item_id, download_id):
 
     # Get the specific download file
     download = get_object_or_404(order_item.product.downloads, id=download_id)
+
+    # Verify user purchased this specific download variant
+    if (
+        order_item.purchased_download
+        and order_item.purchased_download.id != download.id
+    ):
+        raise PermissionDenied("You did not purchase this download variant.")
 
     file_field = download.file
     if not file_field:

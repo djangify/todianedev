@@ -1,7 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from blog.models import Post
-from portfolio.models import Project
+from portfolio.models import Portfolio
 from shop.models import Product, Category as ShopCategory
 from infopages.models import InfoPage
 
@@ -57,7 +57,7 @@ class PortfolioSitemap(Sitemap):
     priority = 0.7
 
     def items(self):
-        return Project.objects.filter(published=True)
+        return Portfolio.objects.filter(published=True)
 
     def lastmod(self, obj):
         return obj.updated if hasattr(obj, "updated") else None

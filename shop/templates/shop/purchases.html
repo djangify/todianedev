@@ -45,6 +45,11 @@
                   <div>
                     <h3 class="text-[color:var(--color-font-main)] font-medium">
                       {{ item.product.title }}
+                      {% if item.purchased_download %}
+                        <span class="text-sm text-[color:var(--color-font-main)]/60">
+                          ({{ item.purchased_download.label }})
+                        </span>
+                      {% endif %}
                     </h3>
                     <p class="text-sm text-[color:var(--color-font-main)]/70">
                       Quantity: {{ item.quantity }}
@@ -59,7 +64,7 @@
                   </div>
                 </div>
 
-                <!-- Download Links -->
+                <!-- Download Link - Only show the purchased variant -->
                 {% if item.has_downloadable_content and order.status == 'completed' %}
                 <div class="mt-4 pt-4 border-t border-[color:var(--color-brand-accent)]/10">
                   <p class="text-sm text-[color:var(--color-font-main)]/70 mb-2">
@@ -67,17 +72,29 @@
                   </p>
                   
                   <div class="flex flex-wrap gap-2">
-                    {% for download in item.get_downloads %}
-                      {% if download.file %}
-                      <a href="{% url 'shop:secure_download' order_item_id=item.id download_id=download.id %}"
+                    {% if item.purchased_download and item.purchased_download.file %}
+                      <!-- Show only the specific purchased download -->
+                      <a href="{% url 'shop:secure_download' order_item_id=item.id download_id=item.purchased_download.id %}"
                          class="inline-flex items-center px-4 py-2 bg-[color:var(--color-brand-primary)] text-white text-sm font-medium rounded hover:bg-[color:var(--color-brand-accent)] transition">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                         </svg>
-                        {{ download.label }}
+                        Download
                       </a>
-                      {% endif %}
-                    {% endfor %}
+                    {% elif not item.purchased_download %}
+                      <!-- Legacy orders or products with single download - show all -->
+                      {% for download in item.get_downloads %}
+                        {% if download.file %}
+                        <a href="{% url 'shop:secure_download' order_item_id=item.id download_id=download.id %}"
+                           class="inline-flex items-center px-4 py-2 bg-[color:var(--color-brand-primary)] text-white text-sm font-medium rounded hover:bg-[color:var(--color-brand-accent)] transition">
+                          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                          </svg>
+                          Download
+                        </a>
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
                   </div>
                 </div>
                 {% elif order.status != 'completed' %}

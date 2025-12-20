@@ -17,6 +17,7 @@
       class="flex items-center justify-between gap-4 mb-4"
     >
       {% csrf_token %}
+      <input type="hidden" name="download_id" value="{{ download.id }}">
 
       <div class="flex items-center gap-3">
         <label class="text-sm font-medium text-[color:var(--color-font-main)]">
@@ -44,8 +45,5 @@
 {% else %}
 
   <!-- No downloads available -->
-  {% comment %} <div class="bg-gray-50 border border-gray-200 rounded-sm p-6 text-center">
-    <p class="text-[color:var(--color-font-main)]/70">No downloads available for this product.</p>
-  </div> {% endcomment %}
 
 {% endif %}

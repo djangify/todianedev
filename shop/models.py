@@ -314,6 +314,13 @@ class OrderItem(models.Model):
     product = models.ForeignKey(
         Product, related_name="order_items", on_delete=models.CASCADE
     )
+    purchased_download = models.ForeignKey(
+        ProductDownload,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        help_text="The specific download variant the customer purchased",
+    )
 
     price_paid_pence = models.PositiveIntegerField()
     quantity = models.PositiveIntegerField(default=1)

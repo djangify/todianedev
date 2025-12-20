@@ -24,6 +24,11 @@
             <div>
               <h3 class="text-base font-semibold text-[color:var(--color-font-main)] mb-1">
                 {{ item.product.title }}
+                {% if item.download %}
+                  <span class="text-sm font-normal text-gray-500">
+                    ({{ item.download.label }})
+                  </span>
+                {% endif %}
               </h3>
               <p class="text-sm text-gray-600">Price: £{{ item.price|floatformat:2 }}</p>
             </div>
@@ -33,6 +38,9 @@
           <div class="flex items-center gap-4">
             <form method="post" action="{% url 'shop:cart_update' item.product.id %}" class="flex items-center gap-2">
               {% csrf_token %}
+              {% if item.download %}
+              <input type="hidden" name="download_id" value="{{ item.download.id }}">
+              {% endif %}
               <input 
                 type="number" 
                 name="quantity" 
@@ -50,6 +58,9 @@
 
             <form method="post" action="{% url 'shop:cart_remove' item.product.id %}">
               {% csrf_token %}
+              {% if item.download %}
+              <input type="hidden" name="download_id" value="{{ item.download.id }}">
+              {% endif %}
               <button type="submit" class="text-red-600 text-sm hover:underline">Remove</button>
             </form>
           </div>
@@ -67,11 +78,11 @@
         <!-- Buttons -->
         <div class="flex flex-col md:flex-row justify-end gap-4 mt-4">
           <a href="{% url 'shop:product_list' %}"
-             class="w-full md:w-auto px-6 py-3 border border-gray-300 rounded-lg text-[color:var(--color-primary)] bg-white hover:bg-[color:var(--color-brand-accent)] text-center transition">
+             class="w-full md:w-auto px-6 py-3 border border-gray-300 rounded-lg text-[color:var(--color-brand-primary)] bg-white hover:bg-[color:var(--color-brand-accent)] text-center transition">
             Continue Shopping
           </a>
           <a href="{% url 'shop:checkout' %}"
-             class="w-full md:w-auto px-6 py-3 rounded-lg bg-[color:var(--color-accent)] text-white font-semibold hover:opacity-90 text-center transition">
+             class="w-full md:w-auto px-6 py-3 rounded-lg bg-[color:var(--color-brand-primary)] text-white font-semibold hover:opacity-90 text-center transition">
             Proceed to Checkout
           </a>
         </div>
