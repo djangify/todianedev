@@ -1,0 +1,32 @@
+{# ==========================================================================
+   REUSABLE FAQ ITEM COMPONENT (AI Search Ready)
+   ==========================================================================
+   
+   Usage:
+   {% include "studio/components/faq_item.html" with question="..." answer="..." %}
+   
+   Parameters:
+   - question: The FAQ question
+   - answer: The FAQ answer (can include HTML)
+   - open: Optional boolean to start expanded (default: false)
+   ========================================================================== #}
+
+<div class="border-b border-[color:var(--color-brand-accent)]/20 last:border-b-0" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+  <details class="group" {% if open %}open{% endif %}>
+    <summary class="flex justify-between items-center cursor-pointer py-5 text-left list-none">
+      <h3 class="text-lg font-semibold text-[color:var(--color-brand-primary)] pr-8" itemprop="name">
+        {{ question }}
+      </h3>
+      <span class="flex-shrink-0 w-8 h-8 rounded-full bg-[color:var(--color-brand-light)] flex items-center justify-center group-open:rotate-180 transition-transform duration-300">
+        <svg class="w-5 h-5 text-[color:var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </span>
+    </summary>
+    <div class="pb-5 pr-12" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+      <div class="text-[color:var(--color-font-main)] leading-relaxed" itemprop="text">
+        {{ answer|safe }}
+      </div>
+    </div>
+  </details>
+</div>

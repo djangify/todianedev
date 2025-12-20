@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Free images from — Diane Corriette{% endblock %}
+
+{% block content %}
+<section class="mt-16">
+
+    {% if gallery.title %}
+        <h2 class="text-2xl font-semibold mb-10 text-center tracking-tight">
+            {{ gallery.title }}
+        </h2>
+    {% endif %}
+    <section class="max-w-7xl mx-auto mb-8">
+  <p>
+    All images in this gallery were created by me using AI design tools and image generation software.
+    They are shared to help address the lack of freely available images representing women - including black women in tech,
+    older women, women of colour, and women in professional, creative, and technical spaces.
+  </p>
+
+  <p>
+    You are welcome to download and use these images on your blog, website, or other projects - personal or commercial.
+    Attribution is not required, but if you’d like to credit the source, a link back to this page is appreciated:
+  </p>
+
+  <p class="text-base text-gray-600 mt-4 mb-2">
+  Optional attribution (copy and paste if you’d like to credit the source):
+</p>
+
+<pre class="bg-gray-100 border border-gray-200 rounded-md p-4 text-sm overflow-x-auto">
+&lt;a href="https://todiane.com/free-images-download/" target="_blank" rel="noopener"&gt;
+  Image courtesy of To Diane – Free AI Images
+&lt;/a&gt;
+</pre>
+
+
+  <p class="mt-4">
+    If these images are useful to you, you can also support my work by clicking the Tip Me button and buying me a coffee.
+  </p>
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+<script>
+  kofiWidgetOverlay.draw('todianedev', {
+    'type': 'floating-chat',
+    'floating-chat.donateButton.text': 'Tip Me',
+    'floating-chat.donateButton.background-color': '#794bc4',
+    'floating-chat.donateButton.text-color': '#fff'
+  });
+</script>
+</section>
+
+
+    <div class="max-w-7xl mx-auto px-4 mb-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-2 auto-rows-[280px]">
+
+            {% for image in gallery.images.all %}
+                {% if image.published %}
+                    {% cycle 'one' 'two' 'three' 'four' 'five' 'six' as position silent %}
+
+                    <figure class="relative group overflow-hidden shadow-sm bg-[color:var(--color-brand-light)]
+                        {% if position == 'one' %}
+                            sm:col-span-1 lg:col-span-3
+                        {% elif position == 'two' %}
+                            sm:col-span-2 lg:col-span-6
+                        {% elif position == 'three' %}
+                            sm:col-span-1 lg:col-span-3
+                        {% elif position == 'four' %}
+                            sm:col-span-2 lg:col-span-6
+                        {% elif position == 'five' %}
+                            sm:col-span-1 lg:col-span-3
+                        {% else %}
+                            sm:col-span-1 lg:col-span-3
+                        {% endif %}
+                    ">
+
+                        <a
+                            hx-get="{% url 'studio:gallery_image_modal' image.pk %}"
+                            hx-target="#gallery-modal"
+                            hx-swap="innerHTML"
+                            class="block w-full h-full cursor-zoom-in"
+                        >
+                            <img
+                                src="{{ image.image.url }}"
+                                alt="{{ image.title|default:'' }}"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                loading="lazy"
+                            >
+                        </a>
+
+                        {% if image.caption %}
+                            <figcaption class="pointer-events-none absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
+                                <span class="text-white text-lg font-medium">
+                                    {{ image.caption }}
+                                </span>
+                            </figcaption>
+                        {% endif %}
+                    </figure>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+{% endblock %}

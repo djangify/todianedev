@@ -1,0 +1,72 @@
+
+<section class="mt-16">
+
+    {% if gallery.title %}
+        <h2 class="text-3xl font-semibold mb-4 text-center tracking-tight">
+            {{ gallery.title }}
+        </h2>
+    {% endif %}
+    {% if gallery.subtitle %}
+        <p class="mt-2 mb-8 text-lg text-gray-600 text-center">
+            {{ gallery.subtitle }}
+        </p>
+    {% endif %}
+
+    <div class="max-w-7xl mx-auto px-4 mb-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-2 auto-rows-[280px]">
+
+            {% for image in homepage_images %}
+                {% if image.published %}
+                    {% cycle 'one' 'two' 'three' 'four' 'five' 'six' as position silent %}
+
+                    <figure class="relative group overflow-hidden shadow-sm bg-[color:var(--color-brand-light)]
+                        {% if position == 'one' %}
+                            sm:col-span-1 lg:col-span-3
+                        {% elif position == 'two' %}
+                            sm:col-span-2 lg:col-span-6
+                        {% elif position == 'three' %}
+                            sm:col-span-1 lg:col-span-3
+                        {% elif position == 'four' %}
+                            sm:col-span-2 lg:col-span-6
+                        {% elif position == 'five' %}
+                            sm:col-span-1 lg:col-span-3
+                        {% else %}
+                            sm:col-span-1 lg:col-span-3
+                        {% endif %}
+                    ">
+
+                        <a
+                            hx-get="{% url 'studio:gallery_image_modal' image.pk %}"
+                            hx-target="#gallery-modal"
+                            hx-swap="innerHTML"
+                            class="block w-full h-full cursor-zoom-in"
+                        >
+                            <img
+                                src="{{ image.image.url }}"
+                                alt="{{ image.title|default:'' }}"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                loading="lazy"
+                            >
+                        </a>
+
+                        {% if image.caption %}
+                            <figcaption class="pointer-events-none absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
+                                <span class="text-white text-lg font-medium">
+                                    {{ image.caption }}
+                                </span>
+                            </figcaption>
+                        {% endif %}
+                    </figure>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+         <a href="{% url 'studio:gallery' homepage_gallery.slug %}"
+         aria-label="View all articles"
+         class=" inline-block uppercase self-start bg-transparent text-[color:var(--color-brand-primary)] font-bold border-2 border-[color:var(--color-brand-primary)] mt-8 px-10 py-4 rounded-md hover:bg-[color:var(--color-brand-primary)] hover:text-white transition-all text-base">
+
+                 
+         View More Free Images
+      </a>
+    </div>
+</section>

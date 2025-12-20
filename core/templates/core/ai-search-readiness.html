@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Get Your Website Ready for AI Search{% endblock %}
+
+{% block open_graph_tags %}
+<meta property="og:title" content="Get Your Website Ready for AI Search" />
+<meta property="og:description" content="Learn how to prepare your site for Google AI Overviews, Bing Copilot, and ChatGPT Browse. Cluster pages, FAQs, and schema made simple." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/ai-search-hero.jpg" />
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Get Your Website Ready for AI Search">
+<meta name="twitter:description" content="Learn how to prepare your site for Google AI Overviews, Bing Copilot, and ChatGPT Browse. Cluster pages, FAQs, and schema made simple.">
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/ai-search.jpg">
+{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-[color:var(--color-text-primary)]">
+
+  <!-- Header -->
+  <header class="space-y-4">
+    <h1 class="text-2xl sm:text-3xl font-semibold leading-normal text-[color:var(--color-brand-secondary)]">
+      Get Your Website Ready for AI Search
+    </h1>
+    <p class="leading-relaxed">
+      Search is changing. Instead of showing a list of links, Google, Bing, and AI tools now deliver direct answers.
+      This guide helps you prepare your website with cluster pages, FAQs, and schema so your content gets chosen.
+    </p>
+  </header>
+
+  <!-- What is AI Search Readiness -->
+  <div class="mt-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+  <div class="md:col-span-3  rounded-xl border border-[color:var(--color-brand-secondary)] p-6">
+    <h2 class="text-xl font-semibold mb-3 text-[color:var(--color-brand-secondary)]">
+      What Does AI Search Readiness Mean?
+    </h2>
+    <p class="text-[color:var(--color-font-main)]">
+      Being AI-search ready means structuring your content so AI tools can easily recognise, trust, and use it in answers.
+      This includes building cluster pages, writing FAQs, and adding schema markup. When your site is AI-friendly, you are
+      more likely to be featured in answer boxes, summaries, and overviews.
+    </p>
+  </div>
+
+  <div class="md:col-span-1 bg-[color:var(--color-brand-light)] rounded-xl border border-[color:var(--color-brand-secondary)] p-6">
+    <h3 class="text-lg font-semibold mb-3 text-[color:var(--color-brand-secondary)]">The Future</h3>
+    <p class="text-[color:var(--color-font-main)]">
+      AI overviews are already here. Sites that adapt now will capture visibility and leads, while others risk being invisible.
+      Getting AI-ready is no longer optional.
+    </p>
+  </div>
+</div>
+
+
+  <!-- Steps -->
+  <section class="mt-14">
+    <h2 class="text-xl font-semibold mt-6 mb-6 text-[color:var(--color-brand-secondary)]">Steps to Get AI-Search Ready</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+      <a href="/blog/what-is-a-cluster-page/" class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 transition bg-[color:var(--color-brand-light)]">
+        <div class="text-sm uppercase text-[color:var(--color-brand-primary)]">Step 1</div>
+        <h3 class="text-lg font-semibold mt-2 mb-1 text-[color:var(--color-brand-secondary)]">Build Cluster Pages</h3>
+        <p class="text-[color:var(--color-font-main)]">Organise your topics into clear hubs that show authority.</p>
+      </a>
+
+      <a href="/blog/how-to-write-faq-snippets/" class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 hover:bg-[color:var(--color-surface-hover)] transition  bg-[color:var(--color-brand-light)]">
+        <div class="text-sm uppercase text-[color:var(--color-brand-primary)]">Step 2</div>
+        <h3 class="text-lg font-semibold mt-2 mb-1 text-[color:var(--color-brand-secondary)]">Add Frequently Asked Questions (FAQ)</h3>
+        <p class="text-[color:var(--color-font-main)]">Answer common customer questions clearly and concisely.</p>
+      </a>
+
+      <a href="/blog/schema-markup-made-simple/" class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6  transition  bg-[color:var(--color-brand-light)]">
+        <div class="text-sm uppercase text-[color:var(--color-brand-primary)]">Step 3</div>
+        <h3 class="text-lg font-semibold mt-2 mb-1 text-[color:var(--color-brand-secondary)]">Apply Schema Markup</h3>
+        <p class="text-[color:var(--color-font-main)]">Use structured data to signal content type to search engines.</p>
+      </a>
+
+      <a href="/blog/formatting-for-ai-search-readiness/" class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 transition  bg-[color:var(--color-brand-light)]">
+        <div class="text-sm uppercase text-[color:var(--color-brand-primary)]">Step 4</div>
+        <h3 class="text-lg font-semibold mt-2 mb-1 text-[color:var(--color-brand-secondary)]">Format for AI</h3>
+        <p class="text-[color:var(--color-font-main)]">Use short paragraphs, headings, and summaries that AI tools prefer.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Quick Answers -->
+  <section class="mt-14">
+    <h2 class="text-xl font-semibold mt-6 mb-6 text-[color:var(--color-brand-secondary)]">Quick Answers About AI Search Readiness</h2>
+    <div class="space-y-8">
+      <div>
+        <h3 class="text-lg font-semibold mb-2 text-[color:var(--color-brand-secondary)]">What is AI search readiness?</h3>
+        <p class="text-[color:var(--color-font-main)]">AI search readiness means structuring your website so artificial intelligence tools such as Google’s AI Overviews, Bing Copilot, and ChatGPT can easily understand and use your content. It involves creating topic clusters, adding FAQs, applying schema markup, and formatting content for clarity. The goal is to increase your chances of being chosen as the direct source in AI-generated answers.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-2 text-[color:var(--color-brand-secondary)]">Do I need coding skills?</h3>
+        <p class="text-[color:var(--color-font-main)]">No coding skills are required to make your site AI-search ready. Most tasks, such as adding FAQs, writing cluster pages, or generating schema markup, can be done with free online tools or copy-and-paste code. Even non-technical business owners can follow simple steps and checklists to prepare their website for AI-driven visibility.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-2 text-[color:var(--color-brand-secondary)]">Is this the same as SEO?</h3>
+        <p class="text-[color:var(--color-font-main)]">AI search readiness builds on traditional SEO but goes further. SEO ensures your site ranks in search results, while AI readiness ensures your content is structured so AI tools can pull it into answer boxes and summaries. In practice, it means you still optimise for keywords, but you also format your content in ways that AI can interpret and reuse.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-2 text-[color:var(--color-brand-secondary)]">How long does it take to get results?</h3>
+        <p class="text-[color:var(--color-font-main)]">The time frame depends on your current site health and how quickly search engines crawl your changes. Many small business websites notice improvements within a few weeks after adding FAQs, schema, and cluster pages. AI snippets may appear gradually, and consistency is key, each new piece of structured content builds your authority over time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Articles -->
+  <section class="mt-14">
+    <h2 class="text-xl font-semibold mt-6 mb-6 text-[color:var(--color-brand-secondary)]">Additional Articles Worth Reading</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <a href="/blog/why-businesses-must-focus-on-ai-search-readiness/" class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 hover:bg-[color:var(--color-surface-hover)] transition">
+        <h3 class="text-lg font-semibold mb-1 text-[color:var(--color-brand-secondary)]">Rise Of AI Search</h3>
+        <p class="text-[color:var(--color-font-main)]">Why businesses must focus on AI Search Readiness.</p>
+      </a>
+      <a href="/blog/ai-search-readiness-vs-ai-seo-and-powered-search/" class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 hover:bg-[color:var(--color-surface-hover)] transition">
+        <h3 class="text-lg font-semibold mb-1 text-[color:var(--color-brand-secondary)]">AI Search vs Others</h3>
+        <p class="text-[color:var(--color-font-main)]">Difference between AI Search readiness, AI SEO & AI-Powered Search.</p>
+      </a>
+      <a href="/blog/how-local-businesses-can-get-ai-search-ready/" class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 hover:bg-[color:var(--color-surface-hover)] transition">
+        <h3 class="text-lg font-semibold mb-1 text-[color:var(--color-brand-secondary)]">Local Business & AI</h3>
+        <p class="text-[color:var(--color-font-main)]">How local business owners can get AI search ready. </p>
+      </a>
+      <a href="/blog/from-high-street-to-ai-search-winning-local-custom/" class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 hover:bg-[color:var(--color-surface-hover)] transition">
+        <h3 class="text-lg font-semibold mb-1 text-[color:var(--color-brand-secondary)]">Winning Local Customers</h3>
+        <p class="text-[color:var(--color-font-main)]">How AI search helps you win local customers.</p>
+      </a>
+      <a href="#" class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 hover:bg-[color:var(--color-surface-hover)] transition">
+        <h3 class="text-lg font-semibold mb-1 text-[color:var(--color-brand-secondary)]">Coming Soon</h3>
+        <p class="text-[color:var(--color-font-main)]">Additional articles on AI search readiness to follow</p>
+      </a>
+      <a href="/blog/category/ai-search-readiness/" class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 hover:bg-[color:var(--color-surface-hover)] transition">
+        <h3 class="text-lg font-semibold mb-1 text-[color:var(--color-brand-secondary)]">Blog Category</h3>
+        <p class="text-[color:var(--color-font-main)]">All the articles currently available on AI Search</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="mt-14">
+    <h2 class="text-xl font-semibold mt-6 mb-6 text-[color:var(--color-brand-secondary)]">Frequently Asked Questions</h2>
+    <div class="max-w-3xl space-y-5">
+      <details class="bg-[color:var(--color-surface-light)] border border-[color:var(--color-brand-secondary)] rounded-lg shadow-sm p-4">
+        <summary class="font-semibold cursor-pointer">Do I need schema for AI search?</summary>
+        <p class="mt-2 text-[color:var(--color-font-main)]">Schema is not strictly required, but it significantly increases your chances of appearing in AI-generated answers and rich results. Schema markup is a way of labelling your content in code so search engines instantly know whether a page is a product, article, FAQ, or how-to. By adding schema, you reduce confusion and signal that your site is trustworthy and relevant.</p>
+      </details>
+      <details class="bg-[color:var(--color-surface-light)] border border-[color:var(--color-brand-secondary)] rounded-lg shadow-sm p-4">
+        <summary class="font-semibold cursor-pointer">Can I make my site AI-ready myself?</summary>
+        <p class="mt-2 text-[color:var(--color-font-main)]">Yes — most business owners can implement AI readiness themselves by following structured guides. Start by defining your main topics, creating cluster pages, and adding FAQs. Then use free schema generators to create the code and paste it into your site. While a Digital Marketing specialist can speed things up, many DIY checklists and toolkits make it realistic to do on your own. If you don't want to do this yourself considering asking me to do it for you ;)</p>
+      </details>
+      <details class="bg-[color:var(--color-surface-light)] border border-[color:var(--color-brand-secondary)] rounded-lg shadow-sm p-4">
+        <summary class="font-semibold cursor-pointer">Does AI search readiness replace SEO?</summary>
+        <p class="mt-2 text-[color:var(--color-font-main)]">No, AI readiness doesn’t replace SEO — it complements it. SEO still matters for driving visibility, keywords, and traffic, but AI readiness makes sure your content gets picked up in summaries, not just rankings. Think of SEO as the foundation and AI readiness as the next layer that prepares your content for how search is evolving.</p>
+      </details>
+      <details class="bg-[color:var(--color-surface-light)] border border-[color:var(--color-brand-secondary)] rounded-lg shadow-sm p-4">
+        <summary class="font-semibold cursor-pointer">Is Systeme.io or ShopWired AI-ready?</summary>
+        <p class="mt-2 text-[color:var(--color-font-main)]">Both Systeme.io and ShopWired support the structure you need for AI search readiness. They allow you to create organised cluster pages, publish FAQs, and add schema markup through built-in fields or custom code. If you are using these platforms, you already have a strong base for preparing your site for AI-driven search results.</p>
+      </details>
+    </div>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need schema for AI search?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Schema is not required, but it greatly improves your chances of being featured in AI snippets and search results."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I make my site AI-ready myself?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. With checklists and guides, most business owners can implement AI readiness without hiring a developer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does AI search readiness replace SEO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. SEO remains essential, but AI readiness ensures your content appears in AI overviews, not just rankings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Systeme.io or ShopWired AI-ready?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Both platforms support the structure and schema you need to prepare your content for AI search."
+          }
+        }
+      ]
+    }
+    </script>
+  </section>
+
+  <!-- Free Download -->
+  <section class="mt-8">
+    <div class="bg-[color:var(--color-surface-light)] border border-[color:var(--color-brand-secondary)] rounded-2xl p-6">
+      <h2 class="text-xl font-semibold mt-4 mb-2 text-[color:var(--color-brand-secondary)]">Free Download: AI Search Checklist</h2>
+      <p class="text-[color:var(--color-font-main)]">Get a simple, step-by-step checklist to make your website AI-search ready today.</p>
+      <div class="mt-4 flex flex-wrap gap-4">
+        <a href="/bloghttps://todiane.com/media/news/resources/ai-search-checklist.pdf" class="px-4 py-2 bg-[color:var(--color-brand-primary)] text-white rounded-md font-medium hover:opacity-90">Get the PDF</a>
+        <a href="/blog/shop/" class="px-4 py-2 border border-[color:var(--color-brand-secondary)] text-[color:var(--color-text-primary)] rounded-md font-medium hover:bg-[color:var(--color-surface-hover)]">Explore Our Shop</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Cluster Pages -->
+  <section class="mt-8 mb-10">
+    <h2 class="text-xl font-semibold mb-6 text-[color:var(--color-brand-secondary)]">Related Cluster Pages</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <a href="/blog#" class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 hover:bg-[color:var(--color-surface-hover)] transition">
+        <h3 class="text-lg font-semibold mb-1 text-[color:var(--color-brand-secondary)]">More Coming Soon</h3>
+        <p class="text-[color:var(--color-font-main)]">Additional pages will be added as they are built.</p>
+      </a>
+    </div>
+  </section>
+</div>
+{% endblock %}

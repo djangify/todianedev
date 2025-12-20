@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ portfolio.meta_title|default:portfolio.title }} - Portfolio{% endblock %}
+{% block meta_description %}{{ portfolio.meta_description|default:portfolio.short_description|striptags|truncatechars:160 }}{% endblock %}
+
+{% block content %}
+<section class="2xl:max-w-screen-2xl 2xl:mx-auto mb-16 space-y-12 px-4 sm:px-6 md:px-8 lg:px-12">
+
+
+  {% include 'portfolio/components/breadcrumb.html' %}
+
+  <!-- Featured Image -->
+  {% if portfolio.display_image %}
+  <div class="mb-8 rounded-xl overflow-hidden shadow-md">
+    <img src="{{ portfolio.display_image }}"
+         alt="{{ portfolio.title }}"
+         class="w-full h-auto object-cover rounded-lg border border-[color:var(--color-brand-accent)]" />
+  </div>
+  {% endif %}
+
+  <!-- Project Details -->
+  <div class="space-y-6">
+    <p class="text-sm uppercase mt-4 relative pl-6 before:content-[''] before:h-1 before:w-4 before:bg-[color:var(--color-brand-accent)] before:absolute before:top-2/4 before:-translate-y-2/4 before:left-0 lg:text-lg mb-4">
+      Project Details
+    </p>
+
+    <h1 class="text-3xl md:text-4xl font-semibold text-[color:var(--color-brand-primary)] leading-normal mt-8">
+      {{ portfolio.title }}
+    </h1>
+
+    {% if portfolio.short_description %}
+    <p class="text-lg text-[color:var(--color-font-main)] mt-2">
+      {{ portfolio.short_description }}
+    </p>
+    {% endif %}
+
+    <!-- External Links -->
+    <div class="flex flex-wrap gap-4 mt-6 mb-10">
+      {% if portfolio.live_site_url %}
+      <a href="{{ portfolio.live_site_url }}" target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center px-6 py-3 border-2 border-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent)] rounded-md hover:bg-[color:var(--color-brand-secondary)] hover:text-[color:var(--color-font-main)] transition-colors">
+        <i class="fas fa-external-link-alt mr-2"></i> Live Site
+      </a>
+      {% endif %}
+
+      {% if portfolio.github_url %}
+      <a href="{{ portfolio.github_url }}" target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center px-6 py-3 border-2 border-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent)] rounded-md hover:bg-[color:var(--color-brand-secondary)] hover:text-[color:var(--color-font-main)] transition-colors">
+        <i class="fab fa-github mr-2"></i> GitHub Repo
+      </a>
+      {% endif %}
+
+      {% if portfolio.for_sale_url %}
+      <a href="{{ portfolio.for_sale_url }}" target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center px-6 py-3 border-2 border-[color:var(--color-brand-dark)] bg-[color:var(--color-brand-light)] text-[color:var(--color-brand-dark)] rounded-md hover:bg-[color:var(--color-brand-accent)] hover:text-[color:var(--color-font-main)] transition-colors font-semibold">
+        <i class="fas fa-shopping-cart mr-2"></i> For Sale
+      </a>
+      {% endif %}
+    </div>
+
+    <!-- Technologies -->
+    {% if portfolio.technologies.exists %}
+    <div class="pb-8 border-b border-[color:var(--color-brand-accent)] space-y-4">
+      <h2 class="text-2xl font-semibold text-[color:var(--color-font-main)]">Technologies Used</h2>
+      <div class="flex flex-wrap gap-3 mt-6 mb-8">
+        {% for tech in portfolio.technologies.all %}
+        <a href="{% url 'portfolio:by_technology' tech.slug %}"
+           class="inline-flex items-center px-4 py-2 border border-[color:var(--color-brand-secondary)] text-[color:var(--color-brand-primary)] rounded-md font-medium text-sm hover:bg-[color:var(--color-brand-accent)] hover:text-[color:var(--color-brand-primary)] transition-colors">
+          {% if tech.icon %}
+          <i class="{{ tech.icon }} mr-3"></i>
+          {% endif %}
+          {{ tech.name }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Main Content -->
+  <article class="portfolio-content mt-8 space-y-12 max-w-none text-[color:var(--color-font-main)] leading-relaxed">
+
+    {% if portfolio.overview %}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-semibold text-[color:var(--color-font-main)]">Overview</h2>
+      <div class="prose max-w-none">{{ portfolio.overview|safe }}</div>
+    </div>
+    {% endif %}
+
+    {% if portfolio.technical_details %}
+    <div class="space-y-4">
+      <h2 class="text-2xl mt-8 font-semibold text-[color:var(--color-font-main)]">Technical Details</h2>
+      <div class="prose max-w-none">{{ portfolio.technical_details|safe }}</div>
+    </div>
+    {% endif %}
+
+    {% if portfolio.results %}
+    <div class="space-y-4 mt-8 ">
+      <h2 class="text-2xl font-semibold text-[color:var(--color-font-main)]">Results</h2>
+      <div class="prose max-w-none">{{ portfolio.results|safe }}</div>
+    </div>
+    {% endif %}
+  </article>
+
+  <!-- LIGHTBOX (Alpine.js required) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.1/cdn.min.js" defer></script>
+
+  {% if portfolio.images.all %}
+  <section id="gallery" class="space-y-8 mt-16"
+          x-data="{
+            images: [
+              {% for image in portfolio.images.all %}
+                { src: '{{ image.display_image }}', caption: '{{ image.caption|escapejs }}' }{% if not forloop.last %},{% endif %}
+              {% endfor %}
+            ],
+            currentIndex: 0,
+            open: false,
+            show(index) {
+              this.currentIndex = index;
+              this.open = true;
+            },
+            next() {
+              this.currentIndex = (this.currentIndex + 1) % this.images.length;
+            },
+            prev() {
+              this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+            },
+            close() {
+              this.open = false;
+            }
+          }">
+
+    <h2 class="text-2xl font-semibold text-[color:var(--color-font-main)] sm:text-3xl xl:text-4xl">
+      Project Gallery
+    </h2>
+
+    <!-- Gallery Grid -->
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {% for image in portfolio.images.all %}
+      <div 
+        class="rounded-lg overflow-hidden group relative border border-[color:var(--color-brand-accent)] cursor-pointer"
+        @click="show({{ forloop.counter0 }})"
+      >
+        <img 
+          src="{{ image.display_image }}"
+          alt="{{ image.caption|default:portfolio.title }}"
+          class="w-full aspect-video object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+
+        {% if image.caption %}
+        <div class="absolute bottom-0 left-0 right-0 bg-[color:var(--color-brand-dark)] bg-opacity-70 p-3 translate-y-full group-hover:translate-y-0 transition-transform">
+          <p class="text-sm text-[color:var(--color-font-main)]">{{ image.caption }}</p>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- LIGHTBOX POPUP -->
+    <div 
+      x-show="open"
+      x-transition
+      class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
+      @keydown.escape.window="close()"
+    >
+
+      <!-- Close Button -->
+      <button 
+        class="absolute top-6 right-6 text-white text-3xl font-light hover:text-gray-300"
+        @click="close()"
+      >
+        &times;
+      </button>
+
+      <!-- Previous Button -->
+      <button 
+        class="absolute left-6 text-white text-5xl font-light hover:text-gray-300 select-none"
+        @click.stop="prev()"
+      >
+        &#10094;
+      </button>
+
+      <!-- Next Button -->
+      <button 
+        class="absolute right-6 text-white text-5xl font-light hover:text-gray-300 select-none"
+        @click.stop="next()"
+      >
+        &#10095;
+      </button>
+
+      <!-- Image + Caption Container -->
+      <div class="max-w-4xl w-full flex flex-col items-center">
+        <img 
+          :src="images[currentIndex].src"
+          class="max-h-[80vh] w-auto rounded-lg shadow-xl mx-auto"
+        />
+
+        <!-- Caption -->
+        <p class="text-white text-center mt-4 text-lg" 
+          x-text="images[currentIndex].caption">
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+  {% endif %}
+
+
+  <!-- Back Button -->
+<div class="mt-16 mb-12">
+  <a href="{% url 'portfolio:list' %}"
+     class="inline-flex items-center gap-2 px-6 py-3 border border-[color:var(--color-brand-secondary)] text-[color:var(--color-brand-secondary)] rounded-md font-medium text-sm hover:bg-[color:var(--color-brand-accent)] hover:text-[color:var(--color-font-main)] transition-colors">
+    <i class="fas fa-arrow-left"></i>
+    <span>Back to Portfolio</span>
+  </a>
+</div>
+</section>
+<!-- JSON-LD Schema for Portfolio Project -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "{{ portfolio.title|escapejs }}",
+  "description": "{{ portfolio.short_description|striptags|truncatechars:160|escapejs }}",
+  "image": "{{ portfolio.display_image }}",
+  "url": "{{ request.build_absolute_uri }}",
+  "author": {
+    "@type": "Person",
+    "name": "Django Product Developer Diane Corriette"
+  },
+  "datePublished": "{{ portfolio.created_at|date:'c' }}",
+  "sameAs": [
+    {% if portfolio.live_site_url %}"{{ portfolio.live_site_url }}"{% if portfolio.github_url or portfolio.for_sale_url %},{% endif %}{% endif %}
+    {% if portfolio.github_url %}"{{ portfolio.github_url }}"{% if portfolio.for_sale_url %},{% endif %}{% endif %}
+    {% if portfolio.for_sale_url %}"{{ portfolio.for_sale_url }}"{% endif %}
+  ]
+}
+</script>
+{% endblock %}

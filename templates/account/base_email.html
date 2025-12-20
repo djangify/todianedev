@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>todiane.com</title>
+  </head>
+  <body
+    style="
+      font-family: Arial, sans-serif;
+      background-color: var(--color-brand-light, #f8fafc);
+      margin: 0;
+      padding: 0;
+    "
+  >
+    <table
+      role="presentation"
+      width="100%"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+    >
+      <tr>
+        <td align="center" style="padding: 20px 0">
+          <table
+            role="presentation"
+            width="600"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            style="
+              background-color: var(--color-bg-default, #ffffff);
+              border-radius: 8px;
+              overflow: hidden;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+              color: var(--color-font-main, #2b2b2b);
+            "
+          >
+
+            <!-- Header -->
+            <tr>
+              <td
+                style="
+                  padding: 20px;
+                  background-color: var(--color-brand-primary, #927397);
+                  text-align: center;
+                "
+              >
+                <h1
+                  style="
+                    color: var(--color-brand-accent, #e7cbae);
+                    font-size: 28px;
+                    font-weight: bold;
+                    margin: 0;
+                    font-family: Arial, sans-serif;
+                  "
+                >
+                  To Diane
+                </h1>
+              </td>
+            </tr>
+
+            <!-- Content -->
+            <tr>
+              <td style="padding: 24px; font-size: 16px; line-height: 1.6; color: var(--color-font-main, #2b2b2b);">
+                {% block content %}{% endblock %}
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td
+                style="
+                  padding: 20px;
+                  background-color: var(--color-bg-contrast, #f1f5f9);
+                  text-align: center;
+                  font-size: 12px;
+                  color: var(--color-font-main, #2b2b2b);
+                "
+              >
+                <p style="margin-top: 0; color: var(--color-font-main, #2b2b2b);">
+                  To Diane helps small business owners set up the essential online systems they need — from landing pages to ecommerce and AI search readiness. Through affordable PDFs, practical guides, and focused setup services, I make digital marketing clear and sustainable.
+                </p>
+
+                <p style="margin-bottom: 10px; color: var(--color-font-main, #2b2b2b);">
+                  © {% now "Y" %} todiane.com. All rights reserved.
+                </p>
+
+                <p style="margin-bottom: 10px; color: var(--color-font-main, #2b2b2b);">
+                  To Diane<br />
+                  11 Solomon Street<br />
+                  Shropshire TF12<br />
+                  United Kingdom
+                </p>
+
+                <div
+                  style="
+                    margin-top: 15px;
+                    border-top: 1px solid var(--color-brand-accent, #e7cbae);
+                    padding-top: 15px;
+                    text-align: left;
+                  "
+                >
+                  <p style="margin-bottom: 5px; color: var(--color-font-main, #2b2b2b);">
+                    This email was sent to {{ email }}. You are receiving this
+                    email because you have an account with To Diane.
+                  </p>
+
+                  <p style="margin-bottom: 5px; color: var(--color-font-main, #2b2b2b);">
+                    Your privacy is important to us. Under the General Data
+                    Protection Regulation (GDPR), you have the right to:
+                  </p>
+
+                  <ul
+                    style="
+                      margin-top: 5px;
+                      margin-bottom: 10px;
+                      padding-left: 20px;
+                      color: var(--color-font-main, #2b2b2b);
+                    "
+                  >
+                    <li>Access your personal data</li>
+                    <li>Rectify inaccurate personal data</li>
+                    <li>Request erasure of your personal data</li>
+                    <li>Object to processing of your personal data</li>
+                  </ul>
+
+                  <p style="margin-bottom: 5px; color: var(--color-font-main, #2b2b2b);">
+                    For any privacy-related queries, please contact:<br />
+                    <span style="color: var(--color-brand-secondary, #d6809c); font-weight: bold;">
+                      hello@todiane.com
+                    </span>
+                  </p>
+
+                  <p style="margin-bottom: 0; color: var(--color-font-main, #2b2b2b);">
+                    This is a transactional email (e.g. account activation,
+                    password resets, purchase confirmations, account updates,
+                    etc.) and does not require an unsubscribe link.
+                  </p>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

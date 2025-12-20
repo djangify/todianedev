@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Indie Software & Product Developer — Diane Corriette{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<header class="bg-[color:var(--color-brand-primary)] text-[color:var(--color-font-main)] relative flex flex-col gap-y-5 lg:gap-y-20">
+  {% include 'core/hero.html' %}
+</header>
+
+<main class="2xl:max-w-screen-2xl 2xl:mx-auto">
+
+  <!-- INTRO: The Studio -->
+  <section 
+    class="scroll-mt-8 p-6 flex flex-col gap-y-10 bg-[--color-brand-secondary] text-[--color-font-main] 
+           lg:gap-x-10 lg:flex-row-reverse lg:items-start *:basis-full md:p-16 2xl:rounded"
+  >
+
+    <!-- Text Column -->
+    <div class="space-y-6 lg:self-center xl:space-y-10">
+
+      <p class="text-sm pl-6 uppercase relative before:content-[''] before:h-1 before:w-4 
+                before:bg-[color:var(--color-brand-accent)] before:absolute before:top-1/2 
+                before:-translate-y-1/2 before:left-0 lg:text-lg">
+        Welcome to the Studio
+      </p>
+
+      <h2 class="text-2xl font-bold lg:text-3xl text-[color:var(--color-font-main)]">
+        Practical Software You Can Run, Own, and Trust
+      </h2>
+
+      <div class="space-y-5 text-[color:var(--color-font-main)]/90">
+
+        <p>
+          I'm <strong>Diane Corriette</strong>, an indie  
+          <strong>Software & Product Developer</strong> who builds tools you can own — 
+          from lightweight web apps to <strong>offline-first software</strong> and 
+          <strong>micro-SaaS systems</strong>.
+        </p>
+
+        <p>
+          My Studio brings together everything I create: financial organisers, productivity systems, 
+          writing tools, micro eCommerce sites, dashboards, and creative coding experiments.  
+          Everything is designed with clarity, simplicity, and user ownership in mind.
+        </p>
+
+        <p>
+          <a href="/studio/" class="inline-block uppercase self-start bg-transparent text-[color:var(--color-brand-primary)] font-bold border-2 border-[color:var(--color-brand-primary)] px-10 py-4 rounded-md hover:bg-[color:var(--color-brand-primary)] hover:text-white transition-all text-base">
+            Enter the Studio
+          </a>
+        </p>
+
+      </div>
+    </div>
+
+    <!-- Studio Categories -->
+    <div
+      class="grid gap-5 sm:grid-cols-1 md:grid-cols-2 *:gap-y-5 *:items-center *:border-2 
+             *:border-[--color-brand-accent] *:rounded-lg *:p-8 bg-[--color-brand-light] 
+             text-[--color-font-main]">
+
+      <a href="/shop/category/software/" class="block">
+        <img src="{% static 'images/service-2.webp' %}" alt="Offline-First Apps" class="h-12 w-12 mx-auto mb-3">
+        <p class="text-xl text-[--color-brand-primary] text-center font-semibold">Offline-First Software</p>
+        <p class="text-center">Tools that run fully on your device for privacy, stability, and ownership.</p>
+      </a>
+
+      <a href="/studio/" class="block">
+        <img src="{% static 'images/service-1.webp' %}" alt="Django Web Apps" class="h-12 w-12 mx-auto mb-3">
+        <p class="text-xl text-[--color-brand-primary] text-center font-semibold">Web Applications</p>
+        <p class="text-center">Django-based systems, micro-SaaS tools, and creator-focused platforms.</p>
+      </a>
+
+      <a href="/studio/" class="block">
+        <img src="{% static 'images/service-3.webp' %}" alt="PDF Tools" class="h-12 w-12 mx-auto mb-3">
+        <p class="text-xl font-semibold text-center">PDFs & Digital Products</p>
+        <p class="text-center">Workbooks, planners, writing tools, and downloadable guides sold via my eCommerce builder.</p>
+      </a>
+
+      <a href="/studio/creative-coding/" class="block">
+        <img src="{% static 'images/service-4.webp' %}" alt="Creative Coding" class="h-12 w-12 mx-auto mb-3">
+        <p class="text-xl font-semibold text-center">Creative Coding</p>
+        <p class="text-center">Playful experiments and interactive tools that showcase the joy of building.</p>
+      </a>
+    </div>
+  </section>
+</main>
+<!-- BLOG SECTION -->
+  <section id="blog" class="scroll-mt-16">
+    {% include "core/components/shop.html" %}
+  </section>
+  <!-- FEATURED TOOLS  -->
+  {% comment %} {% include "core/components/featured.html" %} {% endcomment %}
+  <!-- RECENT WORK / COMING SOON -->
+  {% comment %} {% include "core/components/coming-soon.html" %} {% endcomment %}
+  {% if homepage_gallery %}
+    {% include "studio/gallery/gallery_home.html" with gallery=homepage_gallery %}
+{% endif %}
+
+
+  <!-- BLOG SECTION -->
+  <section id="blog" class="scroll-mt-16">
+    {% include "core/components/blog.html" %}
+  </section>
+
+
+  <!-- BY THE NUMBERS SECTION -->
+  <section id="numbers" class="scroll-mt-8 p-6 md:p-16 bg-[--color-brand-secondary] text-[color:var(--color-font-main)]">
+    
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold">
+        My Stats
+      </h2>
+      <p class="text-lg mt-4 text-[color:var(--color-font-main)]">
+        From idea to production during 2025. Real products. Real users.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 max-w-5xl mx-auto">
+      
+      <div class="text-center">
+        <div class="text-5xl lg:text-6xl font-bold text-[--color-brand-accent] mb-2">9</div>
+        <div class="text-sm lg:text-base uppercase tracking-wider">Products Built</div>
+        <p class="text-xs mt-2 text-[color:var(--color-font-main)]">From idea to launch</p>
+      </div>
+
+      <div class="text-center">
+        <div class="text-5xl lg:text-6xl font-bold text-[--color-brand-accent] mb-2">5</div>
+        <div class="text-sm lg:text-base uppercase tracking-wider">Live Sites</div>
+        <p class="text-xs mt-2 text-[color:var(--color-font-main)]">Running in production</p>
+      </div>
+
+      <div class="text-center">
+        <div class="text-5xl lg:text-6xl font-bold text-[--color-brand-accent] mb-2">3</div>
+        <div class="text-sm lg:text-base uppercase tracking-wider">Active Products</div>
+        <p class="text-xs mt-2 text-[color:var(--color-font-main)]/70">Offline-first, real systems</p>
+      </div>
+
+      <div class="text-center">
+        <div class="text-5xl lg:text-6xl font-bold text-[--color-brand-accent] mb-2">50+</div>
+        <div class="text-sm lg:text-base uppercase tracking-wider">Users</div>
+        <p class="text-xs mt-2 text-[color:var(--color-font-main)]/70">Real people, real systems</p>
+      </div>
+
+    </div>
+
+  </section>
+{% endblock %}

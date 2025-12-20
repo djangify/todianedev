@@ -1,0 +1,31 @@
+<nav class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3 mb-8" aria-label="Breadcrumb">
+  <ol class="flex items-center text-sm gap-2 text-[color:var(--color-font-main)]">
+    
+    <!-- Home -->
+    <li class="flex items-center">
+      <a href="{% url 'core:home' %}" 
+         class="hover:text-[color:var(--color-brand-accent)] transition-colors">
+        Home
+      </a>
+      <i class="fa-solid fa-angle-right mx-2 text-[color:var(--color-brand-accent)]/60"></i>
+    </li>
+
+    <!-- Portfolio -->
+    {% if portfolio %}
+      <li class="flex items-center">
+        <a href="{% url 'portfolio:list' %}" 
+           class="hover:text-[color:var(--color-brand-accent)] transition-colors">
+          Portfolio
+        </a>
+        <i class="fa-solid fa-angle-right mx-2 text-[color:var(--color-brand-accent)]/60"></i>
+      </li>
+      <li class="text-[color:var(--color-brand-accent)] font-medium">
+        {{ portfolio.title|truncatechars:40 }}
+      </li>
+    {% else %}
+      <li class="text-[color:var(--color-brand-accent)] font-medium">
+        Portfolio
+      </li>
+    {% endif %}
+  </ol>
+</nav>

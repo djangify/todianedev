@@ -1,0 +1,89 @@
+{% load static %}
+
+<footer class="border-t border-[color:var(--color-brand-accent)] bg-[color:var(--color-brand-accent)] text-[color:var(--color-font-main)]">
+
+  <div class="max-w-6xl mx-auto px-6 py-12 space-y-10">
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 justify-center text-sm text-[color:var(--color-font-main)]">
+
+
+      <!-- Branding -->
+      <div class="brand-block ">
+        <div class="flex space-x-3 mb-3 items-center">
+          <img src="{% static 'images/dianec-gray.png' %}" alt="Diane Corriette logo" width="64" height="64" class="h-8 w-8 object-contain">
+          <span class="text-lg font-semibold text-[color:var(--color-font-main)]">Diane Corriette</span>
+        </div>
+        <p class="text-sm leading-relaxed">
+          Indie software developer building offline-first tools, websites and micro-products. 
+          Python related Django and Flask powered systems with TailwindCSS V4.
+        </p>
+        
+
+      </div>
+
+      <!-- Pages -->
+      <div>
+        <p class="font-semibold mb-3 text-[color:var(--color-font-main)]">Pages</p>
+        <ul class="space-y-1">
+          <li><a href="/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Home</a></li>
+          <li><a href="{% url 'studio:index' %}" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Studio</a></li>
+          <li><a href="{% url 'portfolio:list' %}" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Portfolio</a></li>
+          <li><a href="{% url 'shop:product_list' %}" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Shop</a></li>
+          {% if not request.user.is_authenticated %}
+          <li>
+              <a href="{% url 'account_signup' %}" class="text-[color:var(--color-font-main)] text-sm hover:text-[color:var(--color-brand-primary)]">
+                  Register
+              </a>
+          </li>
+          <li>
+              <a href="{% url 'account_login' %}" class="text-[color:var(--color-font-main)] text-sm hover:text-[color:var(--color-brand-primary)]">
+                  Login
+              </a>
+          </li>
+      {% else %}
+          <li>
+              <a href="{% url 'account_logout' %}" class="text-[color:var(--color-font-main)] text-sm hover:text-[color:var(--color-brand-primary)]">
+                  Logout
+              </a>
+          </li>
+      {% endif %}
+        </ul>
+      </div>
+
+      <!-- Tools & Resources -->
+      <div>
+        <p class="font-semibold mb-3 text-[color:var(--color-font-main)]">Resources & Tools</p>
+        <ul class="space-y-1">
+          <li><a href="{% url 'core:ai_search' %}" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">AI Search Readiness</a></li>
+          <li><a href="{% url 'core:independent_software' %}" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Independent Software</a></li>
+          <li><a href="{% url 'blog:list' %}" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">My Blog</a></li>
+          <li><a href="{% url 'infopages:docs_index' %}" class="hover:text-[color:var(--color-brand-primary)] transition-colors text-sm">Documentation</a>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- Policies -->
+      <div>
+        <p class="font-semibold mb-3 text-[color:var(--color-font-main)]">Policies</p>
+        <ul class="space-y-1">
+           <li><a href="/infopages/policies/cookie-policy/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Cookie Policy</a></li>
+          <li><a href="/infopages/policies/terms-policy/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Terms Policy</a></li>
+          <li><a href="/infopages/policies/privacy-policy/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Privacy Policy</a></li>
+          <li><a href="/infopages/policies/affiliate-policy/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Affiliate Policy</a></li>
+          <li><a href="/infopages/policies/ai-writing-policy/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">AI Writing Policy</a></li> 
+          
+        </ul>
+
+        
+      </div>
+
+    </div>
+
+    <div class="border-t border-[color:var(--color-brand-primary)]/30 text-center pt-6 text-sm text-[color:var(--color-font-main)]/70">
+      &copy; 2025 Diane Corriette — Indie Software Developer
+    </div>
+
+  </div>
+
+</footer>

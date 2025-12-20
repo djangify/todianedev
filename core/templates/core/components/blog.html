@@ -1,0 +1,108 @@
+{% load static %}
+
+<div class="w-full overflow-hidden bg-[color:var(--color-brand-light)]">
+  <section 
+    class="2xl:max-w-screen-2xl 2xl:mx-auto p-6 flex flex-col gap-y-10 
+           text-[color:var(--color-font-main)] md:p-16 lg:gap-x-10 lg:flex-row-reverse *:basis-full"
+    aria-labelledby="portfolio-blog-heading"
+    role="region">
+
+    <!-- TEXT CONTENT -->
+    <div class="flex flex-col gap-y-5 lg:self-center xl:gap-y-10 *:space-y-2">
+
+      <header>
+        <p class="text-sm pl-6 uppercase relative before:content-[''] before:h-1 before:w-4 
+                  before:bg-[color:var(--color-brand-accent)] before:absolute before:top-1/2 
+                  before:-translate-y-1/2 before:left-0 lg:text-lg sm:mt-6">
+          Latest Writing
+        </p>
+
+        <h2 id="portfolio-blog-heading" class="text-2xl capitalize text-[color:var(--color-brand-primary)] lg:text-3xl">
+          Development, Tools & Offline-First Thinking
+        </h2>
+      </header>
+
+      <p>
+        I write about Django development, building self-hosted systems, the offline-first philosophy, 
+        and the tools I’m creating as I explore this direction.  
+        Some posts are technical, others reflect on the journey of becoming a developer 
+        who values ownership, simplicity, and practical systems.
+      </p>
+
+      <a href="{% url 'blog:list' %}"
+         aria-label="View all articles"
+         class="inline-block uppercase self-start bg-transparent text-[color:var(--color-brand-primary)] font-bold border-2 border-[color:var(--color-brand-primary)] px-10 py-4 rounded-md hover:bg-[color:var(--color-brand-primary)] hover:text-white transition-all text-base">
+
+                 
+         View All Blog Articles
+      </a>
+
+    </div>
+
+    <!-- BLOG CARDS -->
+    <div class="grid gap-y-5 md:grid-cols-2" role="list">
+
+      <article 
+        class="grid sm:grid-rows-subgrid sm:row-span-5 gap-y-4 p-6 px-4 rounded shadow-md 
+               border-t-2 border-[color:var(--color-brand-primary)]"
+        role="listitem">
+
+        <figure class="rounded overflow-hidden">
+          <img class="object-[65%]" 
+               src="{% static 'images/todiane-purp.webp' %}" 
+               alt="Django backend code layout preview"
+               width="600" height="400" loading="lazy" decoding="async" />
+        </figure>
+
+        <h3 class="text-xl text-[color:var(--color-font-main)]">
+          Tools You Own: My Move Toward Local-First Development
+        </h3>
+
+        <p>
+           As a developer I value simplicity, stability, and tools that people can truly own. This is the story behind why I shifted  toward local-first, offline-friendly, and self-hosted tools. 
+        </p>
+
+        <a href="/why-i-am-adding-local-first-development-to-my-work/"
+           aria-label="Read full article: Behind the Build Django Backend Setup"
+           class="uppercase justify-self-start px-6 py-2 border-2 border-[color:var(--color-brand-primary)] 
+                  font-semibold rounded flex items-center group lg:text-sm text-[color:var(--color-font-main)] 
+                  hover:text-[color:var(--color-brand-accent)] transition-colors">
+          <span>Keep Reading</span>
+          <i class="fa-solid fa-angles-right text-[color:var(--color-font-main)] ml-2 group-hover:translate-x-2 transition-transform" aria-hidden="true"></i>
+        </a>
+      </article>
+
+      <article 
+        class="grid sm:grid-rows-subgrid sm:row-span-5 gap-y-4 p-6 rounded shadow-md px-4 
+               border-t-2 border-[color:var(--color-brand-primary)]"
+        role="listitem">
+
+        <figure class="rounded overflow-hidden">
+          <img class="object-[65%]" 
+               src="{% static 'images/todiane-noir.webp' %}" 
+               alt="Preview of my mini ecommerce builder dashboard"
+               width="600" height="400" loading="lazy" decoding="async" />
+        </figure>
+
+        <h3 class="text-xl text-[color:var(--color-font-main)]">
+          Building the Mini eCommerce Builder System
+        </h3>
+
+        <p>
+          A look at how I created a lean, self-hosted digital shop using Django, reusable components, 
+          and a structure designed for creators who prefer independence over subscriptions.
+        </p>
+
+        <a href="/mini-ecommerce-builder-system/"
+           aria-label="Read full article: Building the Mini eCommerce Builder System"
+           class="uppercase justify-self-start px-6 py-2 border-2 border-[color:var(--color-brand-primary)] 
+                  font-semibold rounded flex items-center group lg:text-sm text-[color:var(--color-font-main)] 
+                  hover:text-[color:var(--color-brand-accent)] transition-colors">
+          <span>Keep Reading</span>
+          <i class="fa-solid fa-angles-right text-[color:var(--color-font-main)] ml-2 group-hover:translate-x-2 transition-transform" aria-hidden="true"></i>
+        </a>
+      </article>
+
+    </div>
+  </section>
+</div>

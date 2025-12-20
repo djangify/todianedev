@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/* Tailwind v4 theme color variables */
+@theme {
+  /* Core brand palette */
+  --color-brand-primary: #4c1d95;
+  --color-brand-secondary: #216a95;
+  --color-brand-accent: #9ba3b4;
+  --color-brand-dark: #7c3aed;
+  --color-brand-light: #f8fafc;
+
+  /* Font */
+  --color-font-main: #2b2b2b;
+  --color-font-contrast: #1a1a1a;
+
+  /* Background options */
+  --color-bg-default: #ffffff;
+  --color-bg-contrast: #f1f5f9;
+
+  /* Extended palette for badges and alerts */
+  --color-badge-rose: #fecdd3;
+  --color-badge-mint: #bbf7d0;
+  --color-badge-yellow: #fef9c3;
+  --color-badge-red-light: #fee2e2;
+  --color-badge-red-text: #7f1d1d;
+}
+
+/* Global typography and link defaults */
+@layer base {
+  h1 {
+    @apply text-4xl font-bold text-[--color-brand-primary];
+  }
+
+  h2 {
+    @apply text-3xl font-semibold text-[--color-brand-primary];
+  }
+
+  h3 {
+    @apply text-xl font-semibold text-[--color-brand-primary];
+  }
+
+  p {
+    @apply text-lg text-[--color-font-main] leading-relaxed mb-4;
+  }
+
+  p:last-child {
+    @apply mb-0;
+  }
+
+  ul,
+  ol {
+    @apply text-lg text-[--color-font-main] leading-relaxed;
+    list-style-position: outside;
+    padding-left: 1.5rem;
+  }
+
+  footer ul,
+  footer ol {
+    padding-left: 0;
+    list-style: none;
+  }
+
+
+  li {
+    @apply text-lg text-[--color-font-main] leading-relaxed;
+    text-indent: 0;
+    margin-bottom: 0.25rem;
+  }
+
+  a {
+    @apply text-[--color-brand-secondary] hover:text-[--color-brand-accent] transition-colors;
+  }
+}
+
+/* Prose styling for product descriptions */
+@layer components {
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose p:last-child {
+    margin-bottom: 0;
+  }
+
+  .prose ul,
+  .prose ol {
+    list-style-position: outside;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose li {
+    margin-bottom: 0.25rem;
+    color: var(--color-font-main);
+  }
+}
+
+/* Utilities */
+@layer utilities {
+  @keyframes fadeRotate {
+
+    0%,
+    33% {
+      opacity: 1;
+    }
+
+    40%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .animate-fade-rotate {
+    animation: fadeRotate 15s infinite;
+  }
+
+  .fade-transition {
+    @apply transition-opacity duration-[2000ms] ease-in-out;
+  }
+}
+
+/* Fix misaligned bullets inside centered text blocks */
+.text-center ul,
+.text-center ol {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  list-style-position: outside;
+  padding-left: 1.5rem;
+}
+
+#messages-container {
+  top: 3.5rem;
+}

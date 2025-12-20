@@ -1,0 +1,234 @@
+{% extends "studio/base_landing.html" %}
+{% load static %}
+
+{% block product_name %}Web Applications{% endblock %}
+{% block meta_desc %}A collection of Django-powered web applications built for real-world use. Dashboards, ecommerce frameworks, learning platforms, and content sites.{% endblock %}
+{% block meta_keys %}Django web apps, web applications, Django projects, ecommerce, learning platform{% endblock %}
+
+{% block breadcrumb_extra %}
+<li><span class="mx-2">›</span></li>
+<li><a href="#" class="hover:text-[color:var(--color-brand-accent)] transition-colors">Sites</a></li>
+{% endblock %}
+{% block breadcrumb_current %}Web Applications{% endblock %}
+
+{% block product_category %}Portfolio{% endblock %}
+
+{% block hero_title %}Web Applications{% endblock %}
+
+{% block product_tagline %}
+Django-powered sites built for real-world use.
+{% endblock %}
+
+{% block product_description %}
+A collection of web applications, dashboards, ecommerce frameworks, and content platforms. 
+Each project is built with Django and designed with clarity and simplicity in mind.
+{% endblock %}
+
+{% block product_cta %}
+<a href="#sites" class="inline-flex items-center px-8 py-4 bg-[color:var(--color-brand-primary)] text-white font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+  View Projects
+  <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+  </svg>
+</a>
+{% endblock %}
+
+{% block product_icon %}
+<svg class="w-24 h-24 md:w-32 md:h-32 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+</svg>
+{% endblock %}
+
+{% block benefits_items %}
+<div class="flex flex-col items-center">
+  <svg class="w-8 h-8 mb-2 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+  </svg>
+  <span class="text-sm font-medium">Django 6</span>
+</div>
+<div class="flex flex-col items-center">
+  <svg class="w-8 h-8 mb-2 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+  </svg>
+  <span class="text-sm font-medium">Tailwind CSS</span>
+</div>
+<div class="flex flex-col items-center">
+  <svg class="w-8 h-8 mb-2 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+  </svg>
+  <span class="text-sm font-medium">Open Source</span>
+</div>
+<div class="flex flex-col items-center">
+  <svg class="w-8 h-8 mb-2 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+  </svg>
+  <span class="text-sm font-medium">Live & Working</span>
+</div>
+{% endblock %}
+
+{% block features_label %}{% endblock %}
+{% block features_title %}{% endblock %}
+{% block features_subtitle %}{% endblock %}
+{% block features_content %}{% endblock %}
+
+{% block demo_section %}
+<section id="sites" class="py-20 bg-[color:var(--color-brand-light)]">
+  <div class="w-full max-w-6xl mx-auto px-6 md:px-10 lg:px-16">
+    
+    <div class="text-center mb-16">
+      <p class="uppercase text-sm tracking-widest text-[color:var(--color-brand-accent)] mb-3 font-medium">
+        Live Projects
+      </p>
+      <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-4">
+        Web Applications
+      </h2>
+      <p class="text-lg text-[color:var(--color-font-main)] max-w-5xl mx-auto">
+        Each site is built with Django and designed for real-world use. Click through to explore. 
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      
+      <!-- Zestizm -->
+      <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+        <div class="h-48 bg-gray-100 flex items-center justify-center">
+          <svg class="w-20 h-20 text-[color:var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-xl font-bold text-[color:var(--color-brand-primary)]">Zestizm</h3>
+            <span class="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">Ecommerce</span>
+          </div>
+          <p class="text-[color:var(--color-font-main)] mb-6 leading-relaxed">
+            A minimal ecommerce and content site built to sell a single product with a 
+            simplified buying experience and clear messaging.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="https://www.zestizm.com" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 bg-[color:var(--color-brand-primary)] text-white text-sm font-medium rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-colors">
+              Visit Site
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+            <a href="https://github.com/djangify/zestizm" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 border border-gray-300 text-[color:var(--color-font-main)] text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Inspirational Guidance -->
+      <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+        <div class="h-48 bg-gray-100 flex items-center justify-center">
+          <svg class="w-20 h-20 text-[color:var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-xl font-bold text-[color:var(--color-brand-primary)]">Inspirational Guidance</h3>
+            <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">Platform</span>
+          </div>
+          <p class="text-[color:var(--color-font-main)] mb-6 leading-relaxed">
+            A full Django-driven ecosystem including a goal tracker, prompt generator, 
+            dashboards, wishlists, and digital ecommerce store.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="https://inspirationalguidance.com/" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 bg-[color:var(--color-brand-primary)] text-white text-sm font-medium rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-colors">
+              Visit Site
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+            <a href="https://github.com/djangify/inspirational" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 border border-gray-300 text-[color:var(--color-font-main)] text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Stream English -->
+      <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+        <div class="h-48 bg-gray-100 flex items-center justify-center">
+          <svg class="w-20 h-20 text-[color:var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-xl font-bold text-[color:var(--color-brand-primary)]">Stream English</h3>
+            <span class="px-3 py-1 bg-gray-100 text-[color:var(--color-brand-primary)] text-xs font-medium rounded-full">Education</span>
+          </div>
+          <p class="text-[color:var(--color-font-main)] mb-6 leading-relaxed">
+            A video-led learning platform designed for GCSE English students, including 
+            protected course areas, resources, and teacher-driven content.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="https://www.streamenglish.co.uk/" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 bg-[color:var(--color-brand-primary)] text-white text-sm font-medium rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-colors">
+              Visit Site
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+            <a href="https://github.com/djangify/stream" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 border border-gray-300 text-[color:var(--color-font-main)] text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Pen and I Publishing -->
+      <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+        <div class="h-48 bg-gray-100  flex items-center justify-center">
+          <svg class="w-20 h-20 text-[color:var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-xl font-bold text-[color:var(--color-brand-primary)]">Pen and I Publishing</h3>
+            <span class="px-3 py-1 bg-gray-100 text-rose-700 text-xs font-medium rounded-full">Publishing</span>
+          </div>
+          <p class="text-[color:var(--color-font-main)] mb-6 leading-relaxed">
+            A publishing platform and content site showcasing books, writing resources, 
+            and author tools built with Django.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="https://penandipublishing.com/" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 bg-[color:var(--color-brand-primary)] text-white text-sm font-medium rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-colors">
+              Visit Site
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+{% endblock %}
+
+{% block how_it_works_title %}{% endblock %}
+{% block how_it_works_content %}{% endblock %}
+{% block pricing_section %}{% endblock %}
+{% block faq_content %}{% endblock %}
+{% block faq_section %}{% endblock %}
+{% block simple_process %}{% endblock %}
+{% block features %}{% endblock %}
+{% block final_cta_title %}{% endblock %}
+{% block final_cta_text %}{% endblock %}
+
+{% block final_cta_buttons %}{% endblock %}

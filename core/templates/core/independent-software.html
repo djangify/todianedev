@@ -1,0 +1,360 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Independent Software Development – Diane Corriette{% endblock %}
+
+{% block open_graph_tags %}
+<meta property="og:title" content="Independent Software Development" />
+<meta property="og:description" content="Exploring offline-first, self-hosted, software-for-one, and local-first development – building tools that prioritise ownership, privacy, and independence." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/todiane-purp.webp" />
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Local-First & Offline Development">
+<meta name="twitter:description" content="Building software that works offline, runs locally, and puts users in control.">
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/todiane-purp.webp">
+{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-[color:var(--color-text-primary)]">
+
+  <!-- HEADER -->
+  <header class="space-y-4 mb-12">
+    <h1 class="text-2xl sm:text-3xl font-semibold leading-normal text-[color:var(--color-brand-secondary)]">
+      Building Software That Works For You
+    </h1>
+    <p class="text-lg leading-relaxed">
+      I build tools using four core principles: offline-first architecture, self-hosted systems, 
+      software-for-one philosophy, and working towards local-first development. These approaches 
+      prioritise ownership, privacy, and independence – giving people control over their tools and data.
+    </p>
+  </header>
+
+  <!-- THE 4 PILLARS -->
+  <section class="mb-16">
+    <h2 class="text-3xl font-semibold text-[color:var(--color-brand-secondary)] mb-8">The 4 Development Pillars</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Pillar 1: Offline-First -->
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8 hover:shadow-lg transition-shadow">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-purple-600 flex items-center justify-center text-white mr-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold text-[color:var(--color-brand-secondary)]">Offline-First</h3>
+        </div>
+        <p class="text-[color:var(--color-text-primary)] mb-6">
+          Software designed to function completely without internet connectivity. Your data stays on your device, 
+          the app works reliably offline, and you're never dependent on servers or cloud services to get work done.
+        </p>
+        <div class="space-y-3">
+          <a href="/blog/what-is-offline-first-software" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>What is Offline-First Software?</span>
+          </a>
+          <a href="/blog/offline-first-privacy-and-control" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Why Offline-First Matters for Privacy and Control</span>
+          </a>
+          <a href="/blog/building-offline-apps-with-python-and-django" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Building Offline Apps with Python and Django</span>
+          </a>
+          <a href="/blog/when-offline-first-is-the-right-choice" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>When Offline-First is the Right Choice</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pillar 2: Self-Hosted -->
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8 hover:shadow-lg transition-shadow">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center text-white mr-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold text-[color:var(--color-brand-secondary)]">Self-Hosted</h3>
+        </div>
+        <p class="text-[color:var(--color-text-primary)] mb-6">
+          Running software on your own infrastructure, whether that's your VPS, home server, or local machine. 
+          You control updates, data storage, and how long the software remains available – no platform lock-in.
+        </p>
+        <div class="space-y-3">
+          <a href="/blog/what-are-self-hosted-tools/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>What Are Self-Hosted Tools?</span>
+          </a>
+          <a href="/blog/the-benefits-of-self-hosting-for-small-businesses" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>The Benefits of Self-Hosting for Small Businesses</span>
+          </a>
+          <a href="/blog/tools-you-can-run-yourself/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Tools You Can Run Yourself</span>
+          </a>
+          <a href="/blog/getting-started-with-self-hosting-practical-guide" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Getting Started with Self-Hosting: A Practical Guide</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pillar 3: Software-for-One -->
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8 hover:shadow-lg transition-shadow">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-green-600 flex items-center justify-center text-white mr-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold text-[color:var(--color-brand-secondary)]">Software-for-One</h3>
+        </div>
+        <p class="text-[color:var(--color-text-primary)] mb-6">
+          Building tools for yourself first, solving your own problems without guessing what "users" might want. 
+          This focused approach creates highly effective software that works exactly as intended – if it helps others too, that's a bonus.
+        </p>
+        <div class="space-y-3">
+          <a href="/blog/what-is-software-for-one" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>What is Software-for-One?</span>
+          </a>
+          <a href="/blog/why-building-for-yourself-creates-better-software" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Why Building for Yourself Creates Better Software</span>
+          </a>
+          <a href="/blog/from-personal-tool-to-product" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>From Personal Tool to Product: When to Share Your Software</span>
+          </a>
+          <a href="/blog/the-freedom-of-building-without-feature-requests" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>The Freedom of Building Without Feature Requests</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pillar 4: Local-First -->
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8 hover:shadow-lg transition-shadow">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-indigo-600 flex items-center justify-center text-white mr-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold text-[color:var(--color-brand-secondary)]">Local-First</h3>
+        </div>
+        <p class="text-[color:var(--color-text-primary)] mb-6">
+          Software where data lives on your device first, with optional cloud sync on your terms. This is the direction 
+          I'm working towards – combining offline capability with seamless multi-device access while maintaining full user control.
+        </p>
+        <div class="space-y-3">
+          <a href="/blog/why-i-am-adding-local-first-development-to-my-work/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Why I'm Adding Local-First Development to My Work</span>
+          </a>
+          <a href="/blog/local-first-vs-cloud-first-key-differences/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Local-First vs Cloud-First: Key Differences</span>
+          </a>
+          <a href="/blog/understanding-local-first-sync" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Understanding Local-First Sync: How Data Moves Between Devices</span>
+          </a>
+          <a href="/blog/the-journey-from-offline-first-to-local-first" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>The Journey from Offline-First to Local-First</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="mt-16">
+    <h2 class="text-3xl font-semibold mb-8 text-[color:var(--color-brand-secondary)]">
+      Frequently Asked Questions
+    </h2>
+
+    <div class="space-y-10">
+
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8">
+        <h3 class="text-lg font-semibold mb-3 text-[color:var(--color-brand-secondary)]">
+          What's the difference between offline-first and local-first?
+        </h3>
+        <p>
+          Offline-first means the software works completely without internet – everything stays on your device 
+          with no syncing capability. Local-first also keeps data on your device primarily, but adds optional 
+          syncing between your own devices on your terms. Think of offline-first as "works without internet" 
+          and local-first as "works without internet, plus you control how it syncs."
+        </p>
+      </div>
+
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8">
+        <h3 class="text-lg font-semibold mb-3 text-[color:var(--color-brand-secondary)]">
+          Why build software-for-one instead of for a market?
+        </h3>
+        <p>
+          Building for yourself eliminates guesswork and creates focused, effective tools that solve real problems. 
+          There's no pressure to add unnecessary features or compromise on core functionality. If the tool works 
+          perfectly for you, chances are it'll work well for others with similar needs – but that's secondary to 
+          creating something genuinely useful. This approach avoids the bloat and complexity that comes from trying 
+          to please everyone.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8">
+        <h3 class="text-lg font-semibold mb-3 text-[color:var(--color-brand-secondary)]">
+          Can self-hosted tools still be used by non-technical people?
+        </h3>
+        <p>
+          Yes. While self-hosting requires some technical setup initially, once configured, the tools themselves 
+          can be designed for anyone to use. Many creators and small business owners successfully run self-hosted 
+          systems on affordable VPS hosting with minimal technical knowledge. The key is providing clear 
+          documentation and focusing on tools that don't require constant maintenance once they're running.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8">
+        <h3 class="text-lg font-semibold mb-3 text-[color:var(--color-brand-secondary)]">
+          Why choose offline-first over cloud-based software?
+        </h3>
+        <p>
+          Offline-first tools offer privacy, ownership, and independence from subscriptions and platform changes. 
+          Your data never leaves your device, you're not dependent on company servers staying online, and there's 
+          no recurring cost to keep using the software you've purchased. For personal productivity, financial 
+          tracking, and business tools, most people don't actually need cloud connectivity – they need reliability 
+          and control.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8">
+        <h3 class="text-lg font-semibold mb-3 text-[color:var(--color-brand-secondary)]">
+          How do these approaches work together?
+        </h3>
+        <p>
+          These four principles complement each other. Software-for-one determines what gets built and why. 
+          Offline-first ensures it works without internet dependency. Self-hosted gives you infrastructure control. 
+          Local-first adds optional device syncing while maintaining ownership. Together, they create tools that 
+          prioritise user autonomy, privacy, and long-term stability over vendor lock-in and recurring revenue models.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8">
+        <h3 class="text-lg font-semibold mb-3 text-[color:var(--color-brand-secondary)]">
+          Are these approaches suitable for all types of software?
+        </h3>
+        <p>
+          Not everything needs to be offline-first or local-first. Large-scale collaboration tools, real-time 
+          multiplayer applications, and services requiring heavy computation may benefit from cloud-first designs. 
+          However, personal productivity tools, financial organisers, journaling apps, small business software, 
+          and creative tools are perfect candidates. Most everyday software would benefit from giving users more 
+          control and reducing unnecessary cloud dependency.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section class="mt-16">
+    <h2 class="text-3xl font-semibold mb-8 text-[color:var(--color-brand-secondary)]">
+      Projects Built With These Principles
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+
+      <a href="#" 
+         class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 bg-white hover:bg-[color:var(--color-brand-light)] transition">
+        <h3 class="text-lg font-semibold mb-2 text-[color:var(--color-brand-secondary)]">MTDify Local Edition</h3>
+        <p class="text-[color:var(--color-text-primary)]">Offline-first bookkeeping for UK sole traders – private, subscription-free, runs entirely on your device.</p>
+      </a>
+
+      <a href="/blog/introducing-djangify-mini-ecommerce-site-builder/" 
+         class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 bg-white hover:bg-[color:var(--color-brand-light)] transition">
+        <h3 class="text-lg font-semibold mb-2 text-[color:var(--color-brand-secondary)]">Mini eCommerce Builder</h3>
+        <p class="text-[color:var(--color-text-primary)]">Self-hosted digital shop for creators who want to own their platform and avoid marketplace fees.</p>
+      </a>
+
+      <a href="#" 
+         class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 bg-white hover:bg-[color:var(--color-brand-light)] transition">
+        <h3 class="text-lg font-semibold mb-2 text-[color:var(--color-brand-secondary)]">Invoice Generator (Offline)</h3>
+        <p class="text-[color:var(--color-text-primary)]">Create professional invoices without internet – built as a follow-up to MTDify's success.</p>
+      </a>
+
+      <a href="#" 
+         class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 bg-white hover:bg-[color:var(--color-brand-light)] transition">
+        <h3 class="text-lg font-semibold mb-2 text-[color:var(--color-brand-secondary)]">Stream English</h3>
+        <p class="text-[color:var(--color-text-primary)]">Self-hosted learning management system for educational content delivery.</p>
+      </a>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- FAQ SCHEMA (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What's the difference between offline-first and local-first?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Offline-first means the software works completely without internet with no syncing. Local-first keeps data on your device primarily but adds optional syncing between your devices on your terms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why build software-for-one instead of for a market?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Building for yourself eliminates guesswork and creates focused, effective tools that solve real problems without pressure to add unnecessary features or compromise on functionality."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can self-hosted tools still be used by non-technical people?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. While self-hosting requires initial technical setup, once configured the tools can be designed for anyone to use with minimal ongoing technical knowledge required."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why choose offline-first over cloud-based software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Offline-first tools offer privacy, ownership, and independence from subscriptions. Your data never leaves your device, you're not dependent on servers, and there's no recurring cost."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do these approaches work together?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Software-for-one determines what to build. Offline-first ensures it works without internet. Self-hosted gives infrastructure control. Local-first adds optional syncing while maintaining ownership."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are these approaches suitable for all types of software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not all software needs these approaches. Large collaboration tools may benefit from cloud-first design. However, personal productivity, financial, and creative tools are perfect candidates."
+      }
+    }
+  ]
+}
+</script>
+
+{% endblock %}

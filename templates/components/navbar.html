@@ -1,0 +1,107 @@
+{% load static %}
+<nav class="bg-white border-b border-gray-200" role="navigation" aria-label="Main navigation">
+  <div class="max-w-7xl mx-auto px-4 lg:px-8 flex justify-between items-center h-16">
+
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2">
+      <img src="{% static 'images/dianec-gray.png' %}" alt="Diane Corriette logo" width="40" height="40" loading="lazy" class="h-10 w-10 object-contain">
+      <span class="hidden sm:inline-block text-[color:var(--color-font-main)] font-semibold tracking-wide uppercase">To Diane</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden sm:flex items-center gap-6 text-sm font-medium">
+      
+      <!-- Shop -->
+      <a href="/shop/" class="flex items-center gap-1.5 text-[color:var(--color-brand-primary)] hover:opacity-80 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+        </svg>
+        <span>SHOP</span>
+      </a>
+
+      <!-- Login -->
+      <a href="{% url 'account_login' %}" class="flex items-center gap-1.5 text-[color:var(--color-font-main)] hover:text-[color:var(--color-brand-primary)] transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m-6-3h12m0 0l-3-3m3 3l-3 3" />
+        </svg>
+        <span>LOGIN</span>
+      </a>
+
+      <!-- Register -->
+      <a href="{% url 'account_signup' %}" class="flex items-center gap-1 text-[color:var(--color-font-main)] hover:text-[color:var(--color-brand-primary)] transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+        <span>REGISTER</span>
+      </a>
+
+      <!-- Cart Icon -->
+      <a href="{% url 'shop:cart_detail' %}" class="relative text-[color:var(--color-font-main)] hover:text-[color:var(--color-brand-primary)] transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.77 2.348-1.862l1.546-6.546a1.125 1.125 0 00-1.094-1.374H5.127m0 0l-.383-1.437M5.127 5.468l1.336 5.032M15.75 21a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm-7.5 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+        </svg>
+        {% with total_items=cart|length %}
+          {% if total_items > 0 %}
+            <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{{ total_items }}</span>
+          {% endif %}
+        {% endwith %}
+      </a>
+    </div>
+
+    <!-- Mobile: Cart + Hamburger -->
+    <div class="flex sm:hidden items-center gap-4">
+      <!-- Cart Icon (Mobile) -->
+      <a href="{% url 'shop:cart_detail' %}" class="relative text-[color:var(--color-font-main)]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.77 2.348-1.862l1.546-6.546a1.125 1.125 0 00-1.094-1.374H5.127m0 0l-.383-1.437M5.127 5.468l1.336 5.032M15.75 21a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm-7.5 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+        </svg>
+        {% with total_items=cart|length %}
+          {% if total_items > 0 %}
+            <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{{ total_items }}</span>
+          {% endif %}
+        {% endwith %}
+      </a>
+
+      <!-- Hamburger -->
+      <button id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu"
+              class="flex flex-col justify-center items-center w-8 h-8 gap-1.5 focus:outline-none">
+        <span class="block h-0.5 w-6 bg-[color:var(--color-font-main)] rounded transition-all" id="bar1"></span>
+        <span class="block h-0.5 w-6 bg-[color:var(--color-font-main)] rounded transition-all" id="bar2"></span>
+        <span class="block h-0.5 w-6 bg-[color:var(--color-font-main)] rounded transition-all" id="bar3"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden sm:hidden bg-white border-t border-gray-200">
+    <div class="px-4 py-4 space-y-1">
+      <a href="/" class="block py-3 text-[color:var(--color-font-main)] font-medium border-b border-gray-100">Home</a>
+      <a href="/shop/" class="block py-3 text-[color:var(--color-brand-primary)] font-medium border-b border-gray-100">Shop</a>
+      <a href="{% url 'account_login' %}" class="block py-3 text-[color:var(--color-font-main)] font-medium border-b border-gray-100">Login</a>
+      <a href="{% url 'account_signup' %}" class="block py-3 text-[color:var(--color-font-main)] font-medium">Register</a>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("mobile-menu");
+
+      if (toggle && menu) {
+        toggle.addEventListener("click", () => {
+          menu.classList.toggle("hidden");
+          const expanded = toggle.getAttribute("aria-expanded") === "true";
+          toggle.setAttribute("aria-expanded", !expanded);
+        });
+
+        menu.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", () => {
+            menu.classList.add("hidden");
+            toggle.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+    });
+  </script>
+</nav>

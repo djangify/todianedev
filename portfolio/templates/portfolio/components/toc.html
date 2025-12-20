@@ -1,0 +1,47 @@
+<!--portfolio/templates/portfolio/components/toc.html-->
+
+<div class="bg-[color:var(--color-brand-light)] border border-[color:var(--color-brand-accent)] p-6 rounded-lg mb-16 sticky top-24">
+  <h3 class="text-xl font-bold mb-4 text-[color:var(--color-font-main)]">Table of Contents</h3>
+  <ul class="space-y-2 text-[color:var(--color-brand-accent)]">
+    {% if portfolio.business_logic %}
+      <li><a href="#business-logic" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Problem Statement & Business Logic</a></li>
+    {% endif %}
+    {% if portfolio.target_audience %}
+      <li><a href="#target-audience" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Target Audience</a></li>
+    {% endif %}
+    {% if portfolio.tech_stack_description %}
+      <li><a href="#tech-stack" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Technical Stack</a></li>
+    {% endif %}
+    {% if portfolio.architecture_description %}
+      <li><a href="#architecture" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Architecture & Design</a></li>
+    {% endif %}
+    {% if portfolio.feature_description %}
+      <li><a href="#features" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Key Features</a></li>
+    {% endif %}
+    {% if portfolio.development_process %}
+      <li><a href="#development" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Development Process</a></li>
+    {% endif %}
+    {% if portfolio.challenges %}
+      <li><a href="#challenges" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Challenges & Solutions</a></li>
+    {% endif %}
+    {% if portfolio.bugs_and_fixes %}
+      <li><a href="#bugs-fixes" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Bugs & Fixes</a></li>
+    {% endif %}
+    {% if portfolio.outcome %}
+      <li><a href="#outcome" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Project Outcome</a></li>
+    {% endif %}
+    {% if portfolio.lessons_learned %}
+      <li><a href="#lessons" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Lessons Learned</a></li>
+    {% endif %}
+    {% if portfolio.future_improvements %}
+      <li><a href="#improvements" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Future Improvements</a></li>
+    {% endif %}
+    {% if portfolio.conclusion %}
+      <li><a href="#conclusion" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Conclusion</a></li>
+    {% endif %}
+    {% if portfolio.images.exists %}
+      <li><a href="#gallery" class="hover:text-[color:var(--color-brand-primary)] transition-colors">Project Gallery</a></li>
+    {% endif %}
+  </ul>
+</div>
+

@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- 
+REUSABLE PRODUCT LANDING PAGE TEMPLATE
+
+
+
+Required blocks:
+- product_name: Product title
+- product_tagline: Short compelling tagline
+- product_description: Longer description paragraph
+- product_cta: Call-to-action buttons
+- features_content: Feature cards/list
+- faq_content: FAQ items for AI search readiness
+
+Optional blocks:
+- product_icon: SVG icon for hero
+- hero_extra: Additional hero content
+- demo_section: Screenshots/demo area
+- pricing_section: Pricing information
+- testimonials: Social proof
+- extra_sections: Any additional custom sections
+-->
+
+{% block title %}{% block product_name %}Product{% endblock %} — Studio | ToDiane{% endblock %}
+
+{% block meta_description %}{% block meta_desc %}{% endblock %}{% endblock %}
+
+{% block meta_keywords %}{% block meta_keys %}Django, software, tools{% endblock %}{% endblock %}
+
+{% block content %}
+<article class="w-full" itemscope itemtype="https://schema.org/SoftwareApplication">
+
+  <!-- HERO SECTION -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-[color:var(--color-brand-light)] via-white to-[color:var(--color-brand-light)]">
+    
+    
+    
+    <div class="relative w-full max-w-6xl mx-auto px-6 md:px-10 lg:px-16 py-16 md:py-24">
+      
+      <!-- Breadcrumb -->
+      <nav class="mb-8" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-2 text-sm text-[color:var(--color-font-main)]/70">
+          <li><a href="{% url 'core:home' %}" class="hover:text-[color:var(--color-brand-accent)] transition-colors">Home</a></li>
+          <li><span class="mx-2">›</span></li>
+          <li><a href="{% url 'studio:index' %}" class="hover:text-[color:var(--color-brand-accent)] transition-colors">Studio</a></li>
+          {% block breadcrumb_extra %}{% endblock %}
+          <li><span class="mx-2">›</span></li>
+          <li class="text-[color:var(--color-brand-primary)] font-medium" aria-current="page">{% block breadcrumb_current %}Product{% endblock %}</li>
+        </ol>
+      </nav>
+
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- Hero Text -->
+        <div class="order-2 lg:order-1">
+          <p class="uppercase text-sm tracking-widest text-[color:var(--color-brand-accent)] mb-3 font-medium">
+            {% block product_category %}Software Studio{% endblock %}
+          </p>
+          
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[color:var(--color-brand-primary)] mb-4 leading-tight" itemprop="name">
+            {% block hero_title %}{% endblock %}
+          </h1>
+          
+          <p class="text-xl md:text-2xl text-[color:var(--color-brand-accent)] mb-6 font-medium" itemprop="description">
+            {% block product_tagline %}{% endblock %}
+          </p>
+          
+          <p class="text-lg text-[color:var(--color-font-main)] leading-relaxed mb-8 max-w-xl">
+            {% block product_description %}{% endblock %}
+          </p>
+          
+          <!-- CTA Buttons -->
+          <div class="flex flex-wrap gap-4">
+            {% block product_cta %}
+            <a href="#" class="inline-flex items-center px-8 py-4 bg-[color:var(--color-brand-primary)] text-white font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-all duration-300 shadow-lg">
+              Get Started
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </a>
+            <a href="#features" class="inline-flex items-center px-8 py-4 border-2 border-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-primary)] hover:text-white transition-all duration-300">
+              Learn More
+            </a>
+            {% endblock %}
+          </div>
+          
+          {% block hero_extra %}{% endblock %}
+        </div>
+        
+        <!-- Hero Visual -->
+        <div class="order-1 lg:order-2 flex justify-center">
+          {% block hero_visual %}
+          <div class="relative">
+            <!-- Decorative rings -->
+            <div class="absolute inset-0 -m-8">
+              <div class="absolute inset-0 border-2 border-[color:var(--color-brand-accent)]/20 rounded-full animate-pulse"></div>
+              <div class="absolute inset-4 border-2 border-[color:var(--color-brand-primary)]/10 rounded-full"></div>
+            </div>
+            
+            <!-- Icon container -->
+            <div class="relative w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br from-[color:var(--color-brand-primary)] to-[color:var(--color-brand-accent)] rounded-3xl flex items-center justify-center shadow-2xl">
+              {% block product_icon %}
+              <svg class="w-24 h-24 md:w-32 md:h-32 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+              </svg>
+              {% endblock %}
+            </div>
+          </div>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- KEY BENEFITS BAR -->
+  {% block benefits_bar %}
+  <section class="bg-[color:var(--color-brand-primary)] text-white py-6">
+    <div class="w-full max-w-6xl mx-auto px-6 md:px-10 lg:px-16">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        {% block benefits_items %}
+        <div class="flex flex-col items-center">
+          <svg class="w-8 h-8 mb-2 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+          <span class="text-sm font-medium">Privacy First</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <svg class="w-8 h-8 mb-2 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          <span class="text-sm font-medium">Fast & Light</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <svg class="w-8 h-8 mb-2 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <span class="text-sm font-medium">No Subscriptions</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <svg class="w-8 h-8 mb-2 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+          <span class="text-sm font-medium">Your Data, Your Control</span>
+        </div>
+        {% endblock %}
+      </div>
+    </div>
+  </section>
+  {% endblock %}
+
+
+  <!-- FEATURES SECTION -->
+   {% block features %}
+  <section id="features" class="py-20 bg-white">
+    <div class="w-full max-w-6xl mx-auto px-6 md:px-10 lg:px-16">
+      
+      <div class="text-center mb-16">
+        <p class="uppercase text-sm tracking-widest text-[color:var(--color-brand-accent)] mb-3 font-medium">
+          {% block features_label %}Features{% endblock %}
+        </p>
+        <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-4">
+          {% block features_title %}What's Included{% endblock %}
+        </h2>
+        <p class="text-lg text-[color:var(--color-font-main)] max-w-2xl mx-auto">
+          {% block features_subtitle %}Everything you need to get started.{% endblock %}
+        </p>
+      </div>
+      
+      {% block features_content %}
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature cards go here -->
+      </div>
+      {% endblock %}
+      
+    </div>
+  </section>
+  {% endblock %}
+
+  <!-- DEMO/SCREENSHOT SECTION (Optional) -->
+  {% block demo_section %}{% endblock %}
+
+
+  <!-- HOW IT WORKS -->
+  {% block how_it_works %}
+  <section class="py-20 bg-gradient-to-b from-[color:var(--color-brand-light)] to-white">
+    <div class="w-full max-w-6xl mx-auto px-6 md:px-10 lg:px-16">
+      
+      <div class="text-center mb-16">
+        {% block simple_process %}
+        <p class="uppercase text-sm tracking-widest text-[color:var(--color-brand-accent)] mb-3 font-medium">
+          Simple Process
+        </p>
+        {% endblock %}
+        <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-4">
+          {% block how_it_works_title %}How It Works{% endblock %}
+        </h2>
+      </div>
+      
+      {% block how_it_works_content %}
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Step cards -->
+        <div class="relative">
+          <div class="absolute -left-4 top-0 w-12 h-12 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary)] rounded-full flex items-center justify-center text-xl font-bold shadow-lg">1</div>
+          <div class="pl-12 pt-2">
+            <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-2">Download</h3>
+            <p class="text-[color:var(--color-font-main)]">Get the software for your platform.</p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="absolute -left-4 top-0 w-12 h-12 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary)] rounded-full flex items-center justify-center text-xl font-bold shadow-lg">2</div>
+          <div class="pl-12 pt-2">
+            <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-2">Install</h3>
+            <p class="text-[color:var(--color-font-main)]">Quick setup, no account required.</p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="absolute -left-4 top-0 w-12 h-12 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary)] rounded-full flex items-center justify-center text-xl font-bold shadow-lg">3</div>
+          <div class="pl-12 pt-2">
+            <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-2">Start Using</h3>
+            <p class="text-[color:var(--color-font-main)]">Works offline, your data stays private.</p>
+          </div>
+        </div>
+      </div>
+      {% endblock %}
+      
+    </div>
+  </section>
+  {% endblock %} 
+
+
+  <!-- PRICING SECTION (Optional) -->
+  {% block pricing_section %}{% endblock %}
+
+
+  <!-- TESTIMONIALS (Optional) -->
+  {% block testimonials %}{% endblock %}
+
+
+  <!-- FAQ SECTION (AI Search Ready) -->
+  {% block faq_section %}
+   <section id="faq" class="py-20 bg-white">
+    <div class="w-full max-w-4xl mx-auto px-6 md:px-10 lg:px-16">
+      
+      <div class="text-center mb-12">
+        <p class="uppercase text-sm tracking-widest text-[color:var(--color-brand-accent)] mb-3 font-medium">
+          Got Questions?
+        </p>
+        <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-4">
+          Frequently Asked Questions
+        </h2>
+      </div>
+      {% endblock %}
+      
+      <!-- FAQ Schema for AI Search Readiness -->
+      <div itemscope itemtype="https://schema.org/FAQPage">
+        {% block faq_content %}
+        <!-- FAQ items with proper schema markup go here -->
+        {% endblock %}
+      </div>
+      
+    </div>
+  </section> 
+
+
+  <!-- FINAL CTA -->
+   {% block final_cta_title %}
+   <section class="py-20 bg-gradient-to-br from-[color:var(--color-brand-primary)] to-[color:var(--color-brand-accent)]">
+    <div class="w-full max-w-4xl mx-auto px-6 md:px-10 lg:px-16 text-center">
+      
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+        Ready to Get Started?{% endblock %}
+      </h2>
+      
+      <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+        {% block final_cta_text %}Join hundreds of users who've already made the switch.{% endblock %}
+      </p>
+      
+      {% block final_cta_buttons %}
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#" class="inline-flex items-center px-8 py-4 bg-white text-[color:var(--color-brand-primary)] font-semibold rounded-lg  transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+          Download Now
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+        </a>
+        <a href="{% block docs_link %}#{% endblock %}" class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg  transition-all duration-300">
+          View Documentation
+        </a>
+      </div>
+      {% endblock %}
+      
+    </div> 
+  </section>
+
+
+  <!-- EXTRA SECTIONS (Optional) -->
+  {% block extra_sections %}{% endblock %}
+
+</article>
+{% endblock %}

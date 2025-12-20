@@ -1,0 +1,89 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+<tr>
+  <td
+    style="
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      color: var(--color-font-main, #2b2b2b);
+    "
+  >
+    <h1
+      style="
+        margin-top: 0;
+        color: var(--color-brand-primary, #927397);
+        font-size: 24px;
+        font-weight: bold;
+      "
+    >
+      Welcome to To Diane
+    </h1>
+
+    <p>Hello {{ user.first_name|default:user.email }},</p>
+
+    <p>
+      Thank you for registering with <strong>To Diane</strong>.  
+      I am delighted to have you join our community.  
+      As a member, you will gain access to free resources that help you
+      rediscover your spark and live with more zest every day.
+    </p>
+
+    <p>
+      To complete your registration and verify your email address, please click
+      the button below:
+    </p>
+
+    <p style="text-align: center; margin: 30px 0">
+      <a
+        href="{{ verification_url }}"
+        style="
+          background-color: var(--color-brand-primary, #927397);
+          color: var(--color-brand-accent, #e7cbae);
+          padding: 12px 24px;
+          text-decoration: none;
+          border-radius: 4px;
+          font-weight: bold;
+          display: inline-block;
+          font-family: Arial, sans-serif;
+        "
+        >Verify Your Email</a
+      >
+    </p>
+
+    <p>
+      If the button above does not work, copy and paste this link into your
+      browser:
+    </p>
+
+    <p
+      style="
+        word-break: break-all;
+        background-color: var(--color-brand-light, #f8fafc);
+        border-left: 4px solid var(--color-brand-accent, #e7cbae);
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--color-font-main, #2b2b2b);
+      "
+    >
+      {{ verification_url }}
+    </p>
+
+    <p>
+      This verification link will expire in 24 hours.  
+      If you did not register for an account, please ignore this email.
+    </p>
+
+    <p>
+      Best regards,<br />
+      <strong>The To Diane Team</strong><br />
+      <a
+        href="https://www.todiane.com"
+        style="color: var(--color-brand-secondary, #d6809c); text-decoration: none;"
+        >www.todiane.com</a
+      >
+    </p>
+  </td>
+</tr>
+{% endblock %}

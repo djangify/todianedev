@@ -1,0 +1,14 @@
+django==6.0
+django-allauth
+psycopg[binary]
+django-tinymce
+requests
+whitenoise>=6.6
+django-environ>=0.11
+django-widget-tweaks
+django-tinymce
+gunicorn
+Pillow
+psycopg[binary]
+stripe
+beautifulsoup4
