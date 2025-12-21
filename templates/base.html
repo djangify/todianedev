@@ -36,7 +36,7 @@
     <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/todiane-purp.webp" />
     {% endblock %}
 
-    <!-- 🔹 Preload & optimise styles -->
+    <!-- 🔹 Preload & optimise styles - Stripe url in checkout.html -->
     <link
       rel="preload"
       href="{% static 'css/output.css' %}"
@@ -44,9 +44,8 @@
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript><link rel="stylesheet" href="{% static 'css/output.css' %}" /></noscript>
-    <script src="https://js.stripe.com/v3/" defer></script>
     
-
+  
     <!-- 🔹 Fonts & connections -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

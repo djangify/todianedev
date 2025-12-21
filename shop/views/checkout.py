@@ -42,7 +42,7 @@ def checkout(request):
         intent = stripe.PaymentIntent.create(
             amount=int(total_price * 100),
             currency=getattr(settings, "STRIPE_CURRENCY", "gbp"),
-            payment_method_types=["card"],
+            automatic_payment_methods={"enabled": True},
             metadata={
                 "user_id": str(request.user.id),
             },
