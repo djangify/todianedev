@@ -32,25 +32,20 @@
 
     <!-- Featured Media -->
     <div class="mb-8 rounded-xl overflow-hidden shadow-md">
-      {% if post.youtube_url %}
-      <div class="aspect-video">
+      {% if post.get_youtube_embed_url %}
+      <div class="aspect-video w-full overflow-hidden rounded-xl shadow-md">
         <iframe
           src="{{ post.get_youtube_embed_url }}"
           class="w-full h-full"
           frameborder="0"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
       </div>
-      {% elif post.external_image_url %}
-      <img src="{{ post.external_image_url }}" alt="{{ post.title }}" class="w-full h-96 object-cover">
-      {% elif post.image %}
-      <img src="{{ post.image.url }}" alt="{{ post.title }}" class="w-full h-96 object-cover">
-      {% else %}
-      <div class="w-full h-64 flex items-center justify-center bg-[--color-brand-accent]/10 rounded">
-        <span class="text-[--color-brand-accent]">No Media Available</span>
-      </div>
       {% endif %}
+
     </div>
 
     <!-- Title + Meta -->

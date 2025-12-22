@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.utils import timezone
 from tinymce.models import HTMLField
+from todianedev.mixins.youtube import YouTubeVideoMixin
 
 
 class Category(models.Model):
@@ -20,7 +21,7 @@ class Category(models.Model):
         return reverse("blog:category", kwargs={"slug": self.slug})
 
 
-class Post(models.Model):
+class Post(YouTubeVideoMixin, models.Model):
     STATUS_CHOICES = [
         ("draft", "Draft"),
         ("published", "Published"),
@@ -127,23 +128,6 @@ class Post(models.Model):
             return self.thumbnail.url if self.thumbnail else self.get_image_url()
         except Exception:
             return None
-
-    def get_youtube_video_id(self):
-        """Extract YouTube video ID from URL"""
-        if not self.youtube_url:
-            return None
-        if "youtu.be" in self.youtube_url:
-            return self.youtube_url.split("/")[-1]
-        elif "v=" in self.youtube_url:
-            return self.youtube_url.split("v=")[1].split("&")[0]
-        return None
-
-    def get_youtube_embed_url(self):
-        """Get YouTube video embed URL"""
-        video_id = self.get_youtube_video_id()
-        if video_id:
-            return f"https://www.youtube.com/embed/{video_id}"
-        return None
 
     @property
     def get_meta_title(self):
