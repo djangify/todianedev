@@ -34,7 +34,7 @@ CORS_ALLOWED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
-    # "adminita",
+    "adminita",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -69,7 +69,6 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "core.context_processors.dashboard_announcement",
 ]
 
 ROOT_URLCONF = "todianedev.urls"
@@ -85,6 +84,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "shop.context_processors.cart",
+                "core.context_processors.dashboard_announcement",
             ],
         },
     },
