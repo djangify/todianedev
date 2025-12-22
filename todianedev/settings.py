@@ -69,6 +69,7 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "core.context_processors.dashboard_announcement",
 ]
 
 ROOT_URLCONF = "todianedev.urls"
