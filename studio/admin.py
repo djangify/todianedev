@@ -26,6 +26,8 @@ class GalleryAdmin(admin.ModelAdmin):
 
 @admin.register(GalleryImage)
 class GalleryImageAdmin(admin.ModelAdmin):
-    list_display = ("__str__", "gallery", "order", "published")
+    list_display = ("admin_thumbnail", "__str__", "gallery", "order", "published")
     list_filter = ("published", "gallery")
     ordering = ("gallery", "order")
+    readonly_fields = ("admin_thumbnail",)
+    fields = ("admin_thumbnail", "gallery", "image", "caption", "order", "published")
