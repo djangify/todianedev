@@ -47,12 +47,21 @@
     @apply mb-0;
   }
 
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
   ul,
   ol {
     @apply text-lg text-[--color-font-main] leading-relaxed;
     list-style-position: outside;
     padding-left: 1.5rem;
   }
+
 
   footer ul,
   footer ol {
@@ -131,4 +140,22 @@
 
 #messages-container {
   top: 3.5rem;
+}
+
+@layer base {
+  .blog-content p {
+    margin-bottom: 1rem;
+  }
+
+  .blog-content ul {
+    list-style-type: disc !important;
+  }
+
+  .blog-content ol {
+    list-style-type: decimal !important;
+  }
+
+  .blog-content li {
+    margin-bottom: 0.25rem;
+  }
 }

@@ -11,7 +11,7 @@
 <meta property="og:description" content="{{ post.meta_description|default:post.content|striptags|truncatechars:160 }}" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="{{ request.build_absolute_uri }}" />
-{% if post.youtube_url %}
+{% if post.get_youtube_embed_url %}
 <meta property="og:image" content="https://img.youtube.com/vi/{{ post.get_youtube_video_id }}/maxresdefault.jpg" />
 {% elif post.external_image_url %}
 <meta property="og:image" content="{{ post.external_image_url }}" />
@@ -33,7 +33,7 @@
     <!-- Featured Media -->
     <div class="mb-8 rounded-xl overflow-hidden shadow-md">
       {% if post.get_youtube_embed_url %}
-      <div class="aspect-video w-full overflow-hidden rounded-xl shadow-md">
+      <div class="aspect-video w-full overflow-hidden  shadow-md">
         <iframe
           src="{{ post.get_youtube_embed_url }}"
           class="w-full h-full"
