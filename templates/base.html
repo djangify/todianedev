@@ -78,6 +78,16 @@
   </head>
 
   <body class="antialiased bg-[color:var(--color-surface-light)] text-[color:var(--color-font-main)]">
+      <a href="#main-content" 
+        style="position: absolute; 
+              left: -9999px; 
+              width: 1px; 
+              height: 1px; 
+              overflow: hidden;"
+        onfocus="this.style.cssText='position: absolute; top: 10px; left: 10px; z-index: 9999; background: #1e3a8a; color: white; padding: 8px 16px; border-radius: 4px; font-weight: 600;'"
+        onblur="this.style.cssText='position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;'">
+          Skip to main content
+      </a>
     {% if messages %}
       <section aria-label="Notifications" role="alert">
         {% include 'partials/_messages.html' %}
