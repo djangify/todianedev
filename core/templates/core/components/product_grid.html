@@ -1,0 +1,135 @@
+ <div class="max-w-6xl py-8 mx-auto">
+    
+    <!-- 3-Column Asymmetric Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+      
+      <!-- COLUMN 1 -->
+      <div class="flex flex-col gap-4 md:gap-6">
+        
+        <!-- Card 1: Top Left -->
+        <div class="group relative bg-gradient-to-br from-emerald-50 to-white border border-emerald-200/50  hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden rounded-xl  p-8 text-center flex-1">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-100/50 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+          <!-- Icon -->
+          <div class="w-12 h-12 mb-4 mx-auto bg-emerald-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            
+          <h3 class="text-xl font-semibold text-brand-primary mb-2">MTDify</h3>
+          <p class="text-font-main text-base mb-4">Manage Transactions Daily (MTD) Privacy-first bookkeeping for UK sole traders. Run Locally or self-host.</p>
+          <a href="#" class="inline-flex items-center text-brand-secondary hover:text-brand-dark font-medium transition-colors">
+            Learn more
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Card 2: Bottom Left (with logos/icons grid) -->
+        <div class="bg-bg-default rounded-xl border border-brand-accent/30 p-8 text-center flex-1">
+          
+          <div class="w-12 h-12 mx-auto mb-4 text-brand-dark">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-brand-primary mb-2">Invoice Generator</h3>
+          <p class="text-font-main text-base mb-4">Create professional PDF invoices in seconds with your own self-hosted invoice geneator. </p>
+          <a href="#" class="inline-flex items-center text-brand-secondary hover:text-brand-dark font-medium transition-colors">
+            Coming Soon...
+
+          </a>
+        </div>
+
+      </div>
+
+      <!-- COLUMN 2 (Center - Tall card + shorter card) -->
+      <div class="flex flex-col gap-4 md:gap-6">
+        
+        <!-- Card 3: Featured/Tall Card -->
+        <div class="bg-bg-default rounded-xl border border-brand-accent/30 p-8 text-center flex-[1.6]">
+          <!-- Gradient accent line -->
+          <div class="h-1 w-24 mx-auto bg-[color:var(--color-brand-primary)] rounded-full accent-gradient mb-6"></div>
+          <p class="text-[color:var(--color-brand-primary)] text-semibold font-medium uppercase tracking-wide mb-2">Portfolio</p>
+          <p class="text-6xl md:text-7xl font-bold text-brand-primary mb-2">11+</p>
+          <h3 class="text-xl font-semibold text-font-contrast mb-4">Applications</h3>
+          <p class="text-font-main text-base mb-6">From bookkeeping to eCommerce to educational platforms — I design and build tools with one question in mind: will this still be useful a year from now?</p>
+          <p class="text-font-main text-base mb-6">I’m only interested in creating practical things people can rely on.</p>
+           <a 
+            href="{% url 'portfolio:list' %}" 
+            class="uppercase bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-light)] border border-[color:var(--color-brand-primary)] px-6 py-3 rounded-md hover:bg-[color:var(--color-brand-accent)] transition-colors">
+            View My Work
+          
+          </a>
+        </div>
+
+        <!-- Card 4: Bottom Center -->
+        <div class="group relative bg-gradient-to-br from-rose-50 to-white border border-rose-200/50  p-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden rounded-xl text-center flex-1">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-rose-100/50 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+          <!-- Icon -->
+          <div class="w-12 h-12 mx-auto mb-4 bg-rose-100 rounded-2xl flex items-center justify-center  group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-8 h-8 text-rose-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-brand-primary mb-2">Adminita</h3>
+          <p class="text-font-main text-base mb-4">Easy to install. Modern Django Admin Theme. Available from PYPI.</p>
+          <a href="https://adminita.todiane.com" target="_blank" class="inline-flex items-center text-brand-secondary hover:text-brand-dark font-medium transition-colors">
+            More About Adminita
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- COLUMN 3 -->
+      <div class="flex flex-col gap-4 md:gap-6">
+        
+        <!-- Card 5: Top Right -->
+        <div class="bg-bg-default rounded-xl text-center flex-1 group relative bg-gradient-to-br from-purple-50 to-white border border-purple-200/50 p-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden md:col-span-2 lg:col-span-1">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-purple-100/50 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+          <!-- Icon -->
+           <div class="w-12 h-12 mx-auto mb-4 bg-purple-100 rounded-2xl flex items-center justify-center  group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+              </svg>
+            </div>
+         
+          <h3 class="text-xl font-semibold text-brand-primary mb-2">eCommerce Builder</h3>
+          <p class="text-font-main text-base mb-4"> A complete Django-based 
+              eCommerce system for selling digital products. Your platform. Your data.</p>
+          <a href="#" class="inline-flex items-center text-brand-secondary hover:text-brand-dark font-medium transition-colors">
+            Explore more
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Card 6: Bottom Right (with preview mockup) -->
+        <div class="bg-bg-default rounded-xl border border-brand-accent/30 p-8 text-center flex-1">
+          <!-- Icon -->
+          <div class="w-12 h-12 mx-auto mb-4 text-brand-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-brand-primary mb-2">LinkHub Pro</h3>
+          <p class="text-font-main text-base mb-4">Your link-in-bio solution. Clean, fast, and fully customisable for your brand.</p>
+          
+          <a href="#" class="inline-flex items-center text-brand-secondary hover:text-brand-dark font-medium transition-colors">
+            Coming in 2026...
+            {% comment %} <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg> {% endcomment %}
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>

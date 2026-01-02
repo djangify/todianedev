@@ -1,0 +1,62 @@
+
+ <!--sites section-->
+  <section class="py-20 bg-white">
+
+    <div class="w-full max-w-6xl mx-auto px-6 md:px-10 lg:px-16">
+      
+      <div class="text-center mb-16">
+        <p class="uppercase text-sm tracking-widest text-[color:var(--color-brand-accent)] mb-3 font-medium">
+          Portfolio 
+        </p>
+        <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--color-font-main)] mb-4">
+          Creative Projects
+        </h2>
+        <p class="text-lg text-[color:var(--color-font-main)] max-w-4xl mx-auto">
+          My work includes a range of creative tools and websites.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        
+        {# gallery link #}
+        <a href="{% url 'studio:gallery' homepage_gallery.slug %}"  class="group bg-white border border-[color:var(--color-brand-accent)]/30 rounded-xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-[color:var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-3">Gallery</h3>
+          <p class="text-[color:var(--color-font-main)] leading-relaxed text-sm">
+            Free women in tech images
+          </p>
+        </a>
+        
+        {# inspirational guidance #}
+        <a href="/portfolio/inspirational-guidance/" class="group bg-white border border-[color:var(--color-brand-accent)]/30 rounded-xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-[color:var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-3">Inspirational Guidance</h3>
+          <p class="text-[color:var(--color-font-main)] leading-relaxed text-sm">
+            Personal Development
+          </p>
+        </a>
+        
+        {# Creative Coding #}
+        <a href="/portfolio/technology/creative-coding/" class="group bg-white border border-[color:var(--color-brand-accent)]/30 rounded-xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-[color:var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-3">Creative Coding</h3>
+          <p class="text-[color:var(--color-font-main)] leading-relaxed text-sm">
+            Playful tools and games
+          </p>
+        </a>
+        
+      </div>
+    </div>
+  </section>

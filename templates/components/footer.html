@@ -26,7 +26,7 @@
         <p class="font-semibold mb-3 text-[color:var(--color-font-main)]">Pages</p>
         <ul class="space-y-1">
           <li><a href="/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Home</a></li>
-          <li><a href="{% url 'studio:index' %}" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Studio</a></li>
+          
           <li><a href="{% url 'portfolio:list' %}" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Portfolio</a></li>
           <li><a href="{% url 'shop:product_list' %}" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Shop</a></li>
           {% if not request.user.is_authenticated %}
@@ -70,8 +70,8 @@
            <li><a href="/infopages/policies/cookie-policy/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Cookie Policy</a></li>
           <li><a href="/infopages/policies/terms-policy/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Terms Policy</a></li>
           <li><a href="/infopages/policies/privacy-policy/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Privacy Policy</a></li>
-          <li><a href="/infopages/policies/affiliate-policy/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">Affiliate Policy</a></li>
-          <li><a href="/infopages/policies/ai-writing-policy/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">AI Writing Policy</a></li> 
+          <li><a href="/infopages/policies/" class="hover:text-[color:var(--color-brand-primary)] transition text-sm">All policies</a></li>
+          
           
         </ul>
 

@@ -10,97 +10,29 @@
   {% include 'core/hero.html' %}
 </header>
 
+
+
 <main class="2xl:max-w-screen-2xl 2xl:mx-auto">
-
-  <!-- INTRO: The Studio -->
-  <section 
-    class="scroll-mt-8 p-6 flex flex-col gap-y-10 bg-[--color-brand-secondary] text-[--color-font-main] 
-           lg:gap-x-10 lg:flex-row-reverse lg:items-start *:basis-full md:p-16 2xl:rounded"
-  >
-
-    <!-- Text Column -->
-    <div class="space-y-6 lg:self-center xl:space-y-10">
-
+   <div class="max-w-6xl mt-8 mx-auto">
       <p class="text-sm pl-6 uppercase relative before:content-[''] before:h-1 before:w-4 
                 before:bg-[color:var(--color-brand-accent)] before:absolute before:top-1/2 
                 before:-translate-y-1/2 before:left-0 lg:text-lg">
-        Welcome to the Studio
+        Self-Hosting Advocate
       </p>
 
-      <h2 class="text-2xl font-bold lg:text-3xl text-[color:var(--color-font-main)]">
-        Practical Software You Can Run, Own, and Trust
+      <h2 class="text-2xl font-semibold lg:text-3xl text-[color:var(--color-font-main)]">
+        Practical Tools You Can Run, Own, and Trust
       </h2>
-
-      <div class="space-y-5 text-[color:var(--color-font-main)]/90">
-
-        <p>
-          I'm <strong>Diane Corriette</strong>, an indie  
-          Software & Product Developer. I design and build tools with one question in mind:<strong> will this still be useful a year from now?</strong>
-        </p>
-
-        <p>
-          That applies to everything I make - from micro ecommerce sites and software to practical PDF guides and workbooks designed to be used, not just read. The focus is always on reliability, clarity, and tools that earn their place by being genuinely useful.
-        </p>
-        <p>
-        My Studio brings together everything I create. I’m only interested in creating practical things people can rely on.
-        </p>
-        <p>
-          <a href="/studio/" class="inline-block uppercase self-start bg-transparent text-[color:var(--color-brand-primary)] font-bold border-2 border-[color:var(--color-brand-primary)] px-10 py-4 rounded-md hover:bg-[color:var(--color-brand-primary)] hover:text-white transition-all text-base">
-            Enter the Studio
-          </a>
-        </p>
-
-      </div>
-    </div>
-
-    <!-- Studio Categories -->
-    <div
-      class="grid gap-5 sm:grid-cols-1 md:grid-cols-2 *:gap-y-5 *:items-center *:border-2 
-             *:border-[--color-brand-accent] *:rounded-lg *:p-8 bg-[--color-brand-light] 
-             text-[--color-font-main]">
-
-      <a href="/shop/category/software/" class="block">
-        <img src="{% static 'images/service-2.webp' %}" alt="Offline-First Apps" class="h-12 w-12 mx-auto mb-3">
-        <p class="text-xl text-[--color-brand-primary] text-center font-semibold">
-          Self-Hosted Software
-        </p>
-        <p class="text-center">
-          Tools you run on your own server or machine, giving you control over your data, setup, and long-term ownership.
-        </p>
-
-      </a>
-
-      <a href="/studio/" class="block">
-        <img src="{% static 'images/service-1.webp' %}" alt="Django Web Apps" class="h-12 w-12 mx-auto mb-3">
-        <p class="text-xl text-[--color-brand-primary] text-center font-semibold">Web Applications</p>
-        <p class="text-center">Django-based systems, micro-SaaS tools, and creator-focused platforms.</p>
-      </a>
-
-      <a href="/studio/" class="block">
-        <img src="{% static 'images/service-3.webp' %}" alt="PDF Tools" class="h-12 w-12 mx-auto mb-3">
-        <p class="text-xl font-semibold text-center">PDFs & Digital Products</p>
-        <p class="text-center">Workbooks, planners, writing tools, and downloadable guides sold via my eCommerce builder.</p>
-      </a>
-
-      <a href="/studio/creative-coding/" class="block">
-        <img src="{% static 'images/service-4.webp' %}" alt="Creative Coding" class="h-12 w-12 mx-auto mb-3">
-        <p class="text-xl font-semibold text-center">Creative Coding</p>
-        <p class="text-center">Playful experiments and interactive tools that showcase the joy of building.</p>
-      </a>
-    </div>
-  </section>
+      {% include "core/components/product_grid.html" %}
+      
 </main>
-<!-- BLOG SECTION -->
-  <section id="blog" class="scroll-mt-16">
+<!-- SHOP SECTION -->
+  <section id="shop" class="scroll-mt-16">
     {% include "core/components/shop.html" %}
   </section>
-  <!-- FEATURED TOOLS  -->
-  {% comment %} {% include "core/components/featured.html" %} {% endcomment %}
-  <!-- RECENT WORK / COMING SOON -->
-  {% comment %} {% include "core/components/coming-soon.html" %} {% endcomment %}
-  {% if homepage_gallery %}
-    {% include "studio/gallery/gallery_home.html" with gallery=homepage_gallery %}
-{% endif %}
+
+  {% include "core/components/creative.html" %} 
+  
 
 
   <!-- BLOG SECTION -->
