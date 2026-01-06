@@ -163,3 +163,14 @@
     margin-bottom: 0.25rem;
   }
 }
+
+/* --------------------------------
+   Breadcrumb reset (NO numbering)
+--------------------------------- */
+@layer base {
+  nav[aria-label="Breadcrumb"] ol {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+}
