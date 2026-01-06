@@ -1,0 +1,264 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MTDify - Manage Transactions Daily - Digital Bookkeeping Software{% endblock %}
+{% block open_graph_tags %}
+<meta property="og:title" content="MTDify – Simple Digital Bookkeeping for UK Self-Employed People" />
+<meta property="og:description" content="Offline-first digital bookkeeping designed for UK self-employed people and small businesses. Track income, expenses, and receipts easily." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/mtdify-og-default.png' %}" />
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MTDify – Simple Digital Bookkeeping">
+<meta name="twitter:description" content="Digital record-keeping for UK self-employed people and small businesses.">
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/mtdify-og-default.png' %}">
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "MTDify",
+  "url": "{{ request.build_absolute_uri }}",
+  "description": "A simple digital bookkeeping tool for self-employed individuals and small businesses."
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="w-full bg-[color:var(--color-brand-light)] py-16 sm:py-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tight text-[color:var(--color-brand-primary-contrast)]">
+            Manage Transactions Daily
+        </h1>
+        <p class="text-2xl sm:text-3xl mb-4 font-bold text-[color:var(--color-brand-accent)]">
+            Open Source Bookkeeping
+        </p>
+        <p class="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto mb-12">
+            A self-hosted Django application for tracking income and expenses. Built for developers, freelancers, and anyone who wants full control over their financial data. Perfect for UK sole traders—or adapt it for anywhere.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+            <a href="https://github.com/djangify/mtdify" target="_blank"
+              class="px-6 py-3 bg-[color:var(--color-brand-accent)] text-white font-semibold rounded-lg shadow hover:opacity-90 transition">
+                View on GitHub
+            </a>
+            <a href="https://github.com/djangify/mtdify#quick-start"
+              target="_blank" class="px-6 py-3 border border-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] hover:text-white transition">
+                Quick Start Guide
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- What It Is Section -->
+<section class="w-full py-16 md:py-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-6">
+                    Your data. Your server. Your rules.
+                </h2>
+                <p class="text-lg text-[color:var(--color-text)] leading-relaxed mb-4">
+                    <strong>MTDify is a Django-based bookkeeping application you host yourself.</strong> No subscriptions, no third-party access to your financial records, no vendor lock-in. Clone the repo, spin up Docker, and you're running.
+                </p>
+                <p class="text-lg text-[color:var(--color-text)] leading-relaxed mb-4">
+                    Originally built for UK sole traders preparing for Making Tax Digital, the "Manage Transactions Daily" name now reflects what it actually does—help you stay on top of your finances with a simple, privacy-first tool.
+                </p>
+                <p class="text-lg text-[color:var(--color-text)] leading-relaxed">
+                    Whether you're a developer tracking side-project income, a freelancer managing client payments, or a student learning Django—MTDify is yours to run, modify, and extend.
+                </p>
+            </div>
+            <div class="bg-[color:var(--color-brand-accent)]/10 rounded-2xl p-8 md:p-12 border-2 border-[color:var(--color-brand-accent)]/20">
+                <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-[color:var(--color-brand-accent)] rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-2">Django + SQLite</h3>
+                            <p class="text-[color:var(--color-text-muted)]">Familiar stack. Single-file database. Easy to back up, easy to migrate.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-[color:var(--color-brand-accent)] rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-2">Docker Ready</h3>
+                            <p class="text-[color:var(--color-text-muted)]">One command to deploy. Works on any server, VPS, or your local machine.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-[color:var(--color-brand-accent)] rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-2">MIT Licensed</h3>
+                            <p class="text-[color:var(--color-text-muted)]">Fork it, modify it, build on it. Use it for yourself or your clients.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Who It's For Section -->
+<section class="w-full py-16 bg-[color:var(--color-brand-light)]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-8">
+            Built For People Who Can Self-Host
+        </h2>
+        <ul class="space-y-3">
+            <li class="flex items-start text-lg">
+                <span class="text-[color:var(--color-brand-accent)] font-bold mr-3 text-xl">✓</span>
+                <span><strong>Developers</strong> who want a real Django project to learn from or extend</span>
+            </li>
+            <li class="flex items-start text-lg">
+                <span class="text-[color:var(--color-brand-accent)] font-bold mr-3 text-xl">✓</span>
+                <span><strong>Sysadmins</strong> comfortable with Docker and basic server management</span>
+            </li>
+           
+            <li class="flex items-start text-lg">
+                <span class="text-[color:var(--color-brand-accent)] font-bold mr-3 text-xl">✓</span>
+                <span><strong>Freelancers</strong> who'd rather host their own tools than pay subscriptions</span>
+            </li>
+            <li class="flex items-start text-lg">
+                <span class="text-[color:var(--color-brand-accent)] font-bold mr-3 text-xl">✓</span>
+                <span><strong>Privacy-conscious</strong> people who want financial data on their own hardware</span>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="w-full py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] text-center mb-12">
+            What You Get
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="p-8 border border-[color:var(--color-brand-accent)]">
+                <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-4">Income &amp; Expense Tracking</h3>
+                <p class="text-[color:var(--color-text-muted)]">
+                    Log transactions with dates, categories, notes, and receipt attachments. Everything in one place.
+                </p>
+            </div>
+
+            <div class="p-8 border border-[color:var(--color-brand-accent)]">
+                <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-4">UK Tax Year Quarters</h3>
+                <p class="text-[color:var(--color-text-muted)]">
+                    Transactions auto-sort into April-to-April quarters. See totals by period at a glance.
+                </p>
+            </div>
+
+            <div class="p-8 border border-[color:var(--color-brand-accent)]">
+                <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-4">VAT Support</h3>
+                <p class="text-[color:var(--color-text-muted)]">
+                    Handle 0%, 5%, and 20% VAT rates. Track what you've charged and what you can claim.
+                </p>
+            </div>
+
+            <div class="p-8 border border-[color:var(--color-brand-accent)]">
+                <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-4">Export Your Data</h3>
+                <p class="text-[color:var(--color-text-muted)]">
+                    Download reports anytime. Your figures, ready for your accountant or your HMRC submission.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- The Problem Section -->
+<section class="w-full py-16 bg-[color:var(--color-brand-light)]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-8">
+            Why Not Just Use a Spreadsheet?
+        </h2>
+        <p class="text-lg text-[color:var(--color-text)] mb-6">
+            You could. Many people do. But spreadsheets don't give you automatic categorisation, quarter sorting, or a proper audit trail. And cloud accounting tools? They cost money every month and store your data on someone else's servers.
+        </p>
+        <p class="text-lg text-[color:var(--color-text)]">
+            MTDify sits in the middle—more structured than a spreadsheet, simpler than full accounting software, and entirely under your control.
+        </p>
+    </div>
+</section>
+
+<!-- Getting Started Section -->
+<section class="w-full py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] text-center mb-8">
+            Get Running in Minutes
+        </h2>
+        
+        <div class="bg-gray-900 rounded-lg p-6 mb-8">
+            <pre class="text-green-400 text-sm sm:text-base overflow-x-auto"><code>git clone https://github.com/djangify/mtdify.git
+cd mtdify
+cp .env.example .env
+docker-compose up -d</code></pre>
+        </div>
+        
+        <p class="text-center text-[color:var(--color-text-muted)] mb-8">
+            Then open <code class="bg-gray-100 px-2 py-1 rounded">http://localhost:8000</code> and create your account.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="https://github.com/djangify/mtdify"
+              class="px-6 py-3 bg-[color:var(--color-brand-accent)] text-white font-semibold rounded-lg shadow hover:opacity-90 transition text-center">
+                View Repository
+            </a>
+            <a href="https://github.com/djangify/mtdify/blob/main/README.md"
+              class="px-6 py-3 border border-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] hover:text-white transition text-center">
+                Read the Docs
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- UK Context Section -->
+<section class="w-full py-16 bg-[color:var(--color-brand-light)]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="p-8 bg-white border-l-4 border-[color:var(--color-brand-primary)]">
+            <h3 class="text-2xl font-semibold text-[color:var(--color-brand-primary)] mb-4">Originally Built for UK Sole Traders</h3>
+            <p class="text-lg text-[color:var(--color-text)] mb-4">
+                MTDify follows UK tax year conventions and supports HMRC-compliant record keeping. If you're self-employed in the UK, this gives you the digital records you need for Self Assessment—without the monthly fees.
+            </p>
+            <p class="text-[color:var(--color-text-muted)]">
+                Not in the UK? The codebase is MIT licensed. Fork it and adapt the tax year logic for your region.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Contribute Section -->
+<section class="w-full py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-[color:var(--color-brand-primary)] mb-6">
+            Contributions Welcome
+        </h2>
+        <p class="text-lg text-[color:var(--color-text)] mb-8">
+            Found a bug? Want to add a feature? MTDify is open source and actively maintained. Check the issues, submit a PR, or just star the repo if you find it useful.
+        </p>
+        <a href="https://github.com/djangify/mtdify"
+          class="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg shadow hover:bg-gray-800 transition">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+            </svg>
+            GitHub Repository
+        </a>
+    </div>
+</section>
+{% endblock %}
+

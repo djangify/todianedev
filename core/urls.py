@@ -6,6 +6,11 @@ app_name = "core"
 
 urlpatterns = [
     path("", views.home, name="home"),
+    path(
+        "mtdify/",
+        TemplateView.as_view(template_name="core/mtdify.html"),
+        name="mtdify",
+    ),
     # cluster pages
     path(
         "ai-search-readiness/",
