@@ -11,6 +11,11 @@ urlpatterns = [
         TemplateView.as_view(template_name="core/mtdify.html"),
         name="mtdify",
     ),
+    path(
+        "invoice-generator/",
+        TemplateView.as_view(template_name="core/invoice-generator.html"),
+        name="invoice_generator",
+    ),
     # cluster pages
     path(
         "ai-search-readiness/",
