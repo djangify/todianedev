@@ -43,21 +43,18 @@ class ProductDownloadInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     list_display = [
         "title",
-        "category",
         "status",
         "price",
-        "sale_price",
-        "product_type",
         "purchase_count",
         "featured",
         "display_thumbnail",
         "order",
     ]
-    list_filter = ["status", "category", "product_type", "featured", "created"]
+    list_filter = ["status", "category", "featured", "created"]
     search_fields = ["title", "description", "public_id"]
     prepopulated_fields = {"slug": ("title",)}
     readonly_fields = ["public_id", "purchase_count", "display_preview"]
-    list_editable = ["order", "featured"]
+    list_editable = ["featured"]
     inlines = [ProductImageInline, ProductDownloadInline]
 
     fieldsets = (
