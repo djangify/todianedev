@@ -149,3 +149,5 @@ Please credit the author if you adapt or reuse significant portions of the struc
 ---
 
 > **“AI-Search-Ready development means building websites humans love — and machines understand.”**
+
+Maintained by [Diane Corriette](https://github.com/todiane)
