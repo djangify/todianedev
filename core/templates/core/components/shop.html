@@ -28,7 +28,9 @@
           
           <!-- Hover overlay -->
           <div class="absolute inset-0 bg-[color:var(--color-brand-primary)]/0 group-hover:bg-[color:var(--color-brand-primary)]/10 transition-colors duration-300 flex items-center justify-center">
-            <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-[color:var(--color-brand-primary)] px-4 py-2 rounded-full font-semibold text-sm shadow-lg">View Details</span>
+            <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-[color:var(--color-brand-primary)] px-4 py-2 rounded-full font-semibold text-sm shadow-lg">
+              View Details
+            </span>
           </div>
         </a>
 
@@ -42,7 +44,7 @@
           <!-- Price & CTA -->
           <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
             <span class="text-xl  text-[color:var(--color-font-main)]">£{{ product.current_price|floatformat:2 }}</span>
-            <a href="{{ product.get_absolute_url }}" class="text-[color:var(--color-brand-accent)] hover:text-[color:var(--color-brand-primary)] font-semibold text-sm transition">View →</a>
+            <a href="{{ product.get_absolute_url }}" class="text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] font-semibold text-sm transition">View →</a>
           </div>
         </div>
       </div>
