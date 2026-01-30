@@ -1,6 +1,5 @@
-django==6.0
+django==5.2.9
 django-allauth
-psycopg[binary]
 django-tinymce
 requests
 whitenoise
@@ -9,7 +8,6 @@ django-widget-tweaks
 django-tinymce
 gunicorn
 Pillow
-psycopg[binary]
 stripe
 beautifulsoup4
 adminita

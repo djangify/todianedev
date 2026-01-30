@@ -34,7 +34,7 @@ CORS_ALLOWED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
-    # "adminita",
+    "adminita",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -93,15 +93,16 @@ TEMPLATES = [
 WSGI_APPLICATION = "todianedev.wsgi.application"
 
 
-# Database
+# Database - SQLite default for Docker. Use in production
+# DATABASES = {"default": env.db(default="sqlite:////app/db/db.sqlite3")}
+
+
+# Database - SQLite. Use in development
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("DATABASE_NAME"),
-        "USER": env("DATABASE_USER"),
-        "PASSWORD": env("DATABASE_PASSWORD"),
-        "HOST": env("DATABASE_HOST", default="127.0.0.1"),
-        "PORT": env("DATABASE_PORT", default="5433"),
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "data" / "db" / "db.sqlite3",
     }
 }
 
