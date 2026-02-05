@@ -15,7 +15,7 @@ SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
@@ -30,6 +30,14 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
 
+
+# Database
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 # Application definition
 
@@ -92,19 +100,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "todianedev.wsgi.application"
 
-
-# Database - SQLite default for Docker. Use in production
-# DATABASES = {"default": env.db(default="sqlite:////app/db/db.sqlite3")}
-
-
-# Database - SQLite. Use in development
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "data" / "db" / "db.sqlite3",
-    }
-}
 
 AUTH_USER_MODEL = "accounts.User"
 ACCOUNT_LOGIN_METHODS = {"email"}
