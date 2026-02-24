@@ -74,7 +74,7 @@ Optional blocks:
           <!-- CTA Buttons -->
           <div class="flex flex-wrap gap-4">
             {% block product_cta %}
-            <a href="#" class="inline-flex items-center px-8 py-4 bg-[color:var(--color-brand-primary)] text-white font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-all duration-300 shadow-lg">
+            <a href="#" class="inline-flex items-center px-8 py-4 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-all duration-300 shadow-lg">
               Get Started
               <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
@@ -117,7 +117,7 @@ Optional blocks:
 
   <!-- KEY BENEFITS BAR -->
   {% block benefits_bar %}
-  <section class="bg-[color:var(--color-brand-primary)] text-white py-6">
+  <section class="bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)] py-6">
     <div class="w-full max-w-6xl mx-auto px-6 md:px-10 lg:px-16">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         {% block benefits_items %}

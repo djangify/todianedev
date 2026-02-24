@@ -99,14 +99,14 @@ Explore digital bookkeeping downloads, guides and productivity tools designed fo
         <div class="flex flex-wrap justify-center gap-3">
           <!-- All Products Tab -->
           <a href="{% url 'shop:product_list' %}" 
-             class="px-5 py-2.5 rounded-full font-medium transition-all duration-300 {% if not current_category %}bg-[color:var(--color-brand-primary)] text-white shadow-lg{% else %}bg-white text-[color:var(--color-brand-primary)] hover:bg-[color:var(--color-brand-primary)] hover:text-white shadow-md{% endif %}">
+             class="px-5 py-2.5 rounded-full font-medium transition-all duration-300 {% if not current_category %}bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)] shadow-lg{% else %}bg-white text-[color:var(--color-brand-primary)] hover:bg-[color:var(--color-brand-primary)] hover:text-white shadow-md{% endif %}">
             All Products
           </a>
           
           <!-- Dynamic Category Tabs -->
           {% for category in categories %}
           <a href="{{ category.get_absolute_url }}" 
-             class="px-5 py-2.5 rounded-full font-medium transition-all duration-300 {% if current_category and current_category.id == category.id %}bg-[color:var(--color-brand-primary)] text-white shadow-lg{% else %}bg-white text-[color:var(--color-brand-primary)] hover:bg-[color:var(--color-brand-primary)] hover:text-white shadow-md{% endif %}">
+             class="px-5 py-2.5 rounded-full font-medium transition-all duration-300 {% if current_category and current_category.id == category.id %}bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)] shadow-lg{% else %}bg-white text-[color:var(--color-brand-primary)] hover:bg-[color:var(--color-brand-primary)] hover:text-white shadow-md{% endif %}">
             {{ category.name }}
           </a>
           {% endfor %}
@@ -187,7 +187,7 @@ Explore digital bookkeeping downloads, guides and productivity tools designed fo
             <div>
               <span class="text-xl text-semibold text-[color:var(--color-font-main)]">£{{ product.current_price|floatformat:2 }}</span>
             </div>
-            <a href="{{ product.get_absolute_url }}" class="inline-flex items-center gap-1 px-4 py-2 bg-[color:var(--color-brand-primary)] text-white text-sm font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-colors">
+            <a href="{{ product.get_absolute_url }}" class="inline-flex items-center gap-1 px-4 py-2 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)] text-sm font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-colors">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -217,7 +217,7 @@ Explore digital bookkeeping downloads, guides and productivity tools designed fo
         <div class="flex items-center gap-1">
           {% for num in products.paginator.page_range %}
             {% if products.number == num %}
-            <span class="w-10 h-10 flex items-center justify-center text-sm font-bold rounded-lg bg-[color:var(--color-brand-primary)] text-white">
+            <span class="w-10 h-10 flex items-center justify-center text-sm font-bold rounded-lg bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)]">
               {{ num }}
             </span>
             {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
@@ -263,7 +263,7 @@ Explore digital bookkeeping downloads, guides and productivity tools designed fo
         No products available in this category yet.
         {% endif %}
       </p>
-      <a href="{% url 'shop:product_list' %}" class="inline-flex items-center gap-2 px-6 py-3 bg-[color:var(--color-brand-primary)] text-white font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-colors">
+      <a href="{% url 'shop:product_list' %}" class="inline-flex items-center gap-2 px-6 py-3 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-colors">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
         </svg>

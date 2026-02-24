@@ -9,20 +9,10 @@
   --color-brand-dark: #7c3aed;
   --color-brand-light: #f8fafc;
 
-
-  /*Ice Blue Combo */
-  /* --color-brand-primary: #355470;
-  --color-brand-secondary: #829eae;
-  --color-brand-accent: #9dc6fb;
-  --color-brand-dark: #355470;
-  --color-brand-light: #f8fafc; */
-
-  /*Jade Combo */
-  /* --color-brand-primary: #6e9073;
-  --color-brand-secondary: #b6bda5;
-  --color-brand-accent: #a7b696;
-  --color-brand-dark: #6e9073;
-  --color-brand-light: #f8fafc; */
+  /* Brand contrast tokens */
+  --color-brand-primary-contrast: #ffffff;
+  --color-brand-secondary-contrast: #ffffff;
+  --color-brand-accent-contrast: #1a1a1a;
 
   /* Font */
   --color-font-main: #2b2b2b;

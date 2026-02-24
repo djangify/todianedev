@@ -75,7 +75,7 @@
 
       {% for i in posts.paginator.page_range %}
         {% if posts.number == i %}
-          <span class="px-4 py-2 bg-[color:var(--color-brand-primary)] text-white border border-[--color-brand-primary] rounded">{{ i }}</span>
+          <span class="px-4 py-2 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)] border border-[--color-brand-primary] rounded">{{ i }}</span>
         {% else %}
           <a href="?page={{ i }}" class="px-4 py-2 border border-[--color-brand-primary] text-[--color-brand-primary] rounded hover:bg-[color:var(--color-brand-primary)] hover:text-white transition">{{ i }}</a>
         {% endif %}

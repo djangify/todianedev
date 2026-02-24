@@ -5,7 +5,7 @@
 <section class="w-full py-12 ">
  <!-- Announcement Bar (if text exists) -->
   {% if dashboard_announcement and dashboard_announcement.announcement_bar_text %}
-    <div class="bg-[color:var(--color-brand-accent)] text-white py-3 px-6 mb-6">
+    <div class="bg-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent-contrast)] py-3 px-6 mb-6">
       <div class="max-w-6xl mx-auto text-center">
         <p class="text-md md:text-base font-medium">
           {{ dashboard_announcement.announcement_bar_text|safe }}

@@ -149,7 +149,7 @@
           {% endif %}
           {% for num in posts.paginator.page_range %}
             {% if posts.number == num %}
-              <span class="px-4 py-2 bg-[color:var(--color-brand-primary)] text-white border border-[color:var(--color-brand-primary)] rounded">{{ num }}</span>
+              <span class="px-4 py-2 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)] border border-[color:var(--color-brand-primary)] rounded">{{ num }}</span>
             {% else %}
               <a href="?page={{ num }}" class="px-4 py-2 border border-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary)] rounded hover:bg-[color:var(--color-brand-primary)] hover:text-white transition">{{ num }}</a>
             {% endif %}
