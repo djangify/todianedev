@@ -37,19 +37,7 @@
     {% endblock %}
 
     <!-- 🔹 Preload & optimise styles - Stripe url in checkout.html -->
-    <link
-      rel="preload"
-      href="{% static 'css/output.css' %}"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript><link rel="stylesheet" href="{% static 'css/output.css' %}" /></noscript>
-    
-  
-    <!-- 🔹 Fonts & connections -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://www.todiane.com" crossorigin />
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
 
     <!-- Favicon -->
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
@@ -161,7 +149,7 @@
     </div>
 
     <div id="gallery-modal"></div>
-    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12" defer></script>
 
  
     <!-- 🔹 Deferred JS -->
