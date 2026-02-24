@@ -36,7 +36,7 @@
       </a>
 
       <!-- Cart Icon -->
-      <a href="{% url 'shop:cart_detail' %}" class="relative text-[color:var(--color-font-main)] hover:text-[color:var(--color-brand-primary)] transition">
+      <a href="{% url 'shop:cart_detail' %}" class="relative text-[color:var(--color-font-main)] hover:text-[color:var(--color-brand-primary)] transition" aria-label="View cart">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.77 2.348-1.862l1.546-6.546a1.125 1.125 0 00-1.094-1.374H5.127m0 0l-.383-1.437M5.127 5.468l1.336 5.032M15.75 21a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm-7.5 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
         </svg>
@@ -51,7 +51,7 @@
     <!-- Mobile: Cart + Hamburger -->
     <div class="flex sm:hidden items-center gap-4">
       <!-- Cart Icon (Mobile) -->
-      <a href="{% url 'shop:cart_detail' %}" class="relative text-[color:var(--color-font-main)]">
+      <a href="{% url 'shop:cart_detail' %}" class="relative text-[color:var(--color-font-main)]" aria-label="View cart">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.77 2.348-1.862l1.546-6.546a1.125 1.125 0 00-1.094-1.374H5.127m0 0l-.383-1.437M5.127 5.468l1.336 5.032M15.75 21a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm-7.5 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
         </svg>

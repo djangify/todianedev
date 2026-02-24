@@ -7,8 +7,12 @@
                       <a href="{{ item.get_absolute_url }}" class="group block">
                         <div class="bg-[color:var(--color-brand-light)] rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
                           <div class="relative aspect-square overflow-hidden">
-                            <img src="{{ item.get_image_url|default:'/static/images/placeholder.webp' }}"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img 
+                              src="{{ item.get_image_url|default:'/static/images/placeholder.webp' }}"
+                              alt="{{ item.title }}"
+                              width="600"
+                              height="800"
+                              class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300">
                             {% if item.is_on_sale %}
                             <span class="absolute top-2 right-2 bg-[color:var(--color-brand-accent)] text-[color:var(--color-brand-light)] text-xs font-bold px-2 py-1 rounded">SALE</span>
                             {% endif %}

@@ -4,7 +4,7 @@
             id="main-product-image"
             src="{{ product.get_image_url|default:'/static/images/placeholder.webp' }}"
             alt="product detail for {{ product.title }}"
-            class="block w-full h-full object-contain  transition duration-300" width="600" height="800" loading="lazy"
+            class="block w-full object-contain  transition duration-300" width="600" height="800" loading="lazy"
           />
         </div>
 
@@ -14,11 +14,15 @@
             src="{{ product.get_image_url|default:'/static/images/placeholder.webp' }}"
             data-src="{{ product.get_image_url|default:'/static/images/placeholder.webp' }}"
             alt="product title for {{ product.title }}"
+            width="80"
+            height="80"
             class="w-20 h-20 object-cover border-2 border-[color:var(--color-brand-primary)] rounded hover:shadow-md cursor-pointer product-thumbnail active-thumbnail"
           />
           {% for img in product.images.all %}
           <img
             src="{{ img.image.url }}"
+            width="80"
+            height="80"
             data-src="{{ img.image.url }}"
             alt="{{ img.alt_text|default:'Additional product image' }}"
             class="w-20 h-20 object-cover border border-[color:var(--color-brand-accent)] rounded hover:shadow-md cursor-pointer product-thumbnail"

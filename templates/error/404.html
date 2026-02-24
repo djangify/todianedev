@@ -33,11 +33,11 @@
       <article class="rounded-lg shadow-lg overflow-hidden flex flex-col bg-[color:var(--color-brand-light)] border border-[color:var(--color-brand-accent)]/30">
         <a href="{{ post.get_absolute_url }}" class="block h-48 overflow-hidden">
           {% if post.get_image_url %}
-            <img src="{{ post.get_image_url }}" alt="{{ post.title }}" class="w-full h-full object-cover">
+            <img src="{{ post.get_image_url }}" alt="{{ post.title }}" class="w-full object-cover">
           {% elif post.youtube_url %}
-            <img src="https://img.youtube.com/vi/{{ post.get_youtube_video_id }}/hqdefault.jpg" alt="{{ post.title }}" class="w-full h-full object-cover">
+            <img src="https://img.youtube.com/vi/{{ post.get_youtube_video_id }}/hqdefault.jpg" alt="{{ post.title }}" class="w-full object-cover">
           {% else %}
-            <div class="w-full h-full bg-[color:var(--color-brand-accent)]/10 flex items-center justify-center">
+            <div class="w-full  bg-[color:var(--color-brand-accent)]/10 flex items-center justify-center">
               <span class="text-[color:var(--color-brand-accent)] text-sm">No Image Available</span>
             </div>
           {% endif %}
