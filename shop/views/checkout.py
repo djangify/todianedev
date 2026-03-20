@@ -127,7 +127,7 @@ def payment_success(request):
                 purchased_download=purchased_download,
                 price_paid_pence=int(item["price"] * 100),
                 quantity=item["quantity"],
-                downloads_remaining=item["product"].download_limit,
+                
             )
 
             # Update product purchase count

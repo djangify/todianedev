@@ -2,13 +2,16 @@
 from ..models import Order, OrderItem
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
-from django.http import FileResponse, Http404
+from django.http import FileResponse
 from django.views.decorators.http import require_http_methods
 import os
 import mimetypes
-from wsgiref.util import FileWrapper
 import logging
+from datetime import timedelta
+from django.utils import timezone
+from django.contrib import messages
+from django.shortcuts import redirect
+from ..models import DownloadLog
 
 logger = logging.getLogger("shop")
 
@@ -16,50 +19,64 @@ logger = logging.getLogger("shop")
 @login_required
 @require_http_methods(["GET"])
 def secure_download(request, order_item_id, download_id):
-    """
-    Secure download view that serves files for purchased products.
-    Only allows downloading the specific variant that was purchased.
-    """
     order_item = get_object_or_404(OrderItem, id=order_item_id)
 
-    # Only the owner can download
+    # Ownership check
     if order_item.order.user != request.user:
-        raise PermissionDenied
+        messages.error(request, "You do not have access to this download.")
+        return redirect("shop:order_history")
 
-    # Get the specific download file
+    # Get download
     download = get_object_or_404(order_item.product.downloads, id=download_id)
 
-    # Verify user purchased this specific download variant
+    # Variant check
     if (
         order_item.purchased_download
         and order_item.purchased_download.id != download.id
     ):
-        raise PermissionDenied("You did not purchase this download variant.")
+        messages.error(request, "You did not purchase this version.")
+        return redirect("shop:order_history")
 
     file_field = download.file
     if not file_field:
-        raise Http404("No downloadable file found.")
+        messages.error(request, "No file available.")
+        return redirect("shop:order_history")
 
     file_path = file_field.path
     if not os.path.exists(file_path):
-        raise Http404("File missing on server.")
+        logger.error(f"Missing file: {file_path}")
+        messages.error(request, "File not found.")
+        return redirect("shop:order_history")
 
-    # Check download limit
-    if order_item.downloads_remaining <= 0:
-        raise PermissionDenied("Your download limit has been reached.")
+    # LIMIT CHECK (NEW SYSTEM)
+    if order_item.download_count >= order_item.product.download_limit:
+        logger.warning(f"Download limit reached: {order_item.id}")
+        messages.error(request, "Download limit reached.")
+        return redirect("shop:order_history")
 
-    # Update download counts
-    order_item.downloads_remaining -= 1
-    order_item.download_count += 1
-    order_item.save()
+    # DUPLICATE PROTECTION (CRITICAL)
+    recent_download = DownloadLog.objects.filter(
+        order_item=order_item,
+        user=request.user,
+        downloaded_at__gte=timezone.now() - timedelta(seconds=2)
+    ).exists()
 
-    # Serve the file
+    if not recent_download:
+        order_item.download_count += 1
+        order_item.save()
+
+        DownloadLog.objects.create(
+            order_item=order_item,
+            user=request.user
+        )
+
+    # Serve file
     filename = os.path.basename(file_path)
     content_type, _ = mimetypes.guess_type(filename)
     content_type = content_type or "application/octet-stream"
 
     response = FileResponse(
-        FileWrapper(open(file_path, "rb")),
+        open(file_path, "rb"),
         as_attachment=True,
         content_type=content_type,
     )

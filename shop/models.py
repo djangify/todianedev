@@ -19,6 +19,7 @@ def generate_public_id(instance, *args, **kwargs):
     return f"{slug}-{unique_id_short}"
 
 
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
@@ -324,7 +325,6 @@ class OrderItem(models.Model):
 
     price_paid_pence = models.PositiveIntegerField()
     quantity = models.PositiveIntegerField(default=1)
-    downloads_remaining = models.PositiveIntegerField(default=5)
     download_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
@@ -356,7 +356,9 @@ class OrderItem(models.Model):
     def price(self):
         return self.get_price_in_pounds()
 
-
+    @property
+    def downloads_left(self):
+        return max(self.product.download_limit - self.download_count, 0)
 class ProductReview(models.Model):
     RATING_CHOICES = [
         (1, "1"),
@@ -411,3 +413,11 @@ class WishList(models.Model):
 
     def __str__(self):
         return f"{self.user} → {self.product}"
+
+class DownloadLog(models.Model):
+    order_item = models.ForeignKey(OrderItem, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    downloaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user} → {self.order_item} at {self.downloaded_at}"
