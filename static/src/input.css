@@ -88,7 +88,20 @@
   a {
     @apply text-[--color-brand-secondary] hover:text-[--color-brand-accent] transition-colors;
   }
+
+  .page-content a {
+    color: var(--color-brand-secondary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .page-content a:hover {
+    color: var(--color-brand-accent);
+  }
+
 }
+
+
 
 /* Prose styling for product descriptions */
 @layer components {
