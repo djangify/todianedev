@@ -12,6 +12,11 @@ urlpatterns = [
         name="mtdify",
     ),
     path(
+        "djangify/",
+        TemplateView.as_view(template_name="core/djangify.html"),
+        name="djangify",
+    ),
+    path(
         "invoice-generator/",
         TemplateView.as_view(template_name="core/invoice-generator.html"),
         name="invoice_generator",

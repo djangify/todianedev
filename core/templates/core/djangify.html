@@ -1,0 +1,351 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Djangify eBuilder - Sell Digital Products From Your Own Website{% endblock %}
+{% block open_graph_tags %}
+<meta property="og:title" content="Djangify eBuilder – Sell Digital Products Without Marketplace Cuts" />
+<meta property="og:description" content="A self-hosted Django eCommerce platform for selling digital downloads. Your store, your data, your profits. Available as managed hosting or a one-time self-hosted purchase." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/djangify-og-default.png' %}" />
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Djangify eBuilder – Sell Digital Products">
+<meta name="twitter:description" content="Self-hosted eCommerce for digital product creators. No marketplace rules. No revenue cuts. Your data stays yours.">
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/djangify-og-default.png' %}">
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Djangify eBuilder",
+  "url": "{{ request.build_absolute_uri }}",
+  "description": "A self-hosted Django eCommerce platform built for creators and small businesses selling digital products."
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="w-full bg-[color:var(--color-brand-light)] py-16 sm:py-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tight text-[color:var(--color-brand-primary)]">
+            Djangify eBuilder
+        </h1>
+        <p class="text-2xl sm:text-3xl mb-4 font-bold text-[color:var(--color-brand-accent)]">
+            Sell Digital Products From Your Own Website
+        </p>
+        <p class="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto mb-12">
+            A Django-based eCommerce platform for creators selling PDFs, templates, courses, and downloadable resources. 
+            Available as managed hosting or a one-time self-hosted purchase. No marketplace rules. No revenue cuts. 
+            Your customers and your profits belong to you.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+            <a href="https://djangify.com/shop/product/digital-ecommerce-platform-managed-hosting/" target="_blank"
+              class="px-6 py-3 bg-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent-contrast)] font-semibold rounded-lg shadow hover:opacity-90 transition">
+                Get Managed Hosting
+            </a>
+            <a href="https://djangify.com/shop/product/self-hosted-digital-ecommerce-platform/" target="_blank"
+              class="px-6 py-3 border border-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] hover:text-white transition">
+                Buy Self-Hosted
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- What It Is Section -->
+<section class="w-full py-16 md:py-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-6">
+                    Your store. Your data. Your profits.
+                </h2>
+                <p class="text-lg text-[color:var(--color-text)] leading-relaxed mb-4">
+                    <strong>Djangify eBuilder is a Django-based eCommerce platform you either host yourself or have hosted for you.</strong> 
+                    No marketplace cuts, no third-party access to your customer data, no vendor lock-in. 
+                    Whether you choose managed hosting or self-hosted, you own your store, your branding, and every sale you make.
+                </p>
+                <p class="text-lg text-[color:var(--color-text)] leading-relaxed mb-4">
+                    This is not SaaS. With SaaS platforms like Shopify or Gumroad, you're renting a seat on someone else's platform — 
+                    they set the rules, hold your customer data, and can change their terms or pricing at any time. 
+                    Djangify works differently: your store runs as its own independent instance, 
+                    and your data belongs to you regardless of which option you choose.
+                </p>
+                <p class="text-lg text-[color:var(--color-text)] leading-relaxed">
+                    Built for creators selling PDFs, guides, workbooks, templates, digital art, audio, and downloadable resources — 
+                    Djangify gives you a complete professional storefront without the middleman.
+                </p>
+            </div>
+            <div class="bg-[color:var(--color-brand-accent)]/10 rounded-2xl p-8 md:p-12 border-2 border-[color:var(--color-brand-accent)]/20">
+                <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-[color:var(--color-brand-accent)] rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-2">Built on Django</h3>
+                            <p class="text-[color:var(--color-text-muted)]">A proven, stable stack. Runs on your own infrastructure  for easy deployment and maintenance.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-[color:var(--color-brand-accent)] rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-2">Two Ways to Run It</h3>
+                            <p class="text-[color:var(--color-text-muted)]">Managed hosting at £12/month with everything handled for you, or a one-time £79.99 self-hosted purchase for full infrastructure control.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-[color:var(--color-brand-accent)] rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-2">Stripe Payments Built In</h3>
+                            <p class="text-[color:var(--color-text-muted)]">Connect your own Stripe account. Payments go directly to you — no platform taking a cut of every sale.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Who It's For Section -->
+<section class="w-full py-16 bg-[color:var(--color-brand-light)]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-8">
+            Built For Creators Who Want Ownership
+        </h2>
+        <ul class="space-y-3">
+            <li class="flex items-start text-lg">
+                <span class="text-[color:var(--color-brand-accent)] font-bold mr-3 text-xl">✓</span>
+                <span><strong>Digital product creators</strong> selling PDFs, guides, workbooks, templates, audio, or downloadable resources</span>
+            </li>
+            <li class="flex items-start text-lg">
+                <span class="text-[color:var(--color-brand-accent)] font-bold mr-3 text-xl">✓</span>
+                <span><strong>Non-technical business owners</strong> who want the managed hosting option — nothing to set up, everything handled for you</span>
+            </li>
+            <li class="flex items-start text-lg">
+                <span class="text-[color:var(--color-brand-accent)] font-bold mr-3 text-xl">✓</span>
+                <span><strong>Developers and sysadmins</strong> comfortable with Docker who want full infrastructure control via the self-hosted version</span>
+            </li>
+            <li class="flex items-start text-lg">
+                <span class="text-[color:var(--color-brand-accent)] font-bold mr-3 text-xl">✓</span>
+                <span><strong>Freelancers and professionals</strong> building a second income from digital products without marketplace dependency</span>
+            </li>
+            <li class="flex items-start text-lg">
+                <span class="text-[color:var(--color-brand-accent)] font-bold mr-3 text-xl">✓</span>
+                <span><strong>Privacy-conscious store owners</strong> who want customer data on their own infrastructure, not pooled on someone else's platform</span>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="w-full py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] text-center mb-12">
+            What You Get
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="p-8 border border-[color:var(--color-brand-accent)]">
+                <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-4">Secure Digital Delivery</h3>
+                <p class="text-[color:var(--color-text-muted)]">
+                    Files are delivered securely through a member dashboard after purchase. Customers get order history and access to everything they've bought.
+                </p>
+            </div>
+
+            <div class="p-8 border border-[color:var(--color-brand-accent)]">
+                <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-4">Stripe Payments on Your Terms</h3>
+                <p class="text-[color:var(--color-text-muted)]">
+                    Connect your own Stripe account. Multi-currency support across GBP, USD, EUR, CAD, and AUD. You set your prices and keep what you earn.
+                </p>
+            </div>
+
+            <div class="p-8 border border-[color:var(--color-brand-accent)]">
+                <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-4">Built-In Blog &amp; SEO</h3>
+                <p class="text-[color:var(--color-text-muted)]">
+                    Your store comes with a blog and SEO support built in. Drive organic traffic without relying on marketplace search or paid ads.
+                </p>
+            </div>
+
+            <div class="p-8 border border-[color:var(--color-brand-accent)]">
+                <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-4">Clean Admin Area</h3>
+                <p class="text-[color:var(--color-text-muted)]">
+                    Manage products, orders, and customers through a straightforward admin interface. Add new products whenever you're ready — no migration needed as your catalogue grows.
+                </p>
+            </div>
+
+            <div class="p-8 border border-[color:var(--color-brand-accent)]">
+                <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-4">Your Domain, Your Brand</h3>
+                <p class="text-[color:var(--color-text-muted)]">
+                    Your store runs on your own domain. It looks like a real business website, not a marketplace profile. Your branding, your way.
+                </p>
+            </div>
+
+            <div class="p-8 border border-[color:var(--color-brand-accent)]">
+                <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-4">Customer Accounts &amp; Order History</h3>
+                <p class="text-[color:var(--color-text-muted)]">
+                    Customers register, log in, and access their purchases through a member dashboard. You own every customer relationship.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- The Problem Section -->
+<section class="w-full py-16 bg-[color:var(--color-brand-light)]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-8">
+            Why Not Just Use Shopify or Gumroad?
+        </h2>
+        <p class="text-lg text-[color:var(--color-text)] mb-6">
+            You could. Many creators do. But those platforms take a cut of every sale, set the rules you operate under, 
+            hold your customer data in their database, and can change their pricing or terms at any time. 
+            If they raise fees or shut down a feature you depend on, you feel it immediately — because you're a tenant on their platform, not an owner.
+        </p>
+        <p class="text-lg text-[color:var(--color-text)] mb-6">
+            Djangify is fundamentally different. Your store runs as its own independent instance. 
+            Your customer data lives in your database. Payments go directly from your customer to your Stripe account. 
+            No platform sitting in the middle taking its share.
+        </p>
+        <p class="text-lg text-[color:var(--color-text)]">
+            Djangify sits in the middle — more professional than a PayPal link, far more ownership-friendly than SaaS marketplaces, 
+            and entirely yours to run however suits your business.
+        </p>
+    </div>
+</section>
+
+<!-- Self-Hosted vs Managed Section -->
+<section class="w-full py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] text-center mb-8">
+            Two Ways to Get Started
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+            <div class="p-8 border-2 border-[color:var(--color-brand-accent)] rounded-lg">
+                <h3 class="text-2xl font-bold text-[color:var(--color-brand-primary)] mb-2">Managed Hosting</h3>
+                <p class="text-[color:var(--color-brand-accent)] font-semibold text-lg mb-4">£12/month</p>
+                <p class="text-[color:var(--color-text-muted)] mb-4">
+                    Everything is set up and handled for you. No servers, no Docker, no configuration. 
+                    Your store is ready to use immediately. Updates, backups, and maintenance are all taken care of.
+                </p>
+                <p class="text-[color:var(--color-text-muted)] mb-6">
+                    <strong>This is not SaaS.</strong> You get your own dedicated instance — not a shared platform. 
+                    Your data stays in your database and you could migrate to self-hosted at any point. 
+                    Think of it like managed WordPress hosting: someone else runs the server, but it's your store.
+                </p>
+                <a href="https://djangify.com/shop/product/digital-ecommerce-platform-managed-hosting/" target="_blank"
+                  class="block text-center px-6 py-3 bg-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent-contrast)] font-semibold rounded-lg shadow hover:opacity-90 transition">
+                    Get Managed Hosting
+                </a>
+            </div>
+
+            <div class="p-8 border-2 border-[color:var(--color-brand-primary)] rounded-lg">
+                <h3 class="text-2xl font-bold text-[color:var(--color-brand-primary)] mb-2">Self-Hosted</h3>
+                <p class="text-[color:var(--color-brand-accent)] font-semibold text-lg mb-4">£79.99 one-time</p>
+                <p class="text-[color:var(--color-text-muted)] mb-4">
+                    Install Djangify on your own VPS or server using Docker. Connect your own domain. 
+                    Full infrastructure control — your server, your database, your rules.
+                </p>
+                <p class="text-[color:var(--color-text-muted)] mb-6">
+                    Suited to developers and sysadmins comfortable with terminal, SSH, and editing configuration files. 
+                    You'll need a Linux VPS (DigitalOcean, Hetzner, Linode), Docker, and your own Stripe account.
+                </p>
+                <a href="https://djangify.com/shop/product/self-hosted-digital-ecommerce-platform/" target="_blank"
+                  class="block text-center px-6 py-3 border border-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] hover:text-white transition">
+                    Buy Self-Hosted
+                </a>
+            </div>
+        </div>
+
+        <p class="text-center text-[color:var(--color-text-muted)]">
+            Not sure which is right for you? 
+            <a href="https://djangify.com/blog/self-hosted-or-managed-hosting-sell-digital-downloads-online/" target="_blank" 
+               class="text-[color:var(--color-brand-accent)] underline hover:opacity-80">Read the comparison guide →</a>
+        </p>
+    </div>
+</section>
+
+<!-- Try Before You Buy Section -->
+<section class="w-full py-16 bg-[color:var(--color-brand-light)]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="p-8 bg-white border-l-4 border-[color:var(--color-brand-primary)]">
+            <h3 class="text-2xl font-semibold text-[color:var(--color-brand-primary)] mb-4">Try Before You Buy</h3>
+            <p class="text-lg text-[color:var(--color-text)] mb-4">
+                A live demo store is available so you can experience exactly how Djangify works as a customer — 
+                secure downloads, Stripe payments, and customer accounts all running on the same platform you'd be buying.
+            </p>
+            <p class="text-[color:var(--color-text-muted)] mb-6">
+                Register on the demo store, browse example products, and go through the full purchase flow before you commit to anything.
+            </p>
+            <a href="https://ecommerce-builder.djangify.com" target="_blank"
+              class="inline-block px-6 py-3 bg-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent-contrast)] font-semibold rounded-lg shadow hover:opacity-90 transition">
+                Visit the Demo Store
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Why It's Not SaaS Section -->
+<section class="w-full py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-8">
+            Why This Isn't SaaS — And Why That Matters
+        </h2>
+        <p class="text-lg text-[color:var(--color-text)] mb-6">
+            SaaS means the software runs on the vendor's servers, everyone is on the same shared platform, 
+            and your access depends on your subscription continuing. Stop paying and your store disappears. 
+            The vendor can raise prices, change their terms, or shut down features at any time.
+        </p>
+        <p class="text-lg text-[color:var(--color-text)] mb-6">
+            Djangify is different at a fundamental level. Whether you're on managed hosting or self-hosted, 
+            you have your own dedicated instance — not a seat on a shared platform. Your customer data lives in your database. 
+            Your store runs independently. The software doesn't depend on Djangify's continued existence to keep running.
+        </p>
+        <p class="text-lg text-[color:var(--color-text)]">
+            The people Djangify is built for have often already felt the frustration of SaaS dependency — 
+            platforms that raise transaction fees, change payout rules, restrict customisation, or shut down with little notice. 
+            Djangify offers a different relationship with the software running your business. 
+            <strong>You're not a tenant. You're an owner.</strong>
+        </p>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="w-full py-16 bg-[color:var(--color-brand-light)]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-[color:var(--color-brand-primary)] mb-6">
+            Start Selling From Your Own Website
+        </h2>
+        <p class="text-lg text-[color:var(--color-text)] mb-8">
+            With your digital products, sold your way, on your terms. Visit Djangify to see everything included, 
+            read the documentation, and explore the demo store.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="https://djangify.com" target="_blank"
+              class="px-6 py-3 bg-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent-contrast)] font-semibold rounded-lg shadow hover:opacity-90 transition text-center">
+                Visit Djangify.com
+            </a>
+            <a href="https://djangify.com/docs" target="_blank"
+              class="px-6 py-3 border border-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] hover:text-white transition text-center">
+                Read the Docs
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
