@@ -1,0 +1,520 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Diane Corriette — Django Developer, Founder of Djangify, Digital Creator{% endblock %}
+
+{% block open_graph_tags %}
+<meta property="og:title" content="About Diane Corriette — Django Developer, Founder of Djangify" />
+<meta property="og:description" content="Diane Corriette is a full-stack Django developer, founder of Djangify, life coach, and digital creator. Building online since 2005. Based in the UK." />
+<meta property="og:type" content="profile" />
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:image" content="https://djangify.com/media/blog/images/dianecorriette-django-developer.webp" />
+<meta name="author" content="Diane Corriette">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About Diane Corriette — Django Developer, Founder of Djangify">
+<meta name="twitter:description" content="Diane Corriette is a full-stack Django developer, founder of Djangify, life coach, and digital creator. Building online since 2005.">
+<meta name="twitter:image" content="https://djangify.com/media/blog/images/dianecorriette-django-developer.webp">
+<link rel="canonical" href="https://todiane.com/about">
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://todiane.com/about#webpage",
+      "url": "https://todiane.com/about",
+      "name": "About Diane Corriette — Django Developer, Founder of Djangify, Digital Creator",
+      "description": "Diane Corriette is a full-stack Django developer, founder of Djangify, life coach, and digital creator. Building online since 2005. Based in the UK.",
+      "inLanguage": "en-GB",
+      "isPartOf": { "@id": "https://todiane.com/#website" },
+      "mainEntity": { "@id": "https://todiane.com/#person" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://todiane.com/#website",
+      "url": "https://todiane.com",
+      "name": "todiane.com",
+      "description": "Developer portfolio, projects, and writing by Diane Corriette.",
+      "publisher": { "@id": "https://todiane.com/#person" },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://todiane.com/#person",
+      "name": "Diane Corriette",
+      "url": "https://todiane.com",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://djangify.com/media/blog/images/dianecorriette-django-developer.webp",
+        "caption": "Diane Corriette — Full-Stack Django Developer and Founder of Djangify"
+      },
+      "jobTitle": "Full-Stack Django Developer",
+      "description": "Diane Corriette is a full-stack Django developer, founder of Djangify, life coach, and digital creator. Building online since 2005. Based in the UK.",
+      "homeLocation": {
+        "@type": "Place",
+        "name": "United Kingdom"
+      },
+      "nationality": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
+      "knowsAbout": [
+        "Django", "Python", "Full-Stack Web Development", "eCommerce", "Digital Marketing", "SEO",
+        "Life Coaching", "Flask", "TailwindCSS", "Software Architecture"
+      ],
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "Code Institute",
+          "url": "https://codeinstitute.net"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "Digital Marketing Institute",
+          "url": "https://digitalmarketinginstitute.com"
+        }
+      ],
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Diploma in Full Stack Software Development (eCommerce)",
+          "credentialCategory": "Diploma",
+          "competencyRequired": "Python, Django, JavaScript, eCommerce, Full-Stack Development",
+          "dateCreated": "2024-03-31",
+          "url": "https://www.credential.net/7cb0b0d6-fd26-4413-9519-95fb351e316d",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Code Institute",
+            "url": "https://codeinstitute.net"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Diploma in Digital Marketing",
+          "credentialCategory": "Diploma",
+          "competencyRequired": "Digital Marketing, SEO, Analytics",
+          "dateCreated": "2015-07-22",
+          "url": "https://certs.digitalmarketinginstitute.com/aeb76f27-9375-474e-87bf-563ea4998336",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Digital Marketing Institute",
+            "url": "https://digitalmarketinginstitute.com"
+          }
+        }
+      ],
+      "foundedOrganization": {
+        "@type": "Organization",
+        "name": "Djangify",
+        "url": "https://djangify.com",
+        "description": "A Django-based eCommerce platform for independent creators selling digital products.",
+        "founder": { "@id": "https://todiane.com/#person" }
+      },
+      "sameAs": [
+        "https://dianecorriette.com",
+        "https://djangify.com",
+        "https://inspirationalguidance.com",
+        "https://linkedin.com/in/todianedev",
+        "https://github.com/djangify",
+        "https://github.com/todiane",
+        "https://youtube.com/@Djangify",
+        "https://substack.com/@djangify",
+        "https://todiane.dev"
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="w-full bg-[color:var(--color-brand-light)] py-20 sm:py-32">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 items-center">
+      <div class="text-center md:text-left">
+        <img
+          src="https://djangify.com/media/blog/images/dianecorriette-django-developer.webp"
+          alt="Diane Corriette — Full-stack Django developer and founder of Djangify"
+          class="w-52 h-52 object-cover rounded-lg mx-auto md:mx-0 mb-8 shadow-md">
+        <p class="font-bold text-lg text-[color:var(--color-brand-primary)]">Diane Corriette</p>
+        <p class="text-sm text-[color:var(--color-text-muted)] mb-1">Full-Stack Django Developer</p>
+        <p class="text-sm text-[color:var(--color-text-muted)] mb-4">Founder, Djangify · Life Coach</p>
+        <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+          <span class="text-xs bg-[color:var(--color-brand-primary)] text-white px-3 py-1 rounded font-semibold uppercase tracking-wide">Django</span>
+          <span class="text-xs bg-[color:var(--color-brand-primary)] text-white px-3 py-1 rounded font-semibold uppercase tracking-wide">Python</span>
+          <span class="text-xs bg-[color:var(--color-brand-primary)] text-white px-3 py-1 rounded font-semibold uppercase tracking-wide">eCommerce</span>
+          <span class="text-xs bg-[color:var(--color-brand-primary)] text-white px-3 py-1 rounded font-semibold uppercase tracking-wide">Life Coach</span>
+        </div>
+      </div>
+      <div class="md:col-span-2">
+        <p class="text-sm uppercase tracking-widest text-[color:var(--color-brand-accent)] font-semibold mb-3">About Me</p>
+        <h1 class="text-4xl sm:text-5xl font-bold text-[color:var(--color-brand-primary)] mb-6 leading-tight tracking-tight">
+          I build the tools I wish existed.
+        </h1>
+        <p class="text-xl text-[color:var(--color-text)] leading-relaxed mb-4">
+          I'm Diane Corriette — a full-stack Django developer, founder of <a href="https://djangify.com" class="text-[color:var(--color-brand-accent)] underline hover:opacity-80">Djangify</a>, life coach, and digital creator. I've been building things online since 2005, and I have never once considered stopping.
+        </p>
+        <p class="text-lg text-[color:var(--color-text-muted)] leading-relaxed mb-4">
+          I didn't take the conventional route into tech. I came through years of building websites for clients, running membership communities, studying digital marketing, and eventually making a deliberate decision in 2023 to retrain as a software developer. I graduated with a Merit in Full Stack Software Development (eCommerce) from Code Institute in March 2024.
+        </p>
+        <p class="text-lg text-[color:var(--color-text-muted)] leading-relaxed">
+          Djangify came directly from that journey — a platform I built because the tools I needed didn't exist in the form I wanted them, and because I was tired of watching independent creators hand their profits and their customer data to platforms that don't know their name.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I DO -->
+<section class="w-full py-16">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-sm uppercase tracking-widest text-[color:var(--color-brand-accent)] font-semibold mb-2">What I Do</p>
+    <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-10">Three things. All of them real.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <div class="border-2 border-[color:var(--color-brand-accent)]/30 rounded-lg p-7 bg-white">
+        <div class="w-12 h-12 bg-[color:var(--color-brand-accent)] rounded-lg flex items-center justify-center mb-5">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-[color:var(--color-brand-primary)] mb-3">Developer & Builder</h3>
+        <p class="text-[color:var(--color-text-muted)] leading-relaxed text-sm">I build with Python, Django, Flask, and TailwindCSS. My focus is clean, self-hosted, offline-friendly tools — software people can actually own, not rent. I build and maintain projects under the <a href="https://github.com/djangify" target="_blank" class="text-[color:var(--color-brand-accent)] underline">Djangify organisation on GitHub</a>.</p>
+      </div>
+
+      <div class="border-2 border-[color:var(--color-brand-accent)]/30 rounded-lg p-7 bg-white">
+        <div class="w-12 h-12 bg-[color:var(--color-brand-accent)] rounded-lg flex items-center justify-center mb-5">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-[color:var(--color-brand-primary)] mb-3">Founder of Djangify</h3>
+        <p class="text-[color:var(--color-text-muted)] leading-relaxed text-sm"><a href="https://djangify.com" target="_blank" class="text-[color:var(--color-brand-accent)] underline">Djangify</a> is a Django-based eCommerce platform for independent creators selling digital products. Available as managed hosting at £12/month or a one-time self-hosted purchase. Built so creators own their store, their data, and their profits — with no platform taking a cut of every sale.</p>
+      </div>
+
+      <div class="border-2 border-[color:var(--color-brand-accent)]/30 rounded-lg p-7 bg-white">
+        <div class="w-12 h-12 bg-[color:var(--color-brand-accent)] rounded-lg flex items-center justify-center mb-5">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-[color:var(--color-brand-primary)] mb-3">Life Coach</h3>
+        <p class="text-[color:var(--color-text-muted)] leading-relaxed text-sm">I coach through my brand <a href="https://inspirationalguidance.com" target="_blank" class="text-[color:var(--color-brand-accent)] underline">Inspirational Guidance</a> — a brand that has been active for years and is not for sale. My superpower is making people feel seen, and I don't manufacture it. It happens when I show up as myself.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STORY / TIMELINE -->
+<section class="w-full py-16 bg-[color:var(--color-brand-light)]">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-sm uppercase tracking-widest text-[color:var(--color-brand-accent)] font-semibold mb-2">The Journey</p>
+    <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-4">Building online since before most people called it that.</h2>
+    <p class="text-lg text-[color:var(--color-text-muted)] leading-relaxed mb-12 max-w-2xl">I've been here a long time. Not performing longevity — actually building things, selling things, learning things, and starting again when I needed to.</p>
+
+    <div class="space-y-8">
+
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-24 text-right">
+          <span class="text-sm font-bold text-[color:var(--color-brand-accent)]">2005</span>
+        </div>
+        <div class="flex-shrink-0 w-px bg-[color:var(--color-brand-accent)]/30 relative">
+          <div class="absolute top-1 -left-1.5 w-3 h-3 rounded-full bg-[color:var(--color-brand-accent)]"></div>
+        </div>
+        <div class="pb-8">
+          <h4 class="font-bold text-[color:var(--color-brand-primary)] mb-1">Started working online professionally</h4>
+          <p class="text-sm text-[color:var(--color-text-muted)] leading-relaxed">Began selling products and websites online. Attended internet marketing seminars and started building a real understanding of how digital business works.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-24 text-right">
+          <span class="text-sm font-bold text-[color:var(--color-brand-accent)]">2007</span>
+        </div>
+        <div class="flex-shrink-0 w-px bg-[color:var(--color-brand-accent)]/30 relative">
+          <div class="absolute top-1 -left-1.5 w-3 h-3 rounded-full bg-[color:var(--color-brand-accent)]"></div>
+        </div>
+        <div class="pb-8">
+          <h4 class="font-bold text-[color:var(--color-brand-primary)] mb-1">WordPress developer & community builder</h4>
+          <p class="text-sm text-[color:var(--color-text-muted)] leading-relaxed">Started building with WordPress — first as a blogger, then putting up sites for clients. Built a social network for the Dominican diaspora that grew to over 8,000 members before selling it. Ran membership sites, workshops, and talked to audiences about blogging and online business.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-24 text-right">
+          <span class="text-sm font-bold text-[color:var(--color-brand-accent)]">2010</span>
+        </div>
+        <div class="flex-shrink-0 w-px bg-[color:var(--color-brand-accent)]/30 relative">
+          <div class="absolute top-1 -left-1.5 w-3 h-3 rounded-full bg-[color:var(--color-brand-accent)]"></div>
+        </div>
+        <div class="pb-8">
+          <h4 class="font-bold text-[color:var(--color-brand-primary)] mb-1">Workshop: University of West Indies, Dominica</h4>
+          <p class="text-sm text-[color:var(--color-text-muted)] leading-relaxed">Gave a 90-minute workshop to authors and writers on how to use the internet to promote their books — covering blogging, video, and social media marketing.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-24 text-right">
+          <span class="text-sm font-bold text-[color:var(--color-brand-accent)]">2015</span>
+        </div>
+        <div class="flex-shrink-0 w-px bg-[color:var(--color-brand-accent)]/30 relative">
+          <div class="absolute top-1 -left-1.5 w-3 h-3 rounded-full bg-[color:var(--color-brand-accent)]"></div>
+        </div>
+        <div class="pb-8">
+          <h4 class="font-bold text-[color:var(--color-brand-primary)] mb-1">Diploma in Digital Marketing — Digital Marketing Institute</h4>
+          <p class="text-sm text-[color:var(--color-text-muted)] leading-relaxed">Formalised years of practical knowledge with a professional qualification in digital marketing and SEO. Have kept that knowledge current with every major algorithm update since. <a href="https://certs.digitalmarketinginstitute.com/aeb76f27-9375-474e-87bf-563ea4998336#acc.tr5mjksb" target="_blank" class="text-[color:var(--color-brand-accent)] underline hover:opacity-80">Verify credential →</a></p>
+        </div>
+      </div>
+
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-24 text-right">
+          <span class="text-sm font-bold text-[color:var(--color-brand-accent)]">2017</span>
+        </div>
+        <div class="flex-shrink-0 w-px bg-[color:var(--color-brand-accent)]/30 relative">
+          <div class="absolute top-1 -left-1.5 w-3 h-3 rounded-full bg-[color:var(--color-brand-accent)]"></div>
+        </div>
+        <div class="pb-8">
+          <h4 class="font-bold text-[color:var(--color-brand-primary)] mb-1">Sold client list. Took stock.</h4>
+          <p class="text-sm text-[color:var(--color-text-muted)] leading-relaxed">After years of building for other people, I sold my WordPress client list and stepped back. I continued building and selling products on my own terms — which, looking back, was the right move.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-24 text-right">
+          <span class="text-sm font-bold text-[color:var(--color-brand-accent)]">2023</span>
+        </div>
+        <div class="flex-shrink-0 w-px bg-[color:var(--color-brand-accent)]/30 relative">
+          <div class="absolute top-1 -left-1.5 w-3 h-3 rounded-full bg-[color:var(--color-brand-accent)]"></div>
+        </div>
+        <div class="pb-8">
+          <h4 class="font-bold text-[color:var(--color-brand-primary)] mb-1">Retraining as a software developer</h4>
+          <p class="text-sm text-[color:var(--color-text-muted)] leading-relaxed">Enrolled in the Full Stack Software Development Diploma at Code Institute — a deliberate, focused decision to get the formal skills that matched what I was already doing intuitively. Specialisation: eCommerce.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-24 text-right">
+          <span class="text-sm font-bold text-[color:var(--color-brand-accent)]">2024</span>
+        </div>
+        <div class="flex-shrink-0 w-px bg-[color:var(--color-brand-accent)]/30 relative">
+          <div class="absolute top-1 -left-1.5 w-3 h-3 rounded-full bg-[color:var(--color-brand-accent)]"></div>
+        </div>
+        <div class="pb-8">
+          <h4 class="font-bold text-[color:var(--color-brand-primary)] mb-1">Graduated with Merit. Djangify launched.</h4>
+          <p class="text-sm text-[color:var(--color-text-muted)] leading-relaxed">Graduated Full Stack Software Developer (eCommerce) with Merit in March 2024. <a href="https://www.credential.net/7cb0b0d6-fd26-4413-9519-95fb351e316d#acc.e4NrWX5L" target="_blank" class="text-[color:var(--color-brand-accent)] underline hover:opacity-80">Verify credential →</a> Launched Djangify as a real product — managed hosting and self-hosted — for independent creators ready to stop renting their digital business from platforms that don't know their name.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-24 text-right">
+          <span class="text-sm font-bold text-[color:var(--color-brand-accent)]">Now</span>
+        </div>
+        <div class="flex-shrink-0 w-px bg-[color:var(--color-brand-accent)]/30 relative">
+          <div class="absolute top-1 -left-1.5 w-3 h-3 rounded-full bg-[color:var(--color-brand-accent)]"></div>
+        </div>
+        <div class="pb-2">
+          <h4 class="font-bold text-[color:var(--color-brand-primary)] mb-1">Building the 1,000 True Fans model in public</h4>
+          <p class="text-sm text-[color:var(--color-text-muted)] leading-relaxed">Running the <a href="https://www.skool.com/sell-digital-products-7402" target="_blank" class="text-[color:var(--color-brand-accent)] underline hover:opacity-80">1000 True Fans Skool community</a>, building niche Djangify sites, coaching through Inspirational Guidance, and putting my name on everything — deliberately and unapologetically — because Google rewards the real, named, verifiable person behind the work.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EEAT / DIGITAL FOOTPRINT -->
+<section class="w-full py-16">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-sm uppercase tracking-widest text-[color:var(--color-brand-accent)] font-semibold mb-2">Digital Footprint</p>
+    <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-4">Find me. Verify me. Connect with me.</h2>
+    <p class="text-lg text-[color:var(--color-text-muted)] leading-relaxed mb-10 max-w-2xl">This is my verified digital presence. One person, many platforms — all pointing to the same place. If you want to check my credentials, see my code, or connect professionally, here's where I live online.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <a href="https://todiane.com" target="_blank" class="flex gap-4 p-5 border border-gray-200 rounded-lg hover:border-[color:var(--color-brand-accent)] transition bg-white group">
+        <div class="w-10 h-10 bg-[color:var(--color-brand-light)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[color:var(--color-brand-accent)]/10 transition">
+          <svg class="w-5 h-5 text-[color:var(--color-brand-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+        </div>
+        <div>
+          <p class="font-bold text-sm text-[color:var(--color-brand-primary)]">todiane.com</p>
+          <p class="text-xs text-[color:var(--color-text-muted)]">Developer portfolio & projects</p>
+        </div>
+      </a>
+
+      <a href="https://djangify.com" target="_blank" class="flex gap-4 p-5 border border-gray-200 rounded-lg hover:border-[color:var(--color-brand-accent)] transition bg-white group">
+        <div class="w-10 h-10 bg-[color:var(--color-brand-light)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[color:var(--color-brand-accent)]/10 transition">
+          <svg class="w-5 h-5 text-[color:var(--color-brand-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        </div>
+        <div>
+          <p class="font-bold text-sm text-[color:var(--color-brand-primary)]">djangify.com</p>
+          <p class="text-xs text-[color:var(--color-text-muted)]">The eCommerce platform I built</p>
+        </div>
+      </a>
+
+      <a href="https://dianecorriette.com" target="_blank" class="flex gap-4 p-5 border border-gray-200 rounded-lg hover:border-[color:var(--color-brand-accent)] transition bg-white group">
+        <div class="w-10 h-10 bg-[color:var(--color-brand-light)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[color:var(--color-brand-accent)]/10 transition">
+          <svg class="w-5 h-5 text-[color:var(--color-brand-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        </div>
+        <div>
+          <p class="font-bold text-sm text-[color:var(--color-brand-primary)]">dianecorriette.com</p>
+          <p class="text-xs text-[color:var(--color-text-muted)]">Entity & digital footprint hub</p>
+        </div>
+      </a>
+
+      <a href="https://inspirationalguidance.com" target="_blank" class="flex gap-4 p-5 border border-gray-200 rounded-lg hover:border-[color:var(--color-brand-accent)] transition bg-white group">
+        <div class="w-10 h-10 bg-[color:var(--color-brand-light)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[color:var(--color-brand-accent)]/10 transition">
+          <svg class="w-5 h-5 text-[color:var(--color-brand-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <div>
+          <p class="font-bold text-sm text-[color:var(--color-brand-primary)]">inspirationalguidance.com</p>
+          <p class="text-xs text-[color:var(--color-text-muted)]">Life coaching brand</p>
+        </div>
+      </a>
+
+      <a href="https://linkedin.com/in/todianedev" target="_blank" class="flex gap-4 p-5 border border-gray-200 rounded-lg hover:border-[color:var(--color-brand-accent)] transition bg-white group">
+        <div class="w-10 h-10 bg-[color:var(--color-brand-light)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[color:var(--color-brand-accent)]/10 transition">
+          <svg class="w-5 h-5 text-[color:var(--color-brand-accent)]" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </div>
+        <div>
+          <p class="font-bold text-sm text-[color:var(--color-brand-primary)]">LinkedIn</p>
+          <p class="text-xs text-[color:var(--color-text-muted)]">linkedin.com/in/todianedev</p>
+        </div>
+      </a>
+
+      <a href="https://github.com/djangify" target="_blank" class="flex gap-4 p-5 border border-gray-200 rounded-lg hover:border-[color:var(--color-brand-accent)] transition bg-white group">
+        <div class="w-10 h-10 bg-[color:var(--color-brand-light)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[color:var(--color-brand-accent)]/10 transition">
+          <svg class="w-5 h-5 text-[color:var(--color-brand-accent)]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </div>
+        <div>
+          <p class="font-bold text-sm text-[color:var(--color-brand-primary)]">GitHub — Djangify</p>
+          <p class="text-xs text-[color:var(--color-text-muted)]">github.com/djangify</p>
+        </div>
+      </a>
+
+      <a href="https://youtube.com/@Djangify" target="_blank" class="flex gap-4 p-5 border border-gray-200 rounded-lg hover:border-[color:var(--color-brand-accent)] transition bg-white group">
+        <div class="w-10 h-10 bg-[color:var(--color-brand-light)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[color:var(--color-brand-accent)]/10 transition">
+          <svg class="w-5 h-5 text-[color:var(--color-brand-accent)]" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-2.47 12.6 12.6 0 00-8.64 0A4.83 4.83 0 013.41 6.69 11.94 11.94 0 002 12a11.94 11.94 0 001.41 5.31 4.83 4.83 0 003.77 2.47 12.6 12.6 0 008.64 0 4.83 4.83 0 003.77-2.47A11.94 11.94 0 0022 12a11.94 11.94 0 00-1.41-5.31zM10 15V9l5 3z"/></svg>
+        </div>
+        <div>
+          <p class="font-bold text-sm text-[color:var(--color-brand-primary)]">YouTube — Djangify</p>
+          <p class="text-xs text-[color:var(--color-text-muted)]">Technical tutorials</p>
+        </div>
+      </a>
+
+      <a href="https://substack.com/@djangify" target="_blank" class="flex gap-4 p-5 border border-gray-200 rounded-lg hover:border-[color:var(--color-brand-accent)] transition bg-white group">
+        <div class="w-10 h-10 bg-[color:var(--color-brand-light)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[color:var(--color-brand-accent)]/10 transition">
+          <svg class="w-5 h-5 text-[color:var(--color-brand-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div>
+          <p class="font-bold text-sm text-[color:var(--color-brand-primary)]">Substack</p>
+          <p class="text-xs text-[color:var(--color-text-muted)]">Strategic newsletters</p>
+        </div>
+      </a>
+
+      <a href="https://www.skool.com/sell-digital-products-7402" target="_blank" class="flex gap-4 p-5 border border-gray-200 rounded-lg hover:border-[color:var(--color-brand-accent)] transition bg-white group">
+        <div class="w-10 h-10 bg-[color:var(--color-brand-light)] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[color:var(--color-brand-accent)]/10 transition">
+          <svg class="w-5 h-5 text-[color:var(--color-brand-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div>
+          <p class="font-bold text-sm text-[color:var(--color-brand-primary)]">1000 True Fans — Skool</p>
+          <p class="text-xs text-[color:var(--color-text-muted)]">Community for digital creators</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="w-full py-16 bg-[color:var(--color-brand-light)]">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-sm uppercase tracking-widest text-[color:var(--color-brand-accent)] font-semibold mb-2">Credentials</p>
+    <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-10">Verifiable. Not just claimed.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <div class="bg-white border border-gray-200 rounded-lg p-9" style="border-top: 4px solid var(--color-brand-accent);">
+        <p class="text-xs font-bold uppercase tracking-widest text-[color:var(--color-brand-accent)] mb-2">March 2024</p>
+        <h4 class="font-bold text-lg text-[color:var(--color-brand-primary)] mb-2">Diploma in Full Stack Software Development</h4>
+        <p class="text-sm text-[color:var(--color-text-muted)] mb-1">Specialisation: <strong>eCommerce</strong> · Grade: <strong>Merit</strong></p>
+        <p class="text-sm text-[color:var(--color-text-muted)] mb-4">Code Institute — 12-month intensive programme covering Python, Django, JavaScript, databases, and full eCommerce deployment.</p>
+        <a href="https://www.credential.net/7cb0b0d6-fd26-4413-9519-95fb351e316d#acc.e4NrWX5L" target="_blank" class="text-sm font-semibold text-[color:var(--color-brand-accent)] underline hover:opacity-80">Verify this credential →</a>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-lg p-7" style="border-top: 4px solid var(--color-brand-accent);">
+        <p class="text-xs font-bold uppercase tracking-widest text-[color:var(--color-brand-accent)] mb-2">July 2015</p>
+        <h4 class="font-bold text-lg text-[color:var(--color-brand-primary)] mb-2">Diploma in Digital Marketing</h4>
+        <p class="text-sm text-[color:var(--color-text-muted)] mb-1">Including <strong>SEO specialisation</strong> · Kept current with every major algorithm update since.</p>
+        <p class="text-sm text-[color:var(--color-text-muted)] mb-4">Digital Marketing Institute — professional qualification in digital marketing strategy, analytics, and search engine optimisation.</p>
+        <a href="https://certs.digitalmarketinginstitute.com/aeb76f27-9375-474e-87bf-563ea4998336#acc.tr5mjksb" target="_blank" class="text-sm font-semibold text-[color:var(--color-brand-accent)] underline hover:opacity-80">Verify this credential →</a>
+      </div>
+
+    </div>
+
+    <!-- Belbin -->
+    <div class="mt-12 bg-white border border-gray-200 rounded-lg p-7">
+      <p class="text-xs font-bold uppercase tracking-widest text-[color:var(--color-brand-accent)] mb-3">Belbin Team Role Profile</p>
+      <h4 class="font-bold text-lg text-[color:var(--color-brand-primary)] mb-4">How I actually work — verified by assessment, not self-perception.</h4>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div class="border-l-2 border-[color:var(--color-brand-accent)] pl-4">
+          <p class="font-bold text-sm text-[color:var(--color-brand-primary)] mb-1">Specialist · 62nd percentile</p>
+          <p class="text-xs text-[color:var(--color-text-muted)]">Single-minded, self-starting, dedicated. Provides knowledge and skills in rare supply.</p>
+        </div>
+        <div class="border-l-2 border-[color:var(--color-brand-accent)] pl-4">
+          <p class="font-bold text-sm text-[color:var(--color-brand-primary)] mb-1">Implementer · 59th percentile</p>
+          <p class="text-xs text-[color:var(--color-text-muted)]">Practical, reliable, efficient. Turns ideas into actions and organises work that needs to be done.</p>
+        </div>
+        <div class="border-l-2 border-[color:var(--color-brand-accent)] pl-4">
+          <p class="font-bold text-sm text-[color:var(--color-brand-primary)] mb-1">Completer Finisher · 58th percentile</p>
+          <p class="text-xs text-[color:var(--color-text-muted)]">Painstaking, conscientious. Searches out errors. Polishes and perfects.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- THE HUMAN BIT -->
+<section class="w-full py-16">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-sm uppercase tracking-widest text-[color:var(--color-brand-accent)] font-semibold mb-2">The Human Bit</p>
+    <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-6">The things that don't fit neatly on a CV.</h2>
+    <div class="space-y-5 text-lg text-[color:var(--color-text)] leading-relaxed">
+      <p>My parents were from Dominica — a small island in the Caribbean — and that heritage shaped how I think about community, about showing up for people, and about building things that actually belong to the people who use them. The social network I built in 2009 was for the Dominican diaspora. When you want to connect people who are scattered across the world and far from home, you build something real or you don't bother.</p>
+      <p>I'm an INFJ. The profile says: <em>"Fuelled by a profound internal passion. Stimulated by deep, reflective thought and an enormous amount of empathy. Conscientious to the core, they move through life with a clear sense of their values."</em> That's accurate. It's also why I coach as well as build — the two things aren't separate for me.</p>
+      <p>I write. I have flash fiction and poetry going back years, self-published ebooks on self-confidence, paperback notebooks on Amazon, and GCSE study books. I also sell non-fiction. Writing and building are both just different ways of making something from nothing, and I've never really been able to stop doing either.</p>
+      <div class="border-l-4 border-[color:var(--color-brand-accent)] pl-6 py-1">
+        <p class="italic text-[color:var(--color-brand-primary)]">"My superpower is making people feel seen, and I don't manufacture it — it just happens when I show up as myself."</p>
+      </div>
+      <p>I've been in rooms full of people performing success while quietly wondering if I was the only one who didn't have it figured out. I'm not talking at people when I say that. I'm talking to them. That's where everything I build comes from — not a strategy, just who I am.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="w-full py-16 bg-[color:var(--color-brand-light)]">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold text-[color:var(--color-brand-primary)] mb-4">Want to work together or follow the journey?</h2>
+    <p class="text-lg text-[color:var(--color-text-muted)] mb-8">Whether you're a creator looking to own your digital business, or someone who found their way here from a search — welcome. Here's where to go next.</p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4 flex-wrap">
+      <a href="https://djangify.com/shop" target="_blank"
+        class="px-6 py-3 bg-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent-contrast)] font-semibold rounded-lg shadow hover:opacity-90 transition">
+        Get Djangify
+      </a>
+      <a href="https://www.skool.com/sell-digital-products-7402" target="_blank"
+        class="px-6 py-3 border border-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] hover:text-white transition">
+        Join 1000 True Fans
+      </a>
+      <a href="https://linkedin.com/in/todianedev" target="_blank"
+        class="px-6 py-3 border border-gray-300 text-[color:var(--color-text-muted)] font-semibold rounded-lg hover:border-[color:var(--color-brand-accent)] hover:text-[color:var(--color-brand-accent)] transition">
+        Connect on LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

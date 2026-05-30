@@ -27,6 +27,7 @@ pnpm-debug.log*
 .htaccess/
 .vscode/
 .venv/
+venv/
 stderr.log
 staticfiles/
 
