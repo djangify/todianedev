@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
@@ -7,13 +8,32 @@ from todianedev.sitemaps import sitemaps
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
+    # Allauth — kept for admin login only (registration disabled via settings)
     path("accounts/", include("allauth.urls")),
-    path("accounts/", include("accounts.urls")),
+
+    # ----------------------------------------------------------------
+    # Redirects: shop → /projects/
+    # ----------------------------------------------------------------
+    path("shop/", RedirectView.as_view(url="/portfolio/", permanent=True)),
+    path("shop/<path:rest>", RedirectView.as_view(url="/portfolio/", permanent=True)),
+
+    # Redirects: studio → /projects/
+    path("studio/", RedirectView.as_view(url="/portfolio/", permanent=True)),
+    path("studio/<path:rest>", RedirectView.as_view(url="/portfolio/", permanent=True)),
+
+    # Redirects: old accounts public pages → home
+    path("accounts/dashboard/", RedirectView.as_view(url="/", permanent=True)),
+    path("accounts/profile/", RedirectView.as_view(url="/", permanent=True)),
+    path("accounts/support/", RedirectView.as_view(url="/", permanent=True)),
+    path("accounts/delete-account/", RedirectView.as_view(url="/", permanent=True)),
+
+    # ----------------------------------------------------------------
+    # Apps
+    # ----------------------------------------------------------------
     path("blog/", include("blog.urls")),
     path("infopages/", include("infopages.urls")),
     path("portfolio/", include("portfolio.urls")),
-    path("shop/", include("shop.urls")),
-    path("studio/", include("studio.urls")),
     path(
         "sitemap.xml",
         sitemap,
@@ -28,7 +48,7 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
-# ---- ADMINITA DJANGO DASHBOARD ----
+# ---- ADMIN BRANDING ----
 admin.site.site_header = "@TODIANEDEV"
 admin.site.site_title = "Portfolio Site of Diane Corriette"
 admin.site.index_title = "Welcome to Your Site"

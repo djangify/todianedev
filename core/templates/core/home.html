@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Indie Software & Product Developer — Diane Corriette{% endblock %}
+{% block title %}Diane Corriette — Django Developer & Founder of Djangify{% endblock %}
+{% block meta_description %}Diane Corriette is a Django developer, founder of Djangify eCommerce Builder, and digital creator. Building self-hosted software since 2005.{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Diane Corriette — Django Developer & Founder of Djangify",
+  "description": "Portfolio and writing by Django developer Diane Corriette. Specialising in self-hosted, offline-first software.",
+  "url": "{{ request.build_absolute_uri }}",
+  "author": {
+    "@type": "Person",
+    "name": "Diane Corriette",
+    "url": "https://todiane.com/diane-corriette/"
+  }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 
@@ -10,77 +28,89 @@
   {% include 'core/hero.html' %}
 </header>
 
+<!-- PRODUCT GRID -->
+<section class="2xl:max-w-screen-2xl 2xl:mx-auto">
+  <div class="max-w-6xl mt-8 mx-auto px-4 md:px-6">
+    <p class="text-sm pl-6 uppercase relative before:content-[''] before:h-1 before:w-4
+              before:bg-[color:var(--color-brand-primary)] before:absolute before:top-1/2
+              before:-translate-y-1/2 before:left-0 lg:text-lg">
+      Self-Hosting Advocate
+    </p>
+    <h2 class="text-2xl font-semibold lg:text-3xl text-[color:var(--color-font-main)]">
+      I built the systems I use to run my business
+    </h2>
+    {% include "core/components/product_grid.html" %}
+  </div>
+</section>
 
+<!-- ABOUT ME -->
+<section class="w-full py-16 bg-[color:var(--color-brand-light)]">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
 
-<main class="2xl:max-w-screen-2xl 2xl:mx-auto">
-   <div class="max-w-6xl mt-8 mx-auto px-4 md:px-6">
-      <p class="text-sm pl-6 uppercase relative before:content-[''] before:h-1 before:w-4 
-                before:bg-[color:var(--color-brand-primary)]  before:absolute before:top-1/2 
-                before:-translate-y-1/2 before:left-0 lg:text-lg">
-        Self-Hosting Advocate
-      </p>
-
-      <h2 class="text-2xl font-semibold lg:text-3xl text-[color:var(--color-font-main)]">
-        I built the systems I use to run my business
-        {% comment %} Practical Tools You Can Run, Own, and Trust {% endcomment %}
-      </h2>
-      {% include "core/components/product_grid.html" %}
-      
-</main>
-<!-- SHOP SECTION -->
-  <section id="shop" class="scroll-mt-16">
-    {% include "core/components/shop.html" %}
-  </section>
-
-  {% include "core/components/creative.html" %} 
-  
-
-
-  <!-- BLOG SECTION -->
-  <section id="blog" class="scroll-mt-16">
-    {% include "core/components/blog.html" %}
-  </section>
-
-
-  <!-- BY THE NUMBERS SECTION -->
-  <section id="numbers" class="scroll-mt-8 p-6 md:p-16 bg-[--color-brand-secondary] text-[color:var(--color-brand-secondary-contrast)]">
-    
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--color-font-main)] mb-4">
-        My Stats
-      </h2>
-      <p class="text-lg mt-4 text-[color:var(--color-font-main)]">
-        From idea to production during 2025. Real products. Real users.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 max-w-5xl mx-auto">
-      
-      <div class="text-center">
-        <div class="text-5xl lg:text-6xl font-bold text-[color:var(--color-brand-primary)] mb-2">9</div>
-        <div class="text-sm lg:text-base uppercase tracking-wider">Products Built</div>
-        <p class="text-xs mt-2 text-[color:var(--color-font-main)]">From idea to launch</p>
+      <!-- Image -->
+      <div class="flex justify-center md:justify-start">
+        <img
+          src="https://djangify.com/media/blog/images/dianecorriette-django-developer.webp"
+          alt="Diane Corriette — Django developer and founder of Djangify"
+          class="w-56 h-56 object-cover rounded-xl shadow-md">
       </div>
 
-      <div class="text-center">
-        <div class="text-5xl lg:text-6xl font-bold text-[color:var(--color-brand-primary)] mb-2">5</div>
-        <div class="text-sm lg:text-base uppercase tracking-wider">Live Sites</div>
-        <p class="text-xs mt-2 text-[color:var(--color-font-main)]">Running in production</p>
-      </div>
-
-      <div class="text-center">
-        <div class="text-5xl lg:text-6xl font-bold text-[color:var(--color-brand-primary)] mb-2">3</div>
-        <div class="text-sm lg:text-base uppercase tracking-wider">Active Products</div>
-        <p class="text-xs mt-2 text-[color:var(--color-font-main)]/70">Self-hosted, active tools</p>
-      </div>
-
-      <div class="text-center">
-        <div class="text-5xl lg:text-6xl font-bold text-[color:var(--color-brand-primary)] mb-2">57+</div>
-        <div class="text-sm lg:text-base uppercase tracking-wider">Users</div>
-        <p class="text-xs mt-2 text-[color:var(--color-font-main)]/70">Real people, real systems</p>
+      <!-- Text -->
+      <div class="md:col-span-2">
+        <p class="text-sm uppercase tracking-widest text-[color:var(--color-brand-accent)] font-semibold mb-3">About Me</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-5 leading-tight">
+          I build the tools I wish existed.
+        </h2>
+        <p class="text-lg text-[color:var(--color-font-main)] leading-relaxed mb-4">
+          I'm Diane Corriette — a full-stack Django developer, founder of <a href="https://djangify.com" class="text-[color:var(--color-brand-accent)] underline hover:opacity-80">Djangify</a>, life coach, and digital creator. I've been building online since 2005, and I specialise in self-hosted, offline-first software for people who value ownership over subscriptions.
+        </p>
+        <p class="text-base text-[color:var(--color-font-main)]/70 leading-relaxed mb-8">
+          I graduated with a Merit in Full Stack Software Development from Code Institute in 2024 and have been building real products for real users ever since.
+        </p>
+        <a href="{% url 'core:diane-corriette' %}"
+           class="inline-flex items-center px-6 py-3 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-all">
+          More About Me
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
       </div>
 
     </div>
+  </div>
+</section>
 
-  </section>
+<!-- BY THE NUMBERS -->
+<section id="numbers" class="scroll-mt-8 p-6 md:p-16 bg-[--color-brand-secondary] text-[color:var(--color-brand-secondary-contrast)]">
+  <div class="text-center mb-12">
+    <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--color-font-main)] mb-4">My Stats</h2>
+    <p class="text-lg mt-4 text-[color:var(--color-font-main)]">
+      From idea to production during 2025. Real products. Real users.
+    </p>
+  </div>
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 max-w-5xl mx-auto">
+    <div class="text-center">
+      <div class="text-5xl lg:text-6xl font-bold text-[color:var(--color-brand-primary)] mb-2">9</div>
+      <div class="text-sm lg:text-base uppercase tracking-wider">Products Built</div>
+      <p class="text-xs mt-2 text-[color:var(--color-font-main)]">From idea to launch</p>
+    </div>
+    <div class="text-center">
+      <div class="text-5xl lg:text-6xl font-bold text-[color:var(--color-brand-primary)] mb-2">5</div>
+      <div class="text-sm lg:text-base uppercase tracking-wider">Live Sites</div>
+      <p class="text-xs mt-2 text-[color:var(--color-font-main)]">Running in production</p>
+    </div>
+    <div class="text-center">
+      <div class="text-5xl lg:text-6xl font-bold text-[color:var(--color-brand-primary)] mb-2">3</div>
+      <div class="text-sm lg:text-base uppercase tracking-wider">Active Products</div>
+      <p class="text-xs mt-2 text-[color:var(--color-font-main)]/70">Self-hosted, active tools</p>
+    </div>
+    <div class="text-center">
+      <div class="text-5xl lg:text-6xl font-bold text-[color:var(--color-brand-primary)] mb-2">57+</div>
+      <div class="text-sm lg:text-base uppercase tracking-wider">Users</div>
+      <p class="text-xs mt-2 text-[color:var(--color-font-main)]/70">Real people, real systems</p>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

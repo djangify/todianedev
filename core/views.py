@@ -5,34 +5,10 @@ from blog.models import Post, Category
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django.http import Http404
-from studio.models import Gallery
-from shop.models import Product
 
 
 def home(request):
-    homepage_gallery = (
-        Gallery.objects.filter(published=True).prefetch_related("images").first()
-    )
-
-    homepage_images = (
-        homepage_gallery.images.filter(published=True).order_by("order", "id")[:6]
-        if homepage_gallery
-        else None
-    )
-
-    featured_products = Product.objects.filter(
-        is_active=True, featured=True, status__in=["publish", "soon", "full"]
-    ).order_by("order", "-created")[:4]
-
-    return render(
-        request,
-        "core/home.html",
-        {
-            "homepage_gallery": homepage_gallery,
-            "homepage_images": homepage_images,
-            "featured_products": featured_products,
-        },
-    )
+    return render(request, "core/home.html")
 
 
 def handler500(request):
@@ -44,27 +20,20 @@ def handler403(request, exception):
 
 
 def handler404(request, exception):
-    # Define which category to show (by slug)
-    category_slug = "reflections"  # Change this to your desired category slug
+    category_slug = "reflections"
 
     try:
-        # Try to get the category
         category = get_object_or_404(Category, slug=category_slug)
-
-        # Get posts from the category
         category_posts = Post.objects.filter(
             category=category, status="published", publish_date__lte=timezone.now()
         ).order_by("-publish_date")[:4]
-
     except Http404:
-        # Fallback to recent posts if category doesn't exist
         category_posts = Post.objects.filter(
             status="published", publish_date__lte=timezone.now()
         ).order_by("-publish_date")[:6]
         category = None
 
     context = {"category_posts": category_posts, "selected_category": category}
-
     return render(request, "error/404.html", context, status=404)
 
 
@@ -83,7 +52,6 @@ def robots_txt(request):
         "Disallow: /admin/",
         "Disallow: /accounts/",
         "Disallow: /media/private/",
-        "Disallow: /checkout/",
         "",
         "# AI & Answer Engine Bots",
         "User-agent: GPTBot",
@@ -98,8 +66,8 @@ def robots_txt(request):
         f"Sitemap: {sitemap_url}",
         "",
         "# --- Brand Context ---",
-        "# todiane.com - portfolio projects by Django developer and creator of mini-ecommerce site builder - Diane Corriette.",
-        "# It demonstrates best practices in ecommerce,offline-first,AI-search-ready design and ethical tech visibility.",
+        "# todiane.com - portfolio and writing by Django developer Diane Corriette.",
+        "# Specialising in self-hosted, offline-first software and ecommerce tools.",
     ]
 
     return HttpResponse("\n".join(lines), content_type="text/plain")

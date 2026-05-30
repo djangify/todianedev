@@ -56,11 +56,9 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "accounts",
-    "shop",
     "blog",
     "core",
     "infopages",
-    "studio",
     "portfolio",
     "widget_tweaks",
     "tinymce",
@@ -91,8 +89,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "shop.context_processors.cart",
-                "core.context_processors.dashboard_announcement",
+"core.context_processors.dashboard_announcement",
             ],
         },
     },
@@ -111,7 +108,7 @@ ACCOUNT_SIGNUP_FIELDS = [
 ]
 ACCOUNT_ADAPTER = "accounts.adapters.CustomAccountAdapter"
 
-LOGIN_REDIRECT_URL = "/accounts/dashboard/"
+LOGIN_REDIRECT_URL = "/admin/"
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_URL = "/accounts/login/"
 
@@ -120,6 +117,7 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_ALLOW_REGISTRATION = False
 
 
 SITE_ID = 1
@@ -174,12 +172,6 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
-# Stripe settings
-STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY", default="pk_test_placeholder")
-STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY", default="sk_test_placeholder")
-STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET", default="whsec_placeholder")
-
-CART_SESSION_ID = "cart"
 ADMIN_EMAIL = "hello@todiane.com"
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False

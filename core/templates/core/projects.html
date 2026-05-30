@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects — Diane Corriette{% endblock %}
+{% block meta_description %}Software projects, tools, and digital products built by Django developer Diane Corriette. Self-hosted, offline-first tools built for real people.{% endblock %}
+
+{% block open_graph_tags %}
+<meta property="og:title" content="Projects — Diane Corriette" />
+<meta property="og:description" content="Software projects, tools, and digital products built by Django developer Diane Corriette." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/todiane-purp.webp" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Projects — Diane Corriette" />
+<meta name="twitter:description" content="Software projects, tools, and digital products built by Django developer Diane Corriette." />
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/todiane-purp.webp" />
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Projects — Diane Corriette",
+  "description": "Software projects, tools, and digital products built by Django developer Diane Corriette.",
+  "url": "{{ request.build_absolute_uri }}",
+  "author": {
+    "@type": "Person",
+    "name": "Diane Corriette",
+    "url": "https://todiane.com/diane-corriette/"
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<main class="w-full">
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-[color:var(--color-brand-light)] via-white to-[color:var(--color-brand-light)]">
+    <div class="relative w-full max-w-6xl mx-auto px-6 md:px-10 lg:px-16 py-16 md:py-24">
+      <div class="max-w-3xl">
+        <p class="uppercase text-sm tracking-widest text-[color:var(--color-brand-accent)] mb-3 font-medium">
+          What I Build
+        </p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[color:var(--color-brand-primary)] mb-6 leading-tight">
+          Projects
+        </h1>
+        <p class="text-xl text-[color:var(--color-font-main)] leading-relaxed mb-8">
+          Software, tools, and digital products built with ownership in mind. Self-hosted where possible, 
+          built for real people who value privacy, simplicity, and independence.
+        </p>
+        <a href="{% url 'portfolio:list' %}" class="inline-flex items-center px-6 py-3 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-all duration-300 shadow-lg">
+          See Full Portfolio
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- PRODUCTS -->
+  <section id="products" class="py-20 bg-[color:var(--color-bg-default)]">
+    <div class="w-full max-w-6xl mx-auto px-6 md:px-10 lg:px-16">
+
+      <div class="text-center mb-16">
+        <p class="uppercase text-sm tracking-widest text-[color:var(--color-brand-accent)] mb-3 font-medium">For Sale</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--color-font-main)] mb-4">Products</h2>
+        <p class="text-lg text-[color:var(--color-font-main)] max-w-4xl mx-auto">
+          Production-ready software and digital products you can buy, download, and own.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- eCommerce Builder -->
+        <a href="https://www.djangify.com" target="_blank" rel="noopener"
+           class="group relative bg-gradient-to-br from-purple-50 to-white border border-purple-200/50 rounded-2xl p-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden md:col-span-2">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-purple-100/50 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+          <div class="relative">
+            <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+              </svg>
+            </div>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">Flagship</span>
+              <span class="inline-block px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Django + Tailwind</span>
+            </div>
+            <h3 class="text-2xl font-bold text-[color:var(--color-brand-primary)] mb-3">Djangify — eCommerce Builder</h3>
+            <p class="text-[color:var(--color-font-main)] leading-relaxed mb-4 max-w-2xl">
+              Build your own digital download store without the monthly fees. A complete Django-based
+              eCommerce system for selling digital products, courses, and downloads.
+              Available as managed hosting at £12/month or a one-time self-hosted purchase.
+            </p>
+            <span class="inline-flex items-center text-purple-600 font-semibold group-hover:text-purple-700">
+              Visit djangify.com
+              <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- PDF Products -->
+        <a href="https://todiane.com/shop/category/pdf-workbooks/" 
+           class="group relative bg-gradient-to-br from-rose-50 to-white border border-rose-200/50 rounded-2xl p-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-rose-100/50 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+          <div class="relative">
+            <div class="w-16 h-16 bg-rose-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+            </div>
+            <span class="inline-block px-3 py-1 bg-rose-100 text-rose-700 text-xs font-semibold rounded-full mb-4">Digital Downloads</span>
+            <h3 class="text-2xl font-bold text-[color:var(--color-brand-primary)] mb-3">PDF Products</h3>
+            <p class="text-[color:var(--color-font-main)] leading-relaxed mb-4">
+              Workbooks, planners, and digital guides designed to help you organise your
+              business, track your goals, and stay productive.
+            </p>
+            <span class="inline-flex items-center text-rose-600 font-semibold group-hover:text-rose-700">
+              Browse collection
+              <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Bookkeeping Software -->
+        <a href="{% url 'core:mtdify' %}"
+           class="group relative bg-gradient-to-br from-emerald-50 to-white border border-emerald-200/50 rounded-2xl p-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-100/50 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+          <div class="relative">
+            <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full mb-4">Coming 2026</span>
+            <h3 class="text-2xl font-bold text-[color:var(--color-brand-primary)] mb-3">Bookkeeping Software</h3>
+            <p class="text-[color:var(--color-font-main)] leading-relaxed mb-4">
+              Simple bookkeeping for self-employed people. Track income, expenses, and generate
+              reports. Offline-first version coming in 2026.
+            </p>
+            <span class="inline-flex items-center text-emerald-600 font-semibold group-hover:text-emerald-700">
+              Learn more
+              <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TOOLS -->
+  <section class="py-20 bg-[color:var(--color-brand-light)]">
+    <div class="w-full max-w-6xl mx-auto px-6 md:px-10 lg:px-16">
+
+      <div class="text-center mb-16">
+        <p class="uppercase text-sm tracking-widest text-[color:var(--color-brand-accent)] mb-3 font-medium">Personal Tools</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--color-font-main)] mb-4">Tools I Built for Myself</h2>
+        <p class="text-lg text-[color:var(--color-font-main)] max-w-4xl mx-auto">
+          Productivity tools I use every day. Some may become full products.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- Project Tracker -->
+        <a href="/portfolio/project-tracker/"
+           class="group bg-white border border-[color:var(--color-brand-accent)]/30 rounded-xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-[color:var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-3">Project Tracker</h3>
+          <p class="text-[color:var(--color-font-main)] leading-relaxed">
+            Simple project and task tracking without enterprise complexity. Built so I can stay focused on shipping things.
+          </p>
+        </a>
+
+        <!-- Goal Tracker -->
+        <a href="/portfolio/goal-tracker-a-django-app-for-creative-habit-build/"
+           class="group bg-white border border-[color:var(--color-brand-accent)]/30 rounded-xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-[color:var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-[color:var(--color-brand-primary)] mb-3">Goal Tracker</h3>
+          <p class="text-[color:var(--color-font-main)] leading-relaxed">
+            Setting goals is easy. Finishing them is harder. This tool keeps me honest about follow-through.
+          </p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <section class="py-16 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)]">
+    <div class="w-full max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-4">Want to see the code?</h2>
+      <p class="text-lg mb-8 opacity-90">The portfolio has detailed write-ups on how everything was built.</p>
+      <a href="{% url 'portfolio:list' %}"
+         class="inline-flex items-center px-8 py-4 bg-white text-[color:var(--color-brand-primary)] font-bold rounded-lg hover:bg-[color:var(--color-brand-light)] transition-colors shadow-lg">
+        View Portfolio
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+{% endblock %}

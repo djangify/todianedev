@@ -21,7 +21,6 @@ urlpatterns = [
         TemplateView.as_view(template_name="core/invoice-generator.html"),
         name="invoice_generator",
     ),
-    # cluster pages
     path(
         "ai-search-readiness/",
         TemplateView.as_view(template_name="core/ai-search-readiness.html"),
