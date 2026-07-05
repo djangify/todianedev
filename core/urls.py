@@ -22,16 +22,6 @@ urlpatterns = [
         name="invoice_generator",
     ),
     path(
-        "ai-search-readiness/",
-        TemplateView.as_view(template_name="core/ai-search-readiness.html"),
-        name="ai_search",
-    ),
-    path(
-        "djangify-vs-marketplace/",
-        TemplateView.as_view(template_name="core/djangify-vs-marketplace.html"),
-        name="djangify_vs_marketplace",
-    ),
-    path(
         "diane-corriette/",
         TemplateView.as_view(template_name="core/diane-corriette.html"),
         name="diane-corriette",
@@ -40,6 +30,11 @@ urlpatterns = [
         "independent-software/",
         TemplateView.as_view(template_name="core/independent-software.html"),
         name="independent_software",
+    ),
+    path(
+        "owning-your-platform/",
+        TemplateView.as_view(template_name="core/owning-your-platform.html"),
+        name="owning_your_platform",
     ),
     path("robots.txt", views.robots_txt, name="robots_txt"),
 ]

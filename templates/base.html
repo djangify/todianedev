@@ -10,8 +10,8 @@
     <link rel="canonical" href="{{ request.build_absolute_uri }}" />
 
     <!-- SEO -->
-    <meta name="description" content="{% block meta_description %}Diane Corriette — Django developer, founder of Djangify, and digital creator. Building self-hosted software since 2005.{% endblock %}" />
-    <meta name="keywords" content="{% block meta_keywords %}Diane Corriette, Django, Python, TailwindCSS, eCommerce, Djangify, self-hosting, offline-first, Full-Stack Developer UK{% endblock %}" />
+    <meta name="description" content="{% block meta_description %}Diane Corriette — The Coach Who Codes. Personal Growth Coach who learned to code at 57, founder of Djangify. Building an independent digital business in public.{% endblock %}" />
+    <meta name="keywords" content="{% block meta_keywords %}Diane Corriette, The Coach Who Codes, Personal Growth Coach, NLP, EFT, Django, Python, Djangify, eCommerce, self-hosting, build in public, Developer UK{% endblock %}" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <meta name="author" content="Diane Corriette" />
 
@@ -19,13 +19,13 @@
     {% block open_graph_tags %}
     <meta property="og:site_name" content="ToDiane" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Diane Corriette — Django Developer & Founder of Djangify" />
-    <meta property="og:description" content="Diane Corriette — Django developer, founder of Djangify eCommerce Builder, and digital creator." />
+    <meta property="og:title" content="Diane Corriette — The Coach Who Codes" />
+    <meta property="og:description" content="Personal Growth Coach who learned to code at 57, founder of Djangify. Building an independent digital business in public." />
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
     <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/todiane-purp.webp" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Diane Corriette — Django Developer & Founder of Djangify" />
-    <meta name="twitter:description" content="Diane Corriette — Django developer, founder of Djangify eCommerce Builder, and digital creator." />
+    <meta name="twitter:title" content="Diane Corriette — The Coach Who Codes" />
+    <meta name="twitter:description" content="Personal Growth Coach who learned to code at 57, founder of Djangify. Building an independent digital business in public." />
     <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/todiane-purp.webp" />
     {% endblock %}
 
@@ -35,7 +35,7 @@
     <!-- Favicon -->
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
 
-    <title>{% block title %}Diane Corriette — Django Developer & Founder of Djangify{% endblock %}</title>
+    <title>{% block title %}Diane Corriette — The Coach Who Codes | Personal Growth Coach & Founder of Djangify{% endblock %}</title>
     {% block extra_meta %}{% endblock %}
 
     <!-- JSON-LD: Website -->
@@ -48,9 +48,10 @@
       "author": {
         "@type": "Person",
         "name": "Diane Corriette",
+        "alternateName": "The Coach Who Codes",
         "url": "https://todiane.com/diane-corriette/"
       },
-      "description": "Portfolio, projects, and writing by Django developer Diane Corriette.",
+      "description": "The Coach Who Codes — Diane Corriette, Personal Growth Coach and founder of Djangify, building an independent digital business in public.",
       "publisher": {
         "@type": "Person",
         "name": "Diane Corriette"

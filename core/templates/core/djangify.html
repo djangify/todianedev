@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Djangify eBuilder - Sell Digital Products From Your Own Website{% endblock %}
+{% block title %}Djangify — Sell Digital Products From Your Own Website{% endblock %}
 {% block open_graph_tags %}
-<meta property="og:title" content="Djangify eBuilder – Sell Digital Products Without Marketplace Cuts" />
-<meta property="og:description" content="A self-hosted Django eCommerce platform for selling digital downloads. Your store, your data, your profits. Available as managed hosting or a one-time self-hosted purchase." />
+<meta property="og:title" content="Djangify – Sell Digital Products Without Marketplace Cuts" />
+<meta property="og:description" content="A self-hosted eCommerce system for professionals who sell knowledge, expertise and digital products. Your store, your data, your profits. Available as managed hosting or a one-time self-hosted purchase." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ request.build_absolute_uri }}" />
 <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/djangify-og-default.png' %}" />
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Djangify eBuilder – Sell Digital Products">
+<meta name="twitter:title" content="Djangify – Sell Digital Products">
 <meta name="twitter:description" content="Self-hosted eCommerce for digital product creators. No marketplace rules. No revenue cuts. Your data stays yours.">
 <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/djangify-og-default.png' %}">
 {% endblock %}
@@ -20,9 +20,9 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Djangify eBuilder",
+  "name": "Djangify",
   "url": "{{ request.build_absolute_uri }}",
-  "description": "A self-hosted Django eCommerce platform built for creators and small businesses selling digital products."
+  "description": "A self-hosted eCommerce system for professionals who sell knowledge, expertise and digital products."
 }
 </script>
 {% endblock %}
@@ -32,14 +32,14 @@
 <section class="w-full bg-[color:var(--color-brand-light)] py-16 sm:py-24">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tight text-[color:var(--color-brand-primary)]">
-            Djangify eBuilder
+            Djangify
         </h1>
         <p class="text-2xl sm:text-3xl mb-4 font-bold text-[color:var(--color-brand-accent)]">
             Sell Digital Products From Your Own Website
         </p>
         <p class="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto mb-12">
-            A Django-based eCommerce platform for creators selling PDFs, templates, courses, and downloadable resources. 
-            Available as managed hosting or a one-time self-hosted purchase. No marketplace rules. No revenue cuts. 
+            An eCommerce system for professionals who sell knowledge, expertise and digital products — PDFs, templates, courses, and downloadable resources.
+            Available as managed hosting or a one-time self-hosted purchase. No marketplace rules. No revenue cuts.
             Your customers and your profits belong to you.
         </p>
 
@@ -47,10 +47,6 @@
             <a href="https://djangify.com/shop/product/digital-ecommerce-platform-managed-hosting/" target="_blank"
               class="px-6 py-3 bg-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent-contrast)] font-semibold rounded-lg shadow hover:opacity-90 transition">
                 Get Managed Hosting
-            </a>
-            <a href="https://todiane.com/djangify-vs-marketplace/" 
-              class="px-6 py-3 border border-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] hover:text-white transition">
-                Comparison Table
             </a>
         </div>
     </div>
@@ -66,7 +62,7 @@
                     Your store. Your data. Your profits.
                 </h2>
                 <p class="text-lg text-[color:var(--color-text)] leading-relaxed mb-4">
-                    <strong>Djangify eBuilder is a Django-based eCommerce platform you either host yourself or have hosted for you.</strong> 
+                    <strong>Djangify is an eCommerce system you either host yourself or have hosted for you.</strong>
                     No marketplace cuts, no third-party access to your customer data, no vendor lock-in. 
                     Whether you choose managed hosting or self-hosted, you own your store, your branding, and every sale you make.
                 </p>
@@ -288,7 +284,7 @@
             <h3 class="text-2xl font-semibold text-[color:var(--color-brand-primary)] mb-4">Try Before You Buy</h3>
             <p class="text-lg text-[color:var(--color-text)] mb-4">
                 A live demo store is available so you can experience exactly how Djangify works as a customer — 
-                secure downloads, Stripe payments, and customer accounts all running on the same platform you'd be buying.
+                secure downloads, Stripe payments, and customer accounts all running on the same system you'd be buying.
             </p>
             <p class="text-[color:var(--color-text-muted)] mb-6">
                 Register on the demo store, browse example products, and go through the full purchase flow before you commit to anything.
@@ -340,10 +336,6 @@
             <a href="https://djangify.com" target="_blank"
               class="px-6 py-3 bg-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent-contrast)] font-semibold rounded-lg shadow hover:opacity-90 transition text-center">
                 Visit Djangify.com
-            </a>
-            <a href="https://todiane.com/djangify-vs-marketplace/" 
-              class="px-6 py-3 border border-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] hover:text-white transition text-center">
-                Comparison Table
             </a>
         </div>
     </div>

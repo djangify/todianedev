@@ -1,22 +1,54 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Diane Corriette — Django Developer & Founder of Djangify{% endblock %}
-{% block meta_description %}Diane Corriette is a Django developer, founder of Djangify eCommerce Builder, and digital creator. Building self-hosted software since 2005.{% endblock %}
+{% block title %}Diane Corriette — The Coach Who Codes | Personal Growth Coach & Founder of Djangify{% endblock %}
+{% block meta_description %}Diane Corriette — The Coach Who Codes. A Personal Growth Coach who learned to code at 57, now founder of Djangify. Building an independent digital business in public, using software she built herself and AI as her assistant.{% endblock %}
 
 {% block schema %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Diane Corriette — Django Developer & Founder of Djangify",
-  "description": "Portfolio and writing by Django developer Diane Corriette. Specialising in self-hosted, offline-first software.",
-  "url": "{{ request.build_absolute_uri }}",
-  "author": {
-    "@type": "Person",
-    "name": "Diane Corriette",
-    "url": "https://todiane.com/diane-corriette/"
-  }
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://todiane.com/#webpage",
+      "url": "https://todiane.com/",
+      "name": "Diane Corriette — The Coach Who Codes | Personal Growth Coach & Founder of Djangify",
+      "description": "The Coach Who Codes — Diane Corriette, a Personal Growth Coach who learned to code at 57, building an independent digital business in public.",
+      "inLanguage": "en-GB",
+      "isPartOf": { "@id": "https://todiane.com/#website" },
+      "about": { "@id": "https://todiane.com/#person" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://todiane.com/#website",
+      "url": "https://todiane.com",
+      "name": "todiane.com",
+      "description": "The Coach Who Codes — Diane Corriette building an independent digital business in public.",
+      "publisher": { "@id": "https://todiane.com/#person" },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://todiane.com/#person",
+      "name": "Diane Corriette",
+      "alternateName": "The Coach Who Codes",
+      "url": "https://todiane.com/diane-corriette/",
+      "image": "https://djangify.com/media/blog/images/dianecorriette-django-developer.webp",
+      "jobTitle": ["Personal Growth Coach", "Software Developer", "Founder of Djangify"],
+      "description": "Personal Growth Coach (NLP Master Practitioner, EFT) who learned to code at 57 and founded Djangify. Building an independent digital business in public.",
+      "sameAs": [
+        "https://djangify.com",
+        "https://inspirationalguidance.com",
+        "https://linkedin.com/in/todianedev",
+        "https://github.com/todiane",
+        "https://github.com/djangify",
+        "https://www.youtube.com/@coachcodes66",
+        "https://substack.com/@todiane",
+        "https://todiane.substack.com"
+      ]
+    }
+  ]
 }
 </script>
 {% endblock %}
@@ -60,13 +92,14 @@
       <div class="md:col-span-2">
         <p class="text-sm uppercase tracking-widest text-[color:var(--color-brand-accent)] font-semibold mb-3">About Me</p>
         <h2 class="text-3xl sm:text-4xl font-bold text-[color:var(--color-brand-primary)] mb-5 leading-tight">
-          I build the tools I wish existed.
+          I turn years of expertise into products people buy.
         </h2>
         <p class="text-lg text-[color:var(--color-font-main)] leading-relaxed mb-4">
-          I'm Diane Corriette — a full-stack Django developer, founder of <a href="https://djangify.com" class="text-[color:var(--color-brand-accent)] underline hover:opacity-80">Djangify</a>, life coach, and digital creator. I've been building online since 2005, and I specialise in self-hosted, offline-first software for people who value ownership over subscriptions.
+          I'm Diane Corriette. I spent decades getting good at things — coaching, marketing, and running businesses behind the scenes for other people. Now I package that expertise into digital products and sell them through <a href="https://djangify.com" class="text-[color:var(--color-brand-accent)] underline hover:opacity-80">Djangify</a>, the eCommerce system I built to run it all.
         </p>
+        
         <p class="text-base text-[color:var(--color-font-main)]/70 leading-relaxed mb-8">
-          I graduated with a Merit in Full Stack Software Development from Code Institute in 2024 and have been building real products for real users ever since.
+          That's the idea I'm out to prove: if you've spent years becoming good at something through your job, your business, or lived experience, that knowledge is worth selling. You don't need a huge audience or  personal brand. You need something people want, a place of your own to sell it, and a small group who value what you do. At 57 I learned to code so I could build exactly that, and now I'm doing it in public, so you can see how it works.
         </p>
         <a href="{% url 'core:diane-corriette' %}"
            class="inline-flex items-center px-6 py-3 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] transition-all">

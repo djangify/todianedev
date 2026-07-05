@@ -13,8 +13,8 @@ class StaticSitemap(Sitemap):
         return [
             "core:home",
             "core:diane-corriette",
-            "core:ai_search",
             "core:independent_software",
+            "core:owning_your_platform",
         ]
 
     def location(self, item):

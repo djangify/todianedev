@@ -1,0 +1,350 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Owning Your Platform — Own the Land You Build On | Diane Corriette{% endblock %}
+{% block meta_description %}Platforms are roads, not businesses. Here's how I build to own the land underneath everything — your store, your audience, your discoverability, and your tools. From Diane Corriette, The Coach Who Codes.{% endblock %}
+
+{% block open_graph_tags %}
+<meta property="og:title" content="Owning Your Platform — Own the Land You Build On" />
+<meta property="og:description" content="Etsy, Pinterest and YouTube are roads that lead people back to the one place you own. Here's how I build to own the land underneath everything: store, audience, discoverability, and tools." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/todiane-purp.webp" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Owning Your Platform — Own the Land You Build On">
+<meta name="twitter:description" content="Platforms are traffic, not a business. Own the land underneath everything: your store, your audience, your discoverability, your tools.">
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/todiane-purp.webp">
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Owning Your Platform — Own the Land You Build On",
+  "description": "How to own the land you build your business on: your store, your audience, your discoverability, and your tools. Platforms are roads, not businesses.",
+  "url": "https://todiane.com/owning-your-platform/",
+  "inLanguage": "en-GB",
+  "author": {
+    "@type": "Person",
+    "@id": "https://todiane.com/#person",
+    "name": "Diane Corriette",
+    "alternateName": "The Coach Who Codes",
+    "url": "https://todiane.com/diane-corriette/"
+  },
+  "publisher": { "@id": "https://todiane.com/#person" }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-[color:var(--color-font-main)]">
+
+  <!-- HEADER -->
+  <header class="space-y-4 mb-12">
+    <p class="text-sm pl-6 uppercase relative before:content-[''] before:h-1 before:w-4 before:bg-[color:var(--color-brand-primary)] before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0 tracking-widest text-[color:var(--color-brand-accent)] font-semibold">
+      The Philosophy Behind Everything I Build
+    </p>
+    <h1 class="text-3xl sm:text-4xl font-bold leading-tight text-[color:var(--color-brand-primary)]">
+      Own the Land You Build On
+    </h1>
+    <p class="text-lg leading-relaxed max-w-3xl">
+      I use Etsy. I use Pinterest. I use YouTube. I use Instagram. I use search engines. But none of them are my business.
+      They are <strong>roads</strong> — they lead people back to the one place I actually own. I'm not anti-platform.
+      I'm anti-<em>dependence</em>.
+    </p>
+    <p class="text-lg leading-relaxed max-w-3xl">
+      I spent 15 years building an audience, a shopfront, and a reputation on land I was only renting — until a platform
+      changed the rules and I watched other people lose everything overnight. So now I build differently. Ownership of your
+      time, your choices, your knowledge, your business, your platform, your future. Nothing borrowed. Nothing that can be
+      taken away. This page is how I break that down — and the next thing you can do about it.
+    </p>
+  </header>
+
+  <!-- THE 4 AREAS -->
+  <section class="mb-16">
+    <h2 class="text-3xl font-semibold text-[color:var(--color-brand-secondary)] mb-8">Four things worth owning</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- Area 1: Own Your Store & Sales -->
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8 hover:shadow-lg transition-shadow">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-emerald-600 flex items-center justify-center text-white mr-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold text-[color:var(--color-brand-secondary)]">Own Your Store &amp; Sales</h3>
+        </div>
+        <p class="text-[color:var(--color-text-primary)] mb-6">
+          Marketplaces take a cut of every sale, own your customer relationship, and can suspend you without warning.
+          Selling from a store you control means the profit, the data, and the rules are yours.
+        </p>
+        <div class="space-y-3">
+          <a href="/blog/introducing-djangify-mini-ecommerce-site-builder/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Introducing the Djangify eCommerce Site Builder</span>
+          </a>
+          <a href="/blog/mini-ecommerce-builder-system/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Building the Mini eCommerce Builder System</span>
+          </a>
+          <a href="/blog/migrating-from-wordpress-to-django/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Migrating from WordPress to Django</span>
+          </a>
+          <a href="/blog/the-true-cost-of-diy-online-marketing-solutions/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>The True Cost of DIY Online Marketing Solutions</span>
+          </a>
+          <a href="/blog/marketplaces-vs-your-own-store/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Marketplaces vs Your Own Store: Why "Free" Costs the Most</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Area 2: Own Your Audience -->
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8 hover:shadow-lg transition-shadow">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-purple-600 flex items-center justify-center text-white mr-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold text-[color:var(--color-brand-secondary)]">Own Your Audience</h3>
+        </div>
+        <p class="text-[color:var(--color-text-primary)] mb-6">
+          Followers are borrowed. An algorithm decides who sees you, and it can turn the tap off tomorrow. An email list is
+          the one audience you truly own — a direct line to people that no platform sits between.
+        </p>
+        <div class="space-y-3">
+          <a href="/blog/email-funnels-made-simple/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Email Funnels Made Simple</span>
+          </a>
+          <a href="/blog/lead-magnets-that-convert/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>PDF Lead Magnets That Convert</span>
+          </a>
+          <a href="/blog/why-experts-need-pdfs/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Why Every Expert Needs a PDF to Promote Their Business</span>
+          </a>
+          <a href="/blog/why-im-focusing-on-pdfs-not-websites/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Why I Built a Lifestyle Business Around Creating PDFs</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Area 3: Own Your Discoverability -->
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8 hover:shadow-lg transition-shadow">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center text-white mr-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold text-[color:var(--color-brand-secondary)]">Own Your Discoverability</h3>
+        </div>
+        <p class="text-[color:var(--color-text-primary)] mb-6">
+          Paid ads stop the moment you stop paying. Content that's structured to be found — by search engines and by AI —
+          keeps working for years. Owning your discoverability means being findable without renting attention.
+        </p>
+        <div class="space-y-3">
+          <a href="/blog/what-is-a-cluster-page/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Build Cluster Pages: The Foundation of AI Search Readiness</span>
+          </a>
+          <a href="/blog/schema-markup-made-simple/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Apply Schema Markup (Make Your Content Machine-Readable)</span>
+          </a>
+          <a href="/blog/how-to-write-faq-snippets/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>How to Write FAQ Snippets (Turn Questions Into Traffic)</span>
+          </a>
+          <a href="/blog/why-businesses-must-focus-on-ai-search-readiness/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>Why Businesses Must Focus on AI Search Readiness</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Area 4: Own Your Tools & Infrastructure -->
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8 hover:shadow-lg transition-shadow">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-indigo-600 flex items-center justify-center text-white mr-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold text-[color:var(--color-brand-secondary)]">Own Your Tools &amp; Infrastructure</h3>
+        </div>
+        <p class="text-[color:var(--color-text-primary)] mb-6">
+          Every subscription is a switch someone else controls. Self-hosted, offline-first tools mean the software you rely
+          on keeps working on your terms — no price hikes, no shutdowns, no ransom for your own data.
+          <a href="{% url 'core:independent_software' %}" class="underline hover:text-[color:var(--color-brand-accent)]">See the full independent-software approach →</a>
+        </p>
+        <div class="space-y-3">
+          <a href="/blog/what-are-self-hosted-tools/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>What Are Self-Hosted Tools?</span>
+          </a>
+          <a href="/blog/the-benefits-of-self-hosting-for-small-businesses/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>The Benefits of Self-Hosting for Small Businesses</span>
+          </a>
+          <a href="/blog/setting-up-vps-hosting-hetzner-hestia/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>What I Learned Setting Up VPS Hosting (Hetzner &amp; HestiaCP)</span>
+          </a>
+          <a href="/blog/from-overwhelm-to-ownership-the-story-behind-build/" class="flex items-start text-[color:var(--color-brand-primary)] hover:text-[color:var(--color-brand-accent)] transition-colors">
+            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span>From Overwhelm to Ownership: The Story Behind MTDify</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- THE ONE DOOR -->
+  <section class="mb-16 bg-[color:var(--color-brand-light)] rounded-2xl p-8 md:p-12">
+    <h2 class="text-2xl sm:text-3xl font-bold text-[color:var(--color-brand-primary)] mb-4">Every road leads back to the one place you own</h2>
+    <p class="text-lg leading-relaxed max-w-3xl">
+      You don't have to quit the platforms. Use all of them — but treat each one as a road, not a home. The store, the
+      audience, the discoverability, the tools: keep the version that's yours, and let everything else point back to it.
+      That's the whole game. Not a five-year plan — just the next thing, built on land you own.
+    </p>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="mt-16">
+    <h2 class="text-3xl font-semibold mb-8 text-[color:var(--color-brand-secondary)]">Frequently Asked Questions</h2>
+
+    <div class="space-y-10">
+
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8">
+        <h3 class="text-lg font-semibold mb-3 text-[color:var(--color-brand-secondary)]">What does "owning your platform" actually mean?</h3>
+        <p>
+          It means the core of your business — your store, your audience list, your content, and your tools — lives somewhere
+          you control, not on rented land that a company can change or take away. You can still use marketplaces and social
+          platforms; you just don't let any single one of them <em>be</em> your business.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8">
+        <h3 class="text-lg font-semibold mb-3 text-[color:var(--color-brand-secondary)]">Aren't Etsy, Pinterest and YouTube good for business?</h3>
+        <p>
+          Yes — as roads. They're brilliant at putting you in front of people who don't know you yet. The mistake is
+          treating them as the destination. Use them to bring people back to a place you own, so that if any platform
+          changes its rules, your business doesn't disappear with it.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8">
+        <h3 class="text-lg font-semibold mb-3 text-[color:var(--color-brand-secondary)]">Why does an email list matter more than followers?</h3>
+        <p>
+          Followers are permission the platform can revoke — an algorithm decides who sees your posts. An email address is a
+          direct line to a person that nobody sits between. It's the only audience you genuinely own, which is why building
+          the list is worth more than chasing the follower count.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8">
+        <h3 class="text-lg font-semibold mb-3 text-[color:var(--color-brand-secondary)]">Do I need to be technical to own my platform?</h3>
+        <p>
+          No. Owning your platform is a set of decisions before it's a set of tools — send traffic to your own site, collect
+          emails, publish content you control. The technical pieces (self-hosting, your own store) can come in stages, or run
+          on managed hosting so you get the ownership without the server admin.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-lg border border-[color:var(--color-brand-accent)] p-8">
+        <h3 class="text-lg font-semibold mb-3 text-[color:var(--color-brand-secondary)]">What's the first step if I'm renting everything right now?</h3>
+        <p>
+          Pick one thing to bring home. The highest-leverage move for most people is starting an email list, because it turns
+          borrowed attention into an audience you own. After that, a home for your content and a store you control. One next
+          thing at a time — you don't have to move everything at once.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mt-16 text-center">
+    <h2 class="text-2xl sm:text-3xl font-bold text-[color:var(--color-brand-primary)] mb-4">This is the experiment I'm running in public</h2>
+    <p class="text-lg text-[color:var(--color-text-muted)] max-w-2xl mx-auto mb-8">
+      I built <a href="https://djangify.com" target="_blank" rel="noopener" class="text-[color:var(--color-brand-accent)] underline">Djangify</a>
+      so creators could own their store, their data, and their profits. Follow how I'm doing it — and take what's useful.
+    </p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4 flex-wrap">
+      <a href="{% url 'core:diane-corriette' %}" class="px-6 py-3 bg-[color:var(--color-brand-primary)] text-[color:var(--color-brand-primary-contrast)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] transition">
+        About Diane
+      </a>
+      <a href="{% url 'core:independent_software' %}" class="px-6 py-3 border border-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent)] font-semibold rounded-lg hover:bg-[color:var(--color-brand-accent)] hover:text-white transition">
+        Own Your Tools
+      </a>
+      <a href="{% url 'blog:list' %}" class="px-6 py-3 border border-gray-300 text-[color:var(--color-text-muted)] font-semibold rounded-lg hover:border-[color:var(--color-brand-accent)] hover:text-[color:var(--color-brand-accent)] transition">
+        Read the Blog
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<!-- FAQ SCHEMA (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does owning your platform actually mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It means the core of your business — your store, your audience list, your content, and your tools — lives somewhere you control, not on rented land a company can change or take away. You can still use marketplaces and social platforms; you just don't let any single one of them be your business."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Aren't Etsy, Pinterest and YouTube good for business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, as roads. They're brilliant at putting you in front of people who don't know you yet. The mistake is treating them as the destination. Use them to bring people back to a place you own, so that if any platform changes its rules, your business doesn't disappear with it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does an email list matter more than followers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Followers are permission the platform can revoke — an algorithm decides who sees your posts. An email address is a direct line to a person nobody sits between. It's the only audience you genuinely own, which is why building the list is worth more than chasing follower count."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to be technical to own my platform?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Owning your platform is a set of decisions before it's a set of tools — send traffic to your own site, collect emails, publish content you control. The technical pieces can come in stages, or run on managed hosting so you get the ownership without the server admin."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the first step if I'm renting everything right now?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pick one thing to bring home. The highest-leverage move for most people is starting an email list, because it turns borrowed attention into an audience you own. After that, a home for your content and a store you control. One next thing at a time."
+      }
+    }
+  ]
+}
+</script>
+
+{% endblock %}

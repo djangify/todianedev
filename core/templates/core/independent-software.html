@@ -1,18 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Independent Software Development – Diane Corriette{% endblock %}
+{% block title %}Independent Software — Self-Hosted, Offline-First Tools You Own | Diane Corriette{% endblock %}
+{% block meta_description %}Why I build self-hosted, offline-first, software-for-one, and local-first tools — software people can own, not rent. From The Coach Who Codes, Diane Corriette.{% endblock %}
 
 {% block open_graph_tags %}
-<meta property="og:title" content="Independent Software Development" />
-<meta property="og:description" content="Exploring offline-first, self-hosted, software-for-one, and local-first development – building tools that prioritise ownership, privacy, and independence." />
+<meta property="og:title" content="Independent Software — Tools You Actually Own" />
+<meta property="og:description" content="Self-hosted, offline-first, software-for-one, and local-first development — building tools that prioritise ownership, privacy, and independence. From Diane Corriette, The Coach Who Codes." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="{{ request.build_absolute_uri }}" />
 <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/todiane-purp.webp" />
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Local-First & Offline Development">
-<meta name="twitter:description" content="Building software that works offline, runs locally, and puts users in control.">
+<meta name="twitter:title" content="Independent Software — Tools You Actually Own">
+<meta name="twitter:description" content="Self-hosted, offline-first, and local-first software that puts you in control — not the platform.">
 <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/images/todiane-purp.webp">
 {% endblock %}
 
@@ -22,12 +23,18 @@
   <!-- HEADER -->
   <header class="space-y-4 mb-12">
     <h1 class="text-2xl sm:text-3xl font-semibold leading-normal text-[color:var(--color-brand-secondary)]">
-      Building Software That Works For You
+      Independent Software: Tools You Actually Own
     </h1>
     <p class="text-lg leading-relaxed">
-      I build (and am interested in building) tools using 4 core principles:  self-hosted systems, offline-first architecture, 
-      software-for-one philosophy, and working towards local-first development. These approaches 
-      prioritise ownership, privacy, and independence – giving people control over their tools and data.
+      I spent 15 years building websites for other people before I built anything for myself. At 57 I learned to code and
+      started building my own tools — on four principles that all point the same way: <strong>ownership</strong>.
+      Self-hosted systems, offline-first architecture, software-for-one, and local-first development. Software people can
+      own, not rent — nothing that disappears when a platform changes its mind.
+    </p>
+    <p class="text-lg leading-relaxed">
+      This is the software side of a bigger idea I build everything around:
+      <a href="{% url 'core:owning_your_platform' %}" class="text-[color:var(--color-brand-primary)] underline hover:text-[color:var(--color-brand-accent)]">owning the platform you build your business on</a> —
+      your store, your audience, your tools, your future. <a href="{% url 'core:diane-corriette' %}" class="text-[color:var(--color-brand-primary)] underline hover:text-[color:var(--color-brand-accent)]">More about how I got here →</a>
     </p>
   </header>
 
@@ -272,7 +279,7 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
 
-      <a href="#" 
+      <a href="/mtdify/"
          class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 bg-white hover:bg-[color:var(--color-brand-light)] transition">
         <h3 class="text-lg font-semibold mb-2 text-[color:var(--color-brand-secondary)]">MTDify Local Edition</h3>
         <p class="text-[color:var(--color-text-primary)]">Offline-first bookkeeping for UK sole traders – private, subscription-free, runs entirely on your device.</p>
@@ -284,13 +291,13 @@
         <p class="text-[color:var(--color-text-primary)]">Self-hosted digital shop for creators who want to own their platform and avoid marketplace fees.</p>
       </a>
 
-      <a href="#" 
+      <a href="/invoice-generator/"
          class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 bg-white hover:bg-[color:var(--color-brand-light)] transition">
         <h3 class="text-lg font-semibold mb-2 text-[color:var(--color-brand-secondary)]">Invoice Generator (Offline)</h3>
         <p class="text-[color:var(--color-text-primary)]">Create professional invoices without internet – built as a follow-up to MTDify's success.</p>
       </a>
 
-      <a href="#" 
+      <a href="https://www.streamenglish.co.uk" target="_blank" rel="noopener"
          class="block border border-[color:var(--color-brand-secondary)] rounded-xl p-6 bg-white hover:bg-[color:var(--color-brand-light)] transition">
         <h3 class="text-lg font-semibold mb-2 text-[color:var(--color-brand-secondary)]">Stream English</h3>
         <p class="text-[color:var(--color-text-primary)]">Self-hosted learning management system for educational content delivery.</p>
