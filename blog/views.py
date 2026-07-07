@@ -104,4 +104,7 @@ def post_detail(request, slug):
         "meta_description": post.get_meta_description,
         "meta_keywords": post.meta_keywords,
     }
-    return render(request, "blog/detail.html", context)
+    response = render(request, "blog/detail.html", context)
+    # Opt this page in to the PWA service worker's offline cache (see templates/pwa/sw.js).
+    response["X-PWA-Cacheable"] = "1"
+    return response

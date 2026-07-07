@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from todianedev.sitemaps import sitemaps
+from core.views import service_worker
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -40,6 +41,24 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
+    # ----------------------------------------------------------------
+    # PWA: manifest, service worker (must be at site root for full scope), offline fallback
+    # ----------------------------------------------------------------
+    path(
+        "manifest.webmanifest",
+        TemplateView.as_view(
+            template_name="pwa/manifest.webmanifest",
+            content_type="application/manifest+json",
+        ),
+        name="manifest",
+    ),
+    path("sw.js", service_worker, name="service_worker"),
+    path(
+        "offline/",
+        TemplateView.as_view(template_name="pwa/offline.html"),
+        name="offline",
+    ),
+
     path("", include("core.urls")),
 ]
 

@@ -34,6 +34,7 @@ This project demonstrates:
 - Integration with **PostgreSQL** on **self-managed VPS hosting**
 - Dynamic **AI-Search-Ready sitemap** and **robots.txt** files  
 - Blog, portfolio, and documentation systems powered by Django apps  
+- An installable **Progressive Web App (PWA)** with offline support  
 - A practical approach to **ethical visibility** and **AI-indexed content**
 
 ---
@@ -47,6 +48,12 @@ This project demonstrates:
 | `todiane/urls.py` | Registers sitemap and robots.txt routes |
 | `core/home.html` | Hero, about, and skills sections built with Tailwind v4 |
 | `core/ai-search-readiness.html` | Cluster page explaining AI Search Readiness principles |
+| `templates/pwa/manifest.webmanifest` | Web app manifest — icons, shortcuts, screenshots, theme |
+| `templates/pwa/sw.js` | Service worker template (offline caching + offline reading) |
+| `templates/pwa/offline.html` | Offline fallback page |
+| `templates/partials/_pwa_install.html` | "Add to home screen" install banner (Android + iOS) |
+| `core/views.py` (`service_worker`) | Serves `sw.js`, injecting the latest posts to pre-cache for offline |
+| `static/images/pwa/` | Maskable icons, install screenshots, iOS splash screens |
 
 ---
 
@@ -77,7 +84,58 @@ A dynamic, human-readable file built from the current domain:
 
 ---
 
-## 🔍 3. Search Engine Verification
+## 📲 3. Progressive Web App (PWA)
+
+todiane.com is an **installable PWA**. Visitors can add it to their phone or desktop
+home screen and open it like a native app, and previously-viewed pages keep working
+offline.
+
+### What's included
+
+| Capability | Detail |
+|------------|--------|
+| **Installable app** | `manifest.webmanifest` served at the site root — `standalone` display, brand theme colour, `id`, and `focus-existing` launch handling |
+| **Icons** | Standard + **maskable** icons (Android adaptive shapes) |
+| **App shortcuts** | Long-press the icon to jump to **Blog**, **Portfolio**, or **About** |
+| **Install screenshots** | Richer install dialog on Chromium (mobile + desktop form factors) |
+| **iOS support** | `apple-touch-icon`, home-screen meta, and device-specific splash screens |
+| **Install banner** | Custom "Add to home screen" prompt — Chromium `beforeinstallprompt` + manual iOS Safari instructions; waits until cookie consent is handled |
+| **Offline reading** | Pages that send the `X-PWA-Cacheable` header (blog detail) are cached for offline; the newest posts are pre-cached at install time |
+| **Offline fallback** | `/offline/` page shown when a never-visited page is requested offline |
+| **Update prompt** | New service-worker versions trigger a refresh toast so installed users stay current |
+| **Native share** | Blog posts expose a Web Share button where `navigator.share` is supported |
+| **Dark mode** | `theme-color` responds to `prefers-color-scheme` |
+
+### How it works
+
+- **`/manifest.webmanifest`** and **`/offline/`** are served via `TemplateView`; **`/sw.js`**
+  is served by the `service_worker` view in `core/views.py`, which injects the URLs of the
+  latest published posts so they are cached at install time (readable offline even if never
+  opened).
+- The service worker (`templates/pwa/sw.js`) uses **cache-first** for static assets and
+  `/media/blog/` images, **network-first** for page navigations, and only stores navigations
+  that opt in with the `X-PWA-Cacheable` header (set on blog detail responses).
+- Registration, the update prompt, iOS splash links, and the install banner are wired into
+  `templates/base.html`.
+
+### Regenerating PWA image assets
+
+Icons, screenshots, and splash screens live in `static/images/pwa/` and are generated from
+the brand images with Pillow. Screenshots use the real photo
+`static/images/pwa/the-coach-who-codes934.webp`. Regenerate them after a brand refresh, then
+collect static:
+
+```bash
+python manage.py collectstatic --noinput
+```
+
+> **Note:** the service worker only registers over **HTTPS** or on **`localhost`**. To test
+> locally, run `python manage.py runserver` and open **DevTools → Application** to inspect the
+> manifest, service worker, and offline mode.
+
+---
+
+## 🔍 4. Search Engine Verification
 
 ### Google Search Console
 1. Go to [search.google.com/search-console](https://search.google.com/search-console).  
@@ -93,7 +151,7 @@ Both will confirm when the sitemap is successfully crawled.
 
 ---
 
-## 🧠 4. Why AI-Search Readiness Matters
+## 🧠 5. Why AI-Search Readiness Matters
 
 Traditional SEO gets your site **ranked**.  
 **AI-Search Readiness** gets your content **chosen** — in AI overviews, summaries, and answer engines like:
@@ -108,7 +166,7 @@ Structured data, schema markup, and concise FAQs make your content machine-reada
 
 ---
 
-## ⚙️ 5. Tech Stack
+## ⚙️ 6. Tech Stack
 
 | Layer | Tool | Purpose |
 |--------|------|----------|
@@ -118,16 +176,19 @@ Structured data, schema markup, and concise FAQs make your content machine-reada
 | Database | PostgreSQL | Production-ready persistence |
 | Hosting | Self-Managed VPS (Linux + Nginx + Gunicorn) | Deployment |
 | Editor | TinyMCE + Custom Policies | Blog content creation |
+| PWA | Web App Manifest + Service Worker | Installable app + offline support |
 | AI Visibility | Structured Data + FAQ Schema + Cluster Pages | AI readiness |
 
 ---
 
-## 🧰 6. Maintenance Tips
+## 🧰 7. Maintenance Tips
 
 - Django auto-updates the sitemap when new posts or projects are published.  
 - Verify changes by visiting `/sitemap.xml`.  
 - Use [Google’s URL Inspection tool](https://search.google.com/search-console) to test AI snippet coverage.  
 - Review `robots.txt` after domain or hosting changes.  
+- Bump `CACHE_VERSION` in `templates/pwa/sw.js` after major front-end changes so installed apps refresh their caches.  
+- Run `collectstatic` on every deploy so the manifest, service worker, and PWA images are served correctly.  
 
 ---
 

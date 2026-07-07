@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="theme-color" content="#011852" />
+    <meta name="theme-color" content="#4c1d95" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#2b1065" media="(prefers-color-scheme: dark)" />
     <meta name="color-scheme" content="light dark" />
     <link rel="canonical" href="{{ request.build_absolute_uri }}" />
 
@@ -34,6 +35,24 @@
 
     <!-- Favicon -->
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="{% static 'images/pwa/apple-touch-icon.png' %}" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="ToDiane" />
+    <meta name="application-name" content="ToDiane" />
+
+    <!-- iOS splash screens -->
+    <link rel="apple-touch-startup-image" href="{% static 'images/pwa/splash-1290x2796.png' %}" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3)" />
+    <link rel="apple-touch-startup-image" href="{% static 'images/pwa/splash-1179x2556.png' %}" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)" />
+    <link rel="apple-touch-startup-image" href="{% static 'images/pwa/splash-1170x2532.png' %}" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
+    <link rel="apple-touch-startup-image" href="{% static 'images/pwa/splash-1125x2436.png' %}" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
+    <link rel="apple-touch-startup-image" href="{% static 'images/pwa/splash-828x1792.png' %}" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="{% static 'images/pwa/splash-1640x2360.png' %}" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="{% static 'images/pwa/splash-1536x2048.png' %}" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" />
 
     <title>{% block title %}Diane Corriette — The Coach Who Codes | Personal Growth Coach & Founder of Djangify{% endblock %}</title>
     {% block extra_meta %}{% endblock %}
@@ -171,6 +190,38 @@
         setTimeout(() => { toast.classList.add('hidden'); }, 3000);
       }
     </script>
+
+    <!-- PWA: register the service worker + offer to refresh when a new version ships -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("/sw.js").then(function (reg) {
+            // A new worker has installed while one is already controlling the page.
+            reg.addEventListener("updatefound", function () {
+              var sw = reg.installing;
+              if (!sw) return;
+              sw.addEventListener("statechange", function () {
+                if (sw.state === "installed" && navigator.serviceWorker.controller) {
+                  showToast && showToast("A new version is available — refresh to update.");
+                  sw.postMessage("SKIP_WAITING");
+                }
+              });
+            });
+          }).catch(function (err) {
+            console.warn("Service worker registration failed:", err);
+          });
+          // When the new worker takes control, reload once so the user sees the update.
+          var refreshing = false;
+          navigator.serviceWorker.addEventListener("controllerchange", function () {
+            if (refreshing) return;
+            refreshing = true;
+            window.location.reload();
+          });
+        });
+      }
+    </script>
+
+    {% include 'partials/_pwa_install.html' %}
 
     {% block extra_js %}{% endblock %}
   </body>

@@ -1,0 +1,30 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're offline — ToDiane</title>
+  <meta name="theme-color" content="#4c1d95" />
+  <link rel="stylesheet" href="{% static 'css/output.css' %}" />
+</head>
+<body class="antialiased min-h-screen flex items-center justify-center p-6"
+      style="background:#f8fafc; color:#2b2b2b;">
+  <div class="max-w-md text-center">
+    <img src="{% static 'images/android-chrome-192x192.png' %}" alt=""
+         width="88" height="88" class="mx-auto mb-6"
+         onerror="this.style.display='none'" />
+    <h1 class="text-2xl font-bold mb-3" style="color:#4c1d95;">You're offline</h1>
+    <p class="mb-6 text-base" style="color:#2b2b2b;">
+      It looks like you've lost your connection. Any pages you've already opened
+      are saved on your device and will still open. Everything else will be right
+      here when you're back online.
+    </p>
+    <button
+      onclick="location.reload()"
+      class="inline-block px-6 py-2.5 rounded-lg font-medium"
+      style="background:#4c1d95; color:#ffffff;">
+      Try again
+    </button>
+  </div>
+</body>
+</html>

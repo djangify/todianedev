@@ -1,5 +1,7 @@
+import json
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.urls import reverse
 from django.views.decorators.http import require_GET
 from blog.models import Post, Category
 from django.utils import timezone
@@ -35,6 +37,28 @@ def handler404(request, exception):
 
     context = {"category_posts": category_posts, "selected_category": category}
     return render(request, "error/404.html", context, status=404)
+
+
+@require_GET
+def service_worker(request):
+    """Serve the PWA service worker from the site root (required for full scope).
+
+    The latest published posts are injected so they are cached at install time and
+    can be read offline even if the visitor never opened them.
+    """
+    latest = (
+        Post.objects.filter(status="published", publish_date__lte=timezone.now())
+        .order_by("-publish_date")
+        .values_list("slug", flat=True)[:10]
+    )
+    precache_pages = [reverse("blog:detail", args=[slug]) for slug in latest]
+
+    return render(
+        request,
+        "pwa/sw.js",
+        {"precache_pages": json.dumps(precache_pages)},
+        content_type="application/javascript",
+    )
 
 
 @require_GET

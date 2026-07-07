@@ -1,6 +1,34 @@
  {% load static %}
 
 <div class="social-share no-tooltip flex space-x-4 my-4">
+    <!-- Native share (mobile OS share sheet) — shown only when supported -->
+    <button type="button" data-native-share hidden
+        data-share-title="{{ post.title }}"
+        data-share-url="{{ request.build_absolute_uri }}"
+        aria-label="Share this post"
+        class="inline-flex items-center justify-center w-10 h-10 square-full bg-[color:var(--color-brand-primary)] hover:bg-[color:var(--color-brand-accent)] transition-colors">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path>
+        </svg>
+    </button>
+    <script>
+      (function () {
+        if (!navigator.share) return;
+        document.querySelectorAll("[data-native-share]").forEach(function (btn) {
+          btn.hidden = false;
+          btn.addEventListener("click", function () {
+            navigator.share({
+              title: btn.dataset.shareTitle,
+              url: btn.dataset.shareUrl,
+            }).catch(function () { /* user cancelled — ignore */ });
+          });
+        });
+      })();
+    </script>
+
     <!-- Facebook -->
     <a href="https://www.facebook.com/share.php?u={{ request.build_absolute_uri|urlencode }}" 
     target="_blank" rel="noopener noreferrer"
