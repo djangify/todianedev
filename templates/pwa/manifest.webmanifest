@@ -2,7 +2,7 @@
   "id": "/?source=pwa",
   "name": "ToDiane — The Coach Who Codes",
   "short_name": "ToDiane",
-  "description": "The Coach Who Codes. I'm building an independent digital business in public — with software I built myself and AI as my assistant. Follow the experiment and learn to use AI in your own business.",
+  "description": "The Coach Who Codes. I'm building an independent digital business using software I built myself and AI as my assistant. Follow along if you are curious about how to use AI in your own business.",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
@@ -48,14 +48,14 @@
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "An independent business, built in public"
+      "label": "An independent digital business"
     },
     {
       "src": "{% static 'images/pwa/screenshot-wide.png' %}",
       "sizes": "1920x1080",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Watch the experiment — building a business with AI as assistant"
+      "label": "Building a business with AI as an assistant"
     }
   ],
   "shortcuts": [
