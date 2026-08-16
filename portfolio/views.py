@@ -28,7 +28,7 @@ class PortfolioListView(ListView):
 
     def get_queryset(self):
         return Portfolio.objects.filter(status="published").order_by(
-            "order", "-created_at"
+            "order", "-display_date"
         )
 
     def get_context_data(self, **kwargs):
@@ -75,7 +75,7 @@ def portfolio_by_technology(request, slug):
     technology = get_object_or_404(Technology, slug=slug)
     portfolios = Portfolio.objects.filter(
         technologies=technology, status="published"
-    ).order_by("order", "-created_at")
+    ).order_by("order", "-display_date")
 
     return render(
         request,

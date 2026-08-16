@@ -34,7 +34,10 @@ class PortfolioAdmin(admin.ModelAdmin):
     list_editable = ("order", "is_featured", "status")
 
     fieldsets = (
-        ("Basic Info", {"fields": ("title", "slug", "short_description", "status")}),
+        (
+            "Basic Info",
+            {"fields": ("title", "slug", "short_description", "status", "display_date")},
+        ),
         ("Content", {"fields": ("overview", "technical_details", "results")}),
         (
             "Media & Links",

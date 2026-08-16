@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.core.validators import FileExtensionValidator
+from django.utils import timezone
 from tinymce.models import HTMLField
 
 
@@ -73,6 +74,15 @@ class Portfolio(models.Model):
     is_featured = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0)
 
+    display_date = models.DateTimeField(
+        default=timezone.now,
+        help_text=(
+            "Controls where this project appears on the portfolio (most recent "
+            "first). Edit this to reposition a project. Adjust the time to "
+            "separate several projects added on the same day."
+        ),
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -82,7 +92,7 @@ class Portfolio(models.Model):
     meta_keywords = models.CharField(max_length=255, blank=True)
 
     class Meta:
-        ordering = ["order", "-created_at"]
+        ordering = ["order", "-display_date"]
         verbose_name_plural = "Portfolio Projects"
 
     def __str__(self):
