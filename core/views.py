@@ -1,6 +1,6 @@
 import json
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 from django.views.decorators.http import require_GET
 from blog.models import Post, Category
@@ -11,6 +11,36 @@ from django.http import Http404
 
 def home(request):
     return render(request, "core/home.html")
+
+
+def oauth_authorization_server_metadata(request):
+    """RFC 8414 OAuth Authorization Server Metadata for the Claude MCP connector.
+
+    Claude discovers the OAuth endpoints here after reading the sidecar's
+    Protected Resource Metadata. django-oauth-toolkit serves the endpoints under
+    /o/ but does not publish this document, so we emit it explicitly. Behind a
+    reverse proxy, SECURE_PROXY_SSL_HEADER makes request.scheme report "https";
+    local dev on localhost stays "http".
+    """
+    base = f"{request.scheme}://{request.get_host()}"
+    return JsonResponse(
+        {
+            "issuer": base,
+            "authorization_endpoint": f"{base}/o/authorize/",
+            "token_endpoint": f"{base}/o/token/",
+            "introspection_endpoint": f"{base}/o/introspect/",
+            "revocation_endpoint": f"{base}/o/revoke_token/",
+            "scopes_supported": ["mcp"],
+            "response_types_supported": ["code"],
+            "grant_types_supported": ["authorization_code", "refresh_token"],
+            "code_challenge_methods_supported": ["S256"],
+            "token_endpoint_auth_methods_supported": [
+                "client_secret_post",
+                "client_secret_basic",
+                "none",
+            ],
+        }
+    )
 
 
 def handler500(request):

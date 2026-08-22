@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Free & Premium Tools | Diane Corriette{% endblock %}
+{% block meta_description %}Interactive tools by Diane Corriette — free tools anyone can use, plus premium tools you unlock with a purchase.{% endblock %}
+
+{% block content %}
+<section class="max-w-5xl mx-auto px-4 py-12">
+  <header class="mb-10 text-center">
+    <h1 class="text-3xl md:text-4xl font-bold mb-3">Tools</h1>
+    <p class="text-gray-600 max-w-2xl mx-auto">
+      Interactive tools you can use right in your browser. Free tools are open to
+      everyone. Premium tools unlock when you buy the linked product in the shop.
+    </p>
+  </header>
+
+  {% if free_tools %}
+  <div class="mb-12">
+    <h2 class="text-xl font-semibold mb-5 flex items-center gap-2">
+      <span>Free tools</span>
+      <span class="text-xs uppercase tracking-wide bg-green-100 text-green-800 px-2 py-0.5 rounded-full">Free</span>
+    </h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {% for tool in free_tools %}
+      <a href="{% url 'tools:hosted_tool_detail' tool.slug %}"
+         class="block border border-gray-200 rounded-xl p-5 hover:shadow-md hover:border-gray-300 transition">
+        <h3 class="font-semibold text-lg mb-2">{{ tool.title }}</h3>
+        {% if tool.description %}<p class="text-sm text-gray-600">{{ tool.description }}</p>{% endif %}
+        <span class="inline-block mt-4 text-sm font-medium text-teal-700">Open tool →</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if paid_tools %}
+  <div class="mb-12">
+    <h2 class="text-xl font-semibold mb-5 flex items-center gap-2">
+      <span>Premium tools</span>
+      <span class="text-xs uppercase tracking-wide bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">Premium</span>
+    </h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {% for tool in paid_tools %}
+      <a href="{% url 'tools:hosted_tool_detail' tool.slug %}"
+         class="block border border-gray-200 rounded-xl p-5 hover:shadow-md hover:border-gray-300 transition">
+        <h3 class="font-semibold text-lg mb-2">{{ tool.title }}</h3>
+        {% if tool.description %}<p class="text-sm text-gray-600">{{ tool.description }}</p>{% endif %}
+        <span class="inline-block mt-4 text-sm font-medium text-amber-700">Unlock with purchase →</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if not free_tools and not paid_tools %}
+  <p class="text-center text-gray-500 py-16">
+    No tools published yet. Add hosted tools in the admin and tick “Published”.
+  </p>
+  {% endif %}
+</section>
+{% endblock %}

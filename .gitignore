@@ -53,3 +53,4 @@ local.py
 *.sqlite3
 *.db
 db/
+DEPLOY_SHOP.md

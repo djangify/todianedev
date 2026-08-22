@@ -1,50 +1,47 @@
 {% extends "base.html" %}
-{% load static %}
+
+{% block title %}Your account | Diane Corriette{% endblock %}
+{% block meta_description %}Your orders, downloads and saved products.{% endblock %}
 
 {% block content %}
-<section class="w-full py-12 ">
- <!-- Announcement Bar (if text exists) -->
-  {% if dashboard_announcement and dashboard_announcement.announcement_bar_text %}
-    <div class="bg-[color:var(--color-brand-accent)] text-[color:var(--color-brand-accent-contrast)] py-3 px-6 mb-6">
-      <div class="max-w-6xl mx-auto text-center">
-        <p class="text-md md:text-base font-medium">
-          {{ dashboard_announcement.announcement_bar_text|safe }}
-        </p>
+<section class="max-w-4xl mx-auto px-4 py-12">
+  <h1 class="text-3xl font-bold mb-2">Your account</h1>
+  <p class="text-gray-600 mb-8">Welcome back, {{ user.display_name }}.</p>
+
+  <div class="flex flex-wrap gap-3 mb-10">
+    <a href="{% url 'shop:purchases' %}" class="px-4 py-2 rounded-lg bg-teal-700 text-white text-sm font-medium">My downloads</a>
+    <a href="{% url 'shop:order_history' %}" class="px-4 py-2 rounded-lg border border-gray-300 text-sm font-medium">Order history</a>
+    <a href="{% url 'shop:product_list' %}" class="px-4 py-2 rounded-lg border border-gray-300 text-sm font-medium">Continue shopping</a>
+  </div>
+
+  <h2 class="text-xl font-semibold mb-4">Recent orders</h2>
+  {% if orders %}
+  <div class="divide-y divide-gray-200 border border-gray-200 rounded-xl mb-12">
+    {% for order in orders %}
+    <div class="flex items-center justify-between p-4">
+      <div>
+        <p class="font-medium">Order {{ order.order_id }}</p>
+        <p class="text-sm text-gray-500">{{ order.created|date:"j M Y" }} · {{ order.status|title }}</p>
       </div>
+      <a href="{% url 'shop:order_detail' order.order_id %}" class="text-sm text-teal-700 font-medium">View →</a>
     </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-gray-500 mb-12">You have no orders yet.</p>
   {% endif %}
 
-  <div class="max-w-6xl mx-auto px-6 space-y-16">
-
-    <!-- Welcome Header -->
-    <div class="bg-white rounded-xl border-2 border-[color:var(--color-brand-primary)]/40 p-8 text-center">
-      <h1 class="text-3xl font-bold text-[color:var(--color-brand-primary)] mb-2">
-        {{ dashboard_settings.welcome_heading|default:"Welcome back, " }} {{ user.first_name|default:user.email }}
-      </h1>
-      {% if dashboard_settings.intro_text %}
-      <p class="text-[color:var(--color-font-main)]/80 mb-8">
-        {{ dashboard_settings.intro_text|safe }}
-      </p>
-      {% endif %}
-      {% include 'accounts/includes/dashboard_quick_actions.html' %}
-    </div>
-
-    <!-- Wishlist -->
-    <div class="bg-white rounded-xl border-2 border-[color:var(--color-brand-secondary)]/40 p-8">
-      <h2 class="text-2xl font-semibold text-[color:var(--color-brand-secondary)] mb-6">
-        Your Wish List
-      </h2>
-      {% include 'accounts/includes/dashboard_wishlist.html' %}
-    </div>
-
-    <!-- Free Resources -->
-    <div class="bg-white rounded-xl border-2 border-[color:var(--color-brand-primary)]/40 p-8">
-      <h2 class="text-2xl font-semibold text-[color:var(--color-brand-primary)] mb-6">
-        Free Member Resources
-      </h2>
-      {% include 'accounts/includes/profile_resources.html' %}
-    </div>
-
+  <h2 class="text-xl font-semibold mb-4">Your wishlist</h2>
+  {% if favourites %}
+  <div class="grid gap-4 sm:grid-cols-2">
+    {% for product in favourites %}
+    <a href="{{ product.get_absolute_url }}" class="block border border-gray-200 rounded-xl p-4 hover:shadow-md transition">
+      <p class="font-medium">{{ product.title }}</p>
+    </a>
+    {% endfor %}
   </div>
+  {% else %}
+  <p class="text-gray-500">No saved products yet.</p>
+  {% endif %}
 </section>
 {% endblock %}

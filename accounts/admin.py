@@ -2,7 +2,16 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from .models import User, MemberResource, SupportRequest
+from .models import User, MemberResource, SupportRequest, UserProfile
+
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ("user", "is_subscribed", "oto_seen_at")
+    list_filter = ("is_subscribed",)
+    search_fields = ("user__email",)
+    filter_horizontal = ("favourite_products",)
+    readonly_fields = ("oto_seen_at",)
 
 
 # -------------------------
@@ -149,3 +158,29 @@ class SupportRequestAdmin(admin.ModelAdmin):
         return obj.user.email if obj.user else "-"
 
     get_user_email.short_description = "User Email"
+
+
+# ---------------------------------------------------------------------------
+# Hide the allauth "Social Accounts" section from the admin sidebar — this site
+# doesn't use social login, so Social accounts / Social applications / Social
+# application tokens are just clutter. accounts is listed after
+# allauth.socialaccount in INSTALLED_APPS, so those models are already
+# registered by the time this runs. Each unregister is guarded.
+# ---------------------------------------------------------------------------
+def _hide_socialaccount_admin():
+    try:
+        from allauth.socialaccount.models import (
+            SocialAccount,
+            SocialApp,
+            SocialToken,
+        )
+    except Exception:
+        return
+    for model in (SocialAccount, SocialApp, SocialToken):
+        try:
+            admin.site.unregister(model)
+        except admin.sites.NotRegistered:
+            pass
+
+
+_hide_socialaccount_admin()

@@ -11,3 +11,16 @@ Pillow
 stripe
 beautifulsoup4
 adminita
+
+# --- Djangify eCommerce Site Builder: shop, tools & Claude MCP connector ---
+djangorestframework
+# OAuth 2.1 Authorization Server for the Claude MCP connector
+django-oauth-toolkit==3.3.0
+# MCP sidecar (mcp_server.app) — separate Starlette/uvicorn process served on /mcp
+mcp==1.28.1
+starlette==1.3.1
+uvicorn[standard]==0.49.0
+# AI coach bots: Claude API + PDF knowledge extraction + session-report PDFs
+anthropic
+pypdf==4.3.1
+reportlab==4.5.1

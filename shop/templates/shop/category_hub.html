@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+  <h1 class="text-3xl font-bold mb-6">Shop by Category</h1>
+  <h2 class="text-xl mb-4 text-gray-700">Browse all collections in the Inspirational Guidance shop</h2>
+  <p class="mb-8 text-gray-600">
+    Explore our shop categories to find planners, guides, and workbooks designed to support your personal growth journey.
+  </p>
+
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-16">
+    {% for category in categories %}
+    <div class="border rounded-xl p-6 shadow hover:shadow-lg transition">
+      <h3 class="text-xl font-semibold mb-2">
+        <a href="{{ category.get_absolute_url }}" class="text-teal-700 hover:underline">
+          {{ category.name }}
+        </a>
+      </h3>
+      {% if category.description %}
+        <p class="text-gray-700">{{ category.description|truncatewords:20 }}</p>
+      {% else %}
+        <p class="text-gray-500">Explore products in the {{ category.name }} collection.</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

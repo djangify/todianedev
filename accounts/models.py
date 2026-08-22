@@ -2,6 +2,8 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class UserManager(BaseUserManager):
@@ -56,6 +58,41 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class UserProfile(models.Model):
+    """
+    Customer profile for the shop: wishlist (favourite products) and the
+    one-time-offer guard. Auto-created for every user via the signal below, so
+    ``user.profile`` is always available to the shop app.
+    """
+
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="profile"
+    )
+    bio = models.TextField(max_length=500, blank=True)
+    is_subscribed = models.BooleanField(default=True)
+    oto_seen_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text=(
+            "When the one-time offer was first shown to this user. Set once; "
+            "ensures the offer is strictly one-time."
+        ),
+    )
+    favourite_products = models.ManyToManyField(
+        "shop.Product", blank=True, related_name="favorited_by"
+    )
+
+    def __str__(self):
+        return f"{self.user.email}'s profile"
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_user_profile(sender, instance, created, **kwargs):
+    """Create a UserProfile the first time a User is saved."""
+    if created:
+        UserProfile.objects.get_or_create(user=instance)
 
 
 class MemberResource(models.Model):

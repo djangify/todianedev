@@ -31,6 +31,14 @@
 
     <form method="POST" class="space-y-4">
       {% csrf_token %}
+
+      {# Honeypot spam trap — must stay in the DOM so bots fill it; humans never
+         see it (off-screen + aria-hidden). If filled, allauth silently rejects. #}
+      <div aria-hidden="true" style="position:absolute; left:-99999px; top:auto; width:1px; height:1px; overflow:hidden;">
+        <label for="id_website">Website</label>
+        {{ form.website }}
+      </div>
+
       <div>
         <label for="first_name" class="block text-sm font-medium text-[color:var(--color-brand-primary)] mb-1">First Name</label>
         <input type="text" name="first_name" value="{{ form.first_name.value|default_if_none:'' }}" id="first_name" required class="w-full rounded-md border border-[color:var(--color-brand-secondary-contrast)] p-2 focus:ring-2 focus:ring-[color:var(--color-brand-primary)]">

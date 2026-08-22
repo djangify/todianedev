@@ -55,11 +55,23 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "rest_framework",
+    # OAuth 2.1 Authorization Server for the Claude MCP connector. Listed before
+    # mcp_server so its admin is registered by the time mcp_server hides it.
+    "oauth2_provider",
     "accounts",
     "blog",
     "core",
     "infopages",
     "portfolio",
+    # Djangify eCommerce Site Builder apps
+    "shop",
+    "tools",
+    # AI mentor / coach bots (sold as products)
+    "bots",
+    # MCP connector app — call-log model + owner "Connect to Claude" admin pages.
+    # The MCP endpoint itself is served by a separate sidecar (mcp_server.app).
+    "mcp_server",
     "widget_tweaks",
     "tinymce",
 ]
@@ -89,7 +101,11 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-"core.context_processors.dashboard_announcement",
+                "core.context_processors.dashboard_announcement",
+                # Djangify shop context processors (cart, site settings, sidebar)
+                "shop.context_processors.cart",
+                "shop.context_processors.site_settings",
+                "shop.context_processors.sidebar_products",
             ],
         },
     },
@@ -117,7 +133,14 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_ALLOW_REGISTRATION = False
+ACCOUNT_ALLOW_REGISTRATION = True
+
+# Honeypot spam trap on the signup form. allauth adds a hidden "website" field;
+# real users never see it, but bots fill every field they find. When it's filled
+# allauth silently returns a fake "verification sent" response and creates NO
+# user — the bot is told nothing went wrong. The field is rendered (off-screen)
+# in templates/account/signup.html so bots actually see it.
+ACCOUNT_SIGNUP_FORM_HONEYPOT_FIELD = "website"
 
 
 SITE_ID = 1
@@ -256,4 +279,75 @@ TINYMCE_DEFAULT_CONFIG = {
     "relative_urls": False,
     "remove_script_host": True,
     "document_base_url": "/",
+}
+
+# ================================================================
+# DJANGIFY eCOMMERCE SITE BUILDER — shop / tools / MCP
+# ================================================================
+
+SITE_NAME = env("SITE_NAME", default="todiane.com")
+
+# --- Shop / cart ---
+CART_SESSION_ID = "cart"
+
+# --- Author / EEAT (used by shop templates via getattr fallbacks) ---
+AUTHOR_NAME = "Diane Corriette"
+AUTHOR_SHORT_BIO = (
+    "Diane Corriette is a Django indie developer and personal growth coach — "
+    "The Coach Who Codes — and the creator of the Djangify eCommerce Site Builder."
+)
+AUTHOR_URL = "/about"
+
+# --- Stripe ---
+# The shop code reads STRIPE_PUBLISHABLE_KEY; this project's .env historically
+# names it STRIPE_PUBLIC_KEY, so accept either (PUBLISHABLE wins if both set).
+STRIPE_PUBLISHABLE_KEY = env(
+    "STRIPE_PUBLISHABLE_KEY",
+    default=env("STRIPE_PUBLIC_KEY", default="pk_test_placeholder"),
+)
+STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY", default="sk_test_placeholder")
+STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET", default="whsec_placeholder")
+
+# --- Claude (optional; used by AI features / MCP tooling) ---
+ANTHROPIC_API_KEY = env("ANTHROPIC_API_KEY", default="")
+
+# --- Protected media root (secure digital downloads) ---
+PROTECTED_MEDIA_ROOT = env(
+    "PROTECTED_MEDIA_ROOT",
+    default=os.path.join(MEDIA_ROOT, "secure_downloads"),
+)
+
+# -----------------------------------------------------------------------------
+# REST framework (browsable API for shop/tools endpoints + MCP)
+# -----------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
+    ],
+}
+
+# ================================================================
+# OAUTH 2.1 — Authorization Server for the Claude MCP connector
+# Django (this app) issues tokens; the MCP sidecar (mcp_server.app) is a
+# separate Resource Server that only verifies them. PKCE (S256) required.
+# Only the single "mcp" scope exists.
+# ================================================================
+OAUTH2_PROVIDER = {
+    "PKCE_REQUIRED": True,
+    "SCOPES": {"mcp": "Read and manage this site's content via MCP"},
+    "DEFAULT_SCOPES": ["mcp"],
+    "ACCESS_TOKEN_EXPIRE_SECONDS": env.int(
+        "MCP_ACCESS_TOKEN_EXPIRE_SECONDS", default=36000
+    ),
+    "REFRESH_TOKEN_EXPIRE_SECONDS": env.int(
+        "MCP_REFRESH_TOKEN_EXPIRE_SECONDS", default=5184000  # 60 days
+    ),
+    "ALLOWED_REDIRECT_URI_SCHEMES": env.list(
+        "MCP_ALLOWED_REDIRECT_URI_SCHEMES",
+        default=(["http", "https"] if DEBUG else ["https"]),
+    ),
 }
