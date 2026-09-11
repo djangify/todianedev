@@ -1,15 +1,19 @@
-from django.urls import path
+from django.urls import path, reverse_lazy
 from . import views
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 
 app_name = "core"
 
 urlpatterns = [
     path("", views.home, name="home"),
     path(
+        "deskledger/",
+        TemplateView.as_view(template_name="core/deskledger.html"),
+        name="deskledger",
+    ),
+    path(
         "mtdify/",
-        TemplateView.as_view(template_name="core/mtdify.html"),
-        name="mtdify",
+        RedirectView.as_view(url=reverse_lazy("core:deskledger"), permanent=True),
     ),
     path(
         "djangify/",
