@@ -42,8 +42,10 @@ def logout_view(request):
 # ---------------------------------------------------------------------------
 @login_required
 def dashboard_view(request):
-    """Customer home: recent orders, purchased downloads and wishlist."""
+    """Customer home: recent orders, purchased downloads, wishlist and any
+    hosted-tool results the visitor has saved."""
     from shop.models import Order
+    from tools.models import SavedToolResult
 
     orders = (
         Order.objects.filter(user=request.user)
@@ -54,10 +56,14 @@ def dashboard_view(request):
     favourites = (
         profile.favourite_products.all() if profile is not None else []
     )
+    saved_results = (
+        SavedToolResult.objects.filter(user=request.user)
+        .select_related("tool")[:20]
+    )
     return render(
         request,
         "accounts/dashboard.html",
-        {"orders": orders, "favourites": favourites},
+        {"orders": orders, "favourites": favourites, "saved_results": saved_results},
     )
 
 
@@ -108,3 +114,56 @@ def delete_account_view(request):
 @login_required
 def support(request):
     return redirect("/")
+
+
+# ---------------------------------------------------------------------------
+# Saved tool results (hosted tools -> "Save to my dashboard")
+# ---------------------------------------------------------------------------
+
+def _safe_next(request, default="accounts:dashboard"):
+    """A `next` value posted from our own dashboard forms — validated against
+    open-redirect before use, since it's still browser-supplied POST data."""
+    from django.urls import reverse
+    from django.utils.http import url_has_allowed_host_and_scheme
+
+    next_url = (request.POST.get("next") or "").strip()
+    if next_url and url_has_allowed_host_and_scheme(
+        next_url, allowed_hosts={request.get_host()}, require_https=request.is_secure()
+    ):
+        return next_url
+    return reverse(default)
+
+
+@login_required
+def saved_result_detail(request, pk):
+    from tools.models import SavedToolResult
+
+    result = get_object_or_404(SavedToolResult, pk=pk, user=request.user)
+    return render(request, "accounts/saved_result_detail.html", {"result": result})
+
+
+@login_required
+@require_POST
+def saved_result_rename(request, pk):
+    from tools.models import SavedToolResult
+
+    result = get_object_or_404(SavedToolResult, pk=pk, user=request.user)
+    label = (request.POST.get("label") or "").strip()[:300]
+    if label:
+        result.label = label
+        result.save(update_fields=["label", "updated"])
+        messages.success(request, "Renamed.")
+    else:
+        messages.error(request, "Please enter a name.")
+    return redirect(_safe_next(request))
+
+
+@login_required
+@require_POST
+def saved_result_delete(request, pk):
+    from tools.models import SavedToolResult
+
+    result = get_object_or_404(SavedToolResult, pk=pk, user=request.user)
+    result.delete()
+    messages.success(request, "Deleted.")
+    return redirect(_safe_next(request))

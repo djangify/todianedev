@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}{{ result.label }} | Diane Corriette{% endblock %}
+
+{% block content %}
+<section class="max-w-3xl mx-auto px-4 py-10">
+
+  <a href="{% url 'accounts:dashboard' %}#saved-results" class="text-sm text-teal-700 hover:underline">&larr; Back to your dashboard</a>
+
+  <header class="mt-4 mb-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-teal-800">{{ result.label }}</h1>
+      <p class="text-sm text-gray-500 mt-1">
+        {% if result.tool %}
+          Saved from <a href="{{ result.tool.get_absolute_url }}" class="underline hover:no-underline">{{ result.tool_title|default:result.tool.title }}</a>
+        {% else %}
+          Saved from {{ result.tool_title|default:"a tool that's since been removed" }}
+        {% endif %}
+        on {{ result.created|date:"j F Y, g:ia" }}
+      </p>
+    </div>
+    <div class="flex gap-2 no-print">
+      <button type="button" onclick="window.print()"
+              class="px-4 py-2 text-sm font-medium rounded-lg border border-gray-300 text-teal-800 hover:bg-teal-700 hover:text-white transition">
+        Print / Save as PDF
+      </button>
+    </div>
+  </header>
+
+  <form method="post" action="{% url 'accounts:saved_result_rename' result.pk %}"
+        class="mb-6 flex flex-wrap gap-2 items-center no-print">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{% url 'accounts:saved_result_detail' result.pk %}">
+    <label for="rename-label" class="text-sm text-gray-600">Rename:</label>
+    <input type="text" id="rename-label" name="label" maxlength="300" value="{{ result.label }}"
+           class="flex-1 min-w-[12rem] rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+    <button type="submit" class="px-3 py-1.5 text-sm font-medium rounded-lg bg-teal-700 text-white hover:bg-teal-800">
+      Save name
+    </button>
+  </form>
+
+  <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-6 sm:p-8">
+    {% if result.data %}
+    <dl class="mb-6 space-y-2">
+      {% for key, value in result.data.items %}
+      <div>
+        <dt class="text-xs uppercase tracking-wide text-gray-400">{{ key }}</dt>
+        <dd class="text-gray-800">{{ value }}</dd>
+      </div>
+      {% endfor %}
+    </dl>
+    {% endif %}
+
+    {% if result.results_html %}
+    <div class="prose max-w-none">{{ result.results_html|safe }}</div>
+    {% elif result.results_text %}
+    <p class="whitespace-pre-line text-gray-800">{{ result.results_text }}</p>
+    {% elif not result.data %}
+    <p class="text-gray-500">Nothing was captured for this save.</p>
+    {% endif %}
+  </div>
+
+  <form method="post" action="{% url 'accounts:saved_result_delete' result.pk %}" class="mt-8 text-center no-print">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{% url 'accounts:dashboard' %}#saved-results">
+    <button type="submit" class="text-sm text-red-600 hover:underline"
+            onclick="return confirm('Delete this saved result? This can\'t be undone.');">
+      Delete this saved result
+    </button>
+  </form>
+</section>
+
+<style>
+  @media print {
+    .no-print { display: none !important; }
+  }
+</style>
+{% endblock %}

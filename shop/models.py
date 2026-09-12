@@ -122,18 +122,19 @@ class Product(models.Model):
         storage=secure_storage,
         help_text="Upload a PDF or ZIP file. Use ZIP for bundles.",
     )
-    hosted_tool = models.OneToOneField(
+    hosted_tool = models.ForeignKey(
         "tools.HostedTool",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="product",
+        related_name="products",
         limit_choices_to={"access": "paid"},
         help_text=(
             "Optional: attach a Hosted Tool to sell it as this product. Only "
             "tools set to 'Paid' can be selected here. Buyers reach the live tool "
             "from their downloads area, and the tool's public page becomes "
-            "purchase-only. Leave blank for a normal file download."
+            "purchase-only. Leave blank for a normal file download. The same "
+            "tool can be linked from more than one product (e.g. price tiers)."
         ),
     )
     preview_file = models.FileField(
@@ -685,6 +686,38 @@ class SiteSettings(models.Model):
         "Blog Sidebar Product Count",
         default=5,
         help_text="Number of featured products to show in the blog sidebar.",
+    )
+
+    # --- Hosted tools: newsletter sign-up + saving to dashboard --------------
+    tools_newsletter_enabled = models.BooleanField(
+        "Show newsletter sign-up on free tools",
+        default=False,
+        help_text=(
+            "When ticked, an optional 'email me my results' box appears at the "
+            "bottom of every FREE hosted tool for logged-out visitors (never on "
+            "paid tools, never for a signed-in visitor — they get the save-to-"
+            "dashboard box instead)."
+        ),
+    )
+    tools_newsletter_title = models.CharField(
+        max_length=200,
+        blank=True,
+        default="",
+        help_text="Heading for the newsletter box. Leave blank for a sensible default.",
+    )
+    tools_newsletter_message = models.TextField(
+        blank=True,
+        default="",
+        help_text="Optional supporting line shown under the newsletter box heading.",
+    )
+    tools_saving_enabled = models.BooleanField(
+        "Let visitors save tool results to their dashboard",
+        default=True,
+        help_text=(
+            "When ticked, a logged-in visitor sees a \"Save to my dashboard\" "
+            "button under a tool (if that tool also has saving switched on) and "
+            "can come back to their results later."
+        ),
     )
 
     class Meta:

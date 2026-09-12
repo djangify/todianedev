@@ -1,4 +1,4 @@
-"""Generic full-CRUD engine for the Inspirational Guidance MCP connector.
+"""Generic full-CRUD engine for the todiane.com MCP connector.
 
 Gives Claude create / read / update / delete over *every* piece of site content
 through six generic tools, backed by a registry (``RESOURCES``) that maps a
@@ -47,8 +47,6 @@ def F(type_, required=False, choices=None, model=None, lookup=None, create_missi
 
 
 AUTH_USER = "AUTH_USER"  # sentinel for the site's user model
-
-M30 = ["30", "60", "90"]
 
 
 # ---------------------------------------------------------------------------
@@ -152,6 +150,8 @@ def _resources() -> dict:
                 "currency_symbol": F("str"),
                 "active_theme": F("choice", choices=["classic", "editorial", "minimal", "spotlight"]),
                 "sidebar_heading": F("str"), "sidebar_product_count": F("int"),
+                "tools_saving_enabled": F("bool"), "tools_newsletter_enabled": F("bool"),
+                "tools_newsletter_title": F("str"), "tools_newsletter_message": F("text"),
             },
         },
         "shop_settings": {
@@ -173,65 +173,19 @@ def _resources() -> dict:
             },
         },
 
-        # ---- Hosted tools + experiment (tools app) ---------------------------
+        # ---- Hosted tools (Djangify self-hosted-parity tools app) -------------
         "hosted_tool": {
             "model": "tools.HostedTool", "label": "Hosted tool (HTML artifact)", "search": ["title", "slug"],
             "fields": {
                 "title": F("str", required=True), "slug": F("slug"),
-                "description": F("text"), "link_text": F("str"), "link_url": F("str"),
+                "description": F("html"), "link_text": F("str"), "link_url": F("str"),
+                "link_position": F("choice", choices=["both", "top", "bottom"]),
+                "more_info_title": F("str"), "more_info_description": F("html"),
                 "access": F("choice", choices=["free", "paid"]), "published": F("bool"),
+                "allow_saving": F("bool"), "order": F("int"),
+                "marketing_list_id": F("str"), "marketing_tag": F("str"),
             },
-            "note": "The .html file itself is uploaded in the admin (not over MCP).",
-        },
-        "experiment_week": {
-            "model": "tools.ExperimentWeek", "label": "Experiment week", "search": ["milestone_label"],
-            "fields": {
-                "week_date": F("date", required=True), "week_number": F("int", required=True),
-                "is_milestone": F("bool"), "milestone_label": F("str"),
-                "blog_posts_rewritten": F("int"), "pinterest_pins": F("int"), "youtube_audio": F("int"),
-                "substack_posts": F("int"), "emails_added": F("int"), "ga4_sessions": F("int"),
-                "what_i_did": F("text"), "what_i_noticed": F("text"), "what_changed": F("text"),
-                "went_well_wednesday": F("text"),
-                "revenue_this_week": F("decimal"), "transactions": F("int"), "email_list_total": F("int"),
-                "is_published": F("bool"),
-            },
-        },
-        "experiment_goal": {
-            "model": "tools.ExperimentGoal", "label": "Experiment goal", "search": ["goal_text"],
-            "fields": {
-                "milestone": F("choice", required=True, choices=M30),
-                "goal_text": F("str", required=True), "is_achieved": F("bool"), "order": F("int"),
-            },
-        },
-        "milestone_reflection": {
-            "model": "tools.MilestoneReflection", "label": "Milestone reflection", "search": ["reflection_text"],
-            "fields": {
-                "milestone": F("choice", required=True, choices=M30),
-                "reflection_text": F("text", required=True), "published_date": F("date"),
-            },
-        },
-
-        # ---- AI mentor / coach bots ------------------------------------------
-        "bot": {
-            "model": "bots.BotProduct", "label": "AI mentor bot", "search": ["bot_name"],
-            "fields": {
-                "product": F("fk", required=True, model="shop.Product", lookup=["slug", "title"]),
-                "bot_name": F("str", required=True),
-                "welcome_message": F("text", required=True),
-                "system_prompt": F("text", required=True),
-                "message_limit": F("int"), "access_days": F("int"),
-                "model": F("choice", choices=["claude-haiku-4-5-20251001", "claude-sonnet-4-5"]),
-                "max_tokens": F("int"), "is_active": F("bool"),
-            },
-        },
-        "bot_knowledge": {
-            "model": "bots.BotKnowledge", "label": "Bot knowledge file", "search": ["title"],
-            "no_create": True,  # the PDF is uploaded in the admin
-            "fields": {
-                "bot_product": F("fk", model="bots.BotProduct", lookup=["bot_name"]),
-                "title": F("str"), "order": F("int"),
-            },
-            "note": "The PDF file is uploaded in the admin (not over MCP).",
+            "note": "The .html file and thumbnail image are uploaded in the admin (not over MCP).",
         },
 
         # ---- Member resources (accounts app) ---------------------------------
@@ -240,6 +194,60 @@ def _resources() -> dict:
             "no_create": True,  # the file + thumbnail are uploaded in the admin
             "fields": {"title": F("str"), "description": F("text"), "is_active": F("bool"), "order": F("int")},
             "note": "The file and thumbnail are uploaded in the admin (not over MCP).",
+        },
+
+        # ---- Info pages (policies / docs) -------------------------------------
+        "info_page": {
+            "model": "infopages.InfoPage", "label": "Info page (policy / doc)", "search": ["title", "slug"],
+            "fields": {
+                "title": F("str", required=True), "slug": F("slug", required=True),
+                "page_type": F("choice", required=True, choices=["doc", "policy"]),
+                "category": F("fk", model="infopages.Category", lookup=["slug", "name"], create_missing=True),
+                "content": F("html", required=True),
+                "published": F("bool"),
+            },
+        },
+        "info_page_category": {
+            "model": "infopages.Category", "label": "Info page category", "search": ["name", "slug"],
+            "fields": {"name": F("str", required=True), "slug": F("slug", required=True)},
+        },
+
+        # ---- Portfolio (todiane.com project showcase) --------------------------
+        "portfolio_project": {
+            "model": "portfolio.Portfolio", "label": "Portfolio project", "search": ["title", "slug"],
+            "fields": {
+                "title": F("str", required=True), "slug": F("slug"),
+                "short_description": F("str"),
+                "overview": F("html"), "technical_details": F("html"), "results": F("html"),
+                "featured_image_url": F("str"),
+                "live_site_url": F("str"), "github_url": F("str"), "for_sale_url": F("str"),
+                "technologies": F("m2m", model="portfolio.Technology", lookup=["slug", "name"], create_missing=True),
+                "status": F("choice", choices=["draft", "published"]),
+                "is_featured": F("bool"), "order": F("int"), "display_date": F("datetime"),
+                "meta_title": F("str"), "meta_description": F("str"), "meta_keywords": F("str"),
+            },
+            "note": "featured_image (uploaded file) is set in the admin; use featured_image_url for an external image instead.",
+        },
+        "portfolio_technology": {
+            "model": "portfolio.Technology", "label": "Portfolio technology tag", "search": ["name", "slug"],
+            "fields": {
+                "name": F("str", required=True), "slug": F("slug"),
+                "category": F("choice", choices=["frontend", "backend", "database", "devops", "other"]),
+            },
+        },
+        "portfolio_image": {
+            "model": "portfolio.PortfolioImage", "label": "Portfolio project gallery image", "search": ["caption"],
+            "fields": {
+                "portfolio": F("fk", required=True, model="portfolio.Portfolio", lookup=["slug", "title"]),
+                "image_url": F("str"), "caption": F("str"), "order": F("int"),
+            },
+            "note": "image (uploaded file) is set in the admin; use image_url for an external image instead.",
+        },
+
+        # ---- Dashboard banner (core app) ---------------------------------------
+        "dashboard_announcement": {
+            "model": "core.DashboardAnnouncement", "label": "Dashboard announcement banner", "singleton": True,
+            "fields": {"announcement_bar_text": F("str")},
         },
     }
 

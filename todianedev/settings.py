@@ -67,8 +67,6 @@ INSTALLED_APPS = [
     # Djangify eCommerce Site Builder apps
     "shop",
     "tools",
-    # AI mentor / coach bots (sold as products)
-    "bots",
     # MCP connector app — call-log model + owner "Connect to Claude" admin pages.
     # The MCP endpoint itself is served by a separate sidecar (mcp_server.app).
     "mcp_server",

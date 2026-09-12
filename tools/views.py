@@ -1,138 +1,46 @@
+# tools/views.py
+#
+# Ported from the Djangify self-hosted eCommerce Site Builder's "tools" app.
+# A free tool always shows its results in the browser. Two optional,
+# non-gating extras sit alongside it:
+#   1. A floating "Download PDF" button (print-to-PDF with branded attribution).
+#   2. "Save to my dashboard" for a logged-in visitor, via the sandboxed
+#      iframe -> parent page -> server postMessage relay (see tool_detail.html).
 import json
+import logging
 import re
 
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.http import Http404, HttpResponse, JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
-from django.db.models import Sum, Max
+from django.shortcuts import get_object_or_404, render
+from django.utils.html import strip_tags
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 from django.views.decorators.http import require_POST
 
 from .models import (
-    ExperimentWeek,
-    ExperimentGoal,
-    MilestoneReflection,
-    AliveListItem,
+    MAX_SAVED_RESULT_DATA_BYTES,
+    MAX_SAVED_RESULTS_PER_TOOL,
     HostedTool,
-    ToolSavedResult,
+    SavedToolResult,
 )
 
+logger = logging.getLogger("tools")
 
-def experiment_results(request):
-    weeks = ExperimentWeek.objects.filter(is_published=True).order_by("-week_date")
+# Cap on the size of the results snapshot we accept from the browser, so a
+# runaway tool can't post megabytes of markup at us.
+MAX_RESULTS_HTML_BYTES = 200_000
+MAX_RESULTS_TEXT_BYTES = 100_000
 
-    goals_qs = ExperimentGoal.objects.all()
-    goals_by_milestone = {
-        "30": goals_qs.filter(milestone="30"),
-        "60": goals_qs.filter(milestone="60"),
-        "90": goals_qs.filter(milestone="90"),
-    }
-
-    reflections = {r.milestone: r for r in MilestoneReflection.objects.all()}
-
-    totals = weeks.aggregate(
-        total_revenue=Sum("revenue_this_week"),
-        total_true_fans=Sum("transactions"),
-        total_posts_rewritten=Sum("blog_posts_rewritten"),
-    )
-
-    latest_email_total = weeks.filter(
-        email_list_total__isnull=False
-    ).values_list("email_list_total", flat=True).first()
-
-    context = {
-        "weeks": weeks,
-        "goals_by_milestone": goals_by_milestone,
-        "reflections": reflections,
-        "total_revenue": totals["total_revenue"] or 0,
-        "total_true_fans": totals["total_true_fans"] or 0,
-        "total_posts_rewritten": totals["total_posts_rewritten"] or 0,
-        "latest_email_total": latest_email_total or 0,
-    }
-    return render(request, "tools/experiment_results.html", context)
-
-
-def tools_home(request):
-    tools = HostedTool.objects.filter(published=True).order_by("access", "title")
-    return render(
-        request,
-        "tools/index.html",
-        {
-            "free_tools": [t for t in tools if t.access == HostedTool.ACCESS_FREE],
-            "paid_tools": [t for t in tools if t.access == HostedTool.ACCESS_PAID],
-        },
-    )
-
-
-def calming_game(request):
-    return render(request, "tools/calming_game.html")
-
-
-def tap_to_calm(request):
-    return render(request, "tools/tap_to_calm.html")
-
-
-def alive_list_builder(request):
-    if request.method == "POST":
-        try:
-            data = json.loads(request.body)
-        except (json.JSONDecodeError, ValueError):
-            return JsonResponse({"error": "Invalid JSON"}, status=400)
-
-        action = data.get("action")
-
-        if not request.user.is_authenticated:
-            return JsonResponse({"requires_login": True}, status=401)
-
-        if action == "save_item":
-            item_text = data.get("item_text", "").strip()
-            category = data.get("category", "").strip()
-            if not item_text:
-                return JsonResponse({"error": "item_text required"}, status=400)
-            item = AliveListItem.objects.create(
-                user=request.user,
-                item_text=item_text,
-                category=category,
-            )
-            return JsonResponse({"status": "ok", "item_id": item.id})
-
-        elif action == "delete_item":
-            item_id = data.get("item_id")
-            item = get_object_or_404(AliveListItem, id=item_id, user=request.user)
-            item.delete()
-            return JsonResponse({"status": "ok"})
-
-        elif action == "toggle_living_it":
-            item_id = data.get("item_id")
-            item = get_object_or_404(AliveListItem, id=item_id, user=request.user)
-            item.is_living_it = not item.is_living_it
-            item.save(update_fields=["is_living_it", "updated"])
-            return JsonResponse({"status": "ok", "is_living_it": item.is_living_it})
-
-        return JsonResponse({"error": "Unknown action"}, status=400)
-
-    # GET
-    existing_items = []
-    if request.user.is_authenticated:
-        existing_items = list(
-            AliveListItem.objects.filter(user=request.user).values(
-                "id", "item_text", "category", "is_living_it", "order"
-            )
-        )
-
-    return render(request, "tools/alive_list_builder.html", {
-        "existing_items_json": json.dumps(existing_items),
-        "user_authenticated": request.user.is_authenticated,
-    })
-
-
-# -- Hosted Tools (upload-an-HTML-artifact) ----------------------------------
 
 def _staff_preview(request):
     return request.GET.get("preview") == "1" and request.user.is_staff
 
+
+# ---------------------------------------------------------------------------
+# Download PDF button + branded attribution page
+# ---------------------------------------------------------------------------
 
 # Anchor tags that carry a real, followable link. We deliberately keep this to
 # http(s) and mailto so we surface the kind of link a tool author puts on a
@@ -156,7 +64,7 @@ def _harvest_tool_links(html_bytes):
     In a saved/printed PDF that button loses its destination, so here we scan
     the raw artifact HTML, collect each external link's visible text + URL,
     de-duplicate by URL and cap the count. Returns a list of (label, url)
-    tuples (raw/unescaped -- the caller escapes them).
+    tuples (raw/unescaped — the caller escapes them).
 
     NOTE: this only sees real <a href> links. A <button onclick="location=...">
     style button hides its URL inside JavaScript and is not harvested.
@@ -176,7 +84,6 @@ def _harvest_tool_links(html_bytes):
         if href in seen:
             continue
         seen.add(href)
-        # Strip any inner tags (e.g. an icon <svg>) and collapse whitespace.
         label = _WS_RE.sub(" ", _TAG_RE.sub("", m.group("label") or "")).strip()
         if not label:
             label = href
@@ -193,12 +100,12 @@ def _build_pdf_branding(links=None):
 
     - On screen: only a small floating "Download PDF" button is visible.
     - When the visitor saves/prints to PDF: the button is hidden and a clean
-      final page is appended carrying Inspirational Guidance's identity (site
-      name, author, bio, URL) so they always remember where the PDF came from.
+      final page is appended carrying this site's identity (name, author,
+      bio, URL) so they always remember where the PDF came from.
 
-    Brand details come from Django settings (SITE_NAME / AUTHOR_*), so a missing
-    value never breaks the tool -- the button always renders and the attribution
-    block only includes the pieces that are available.
+    Brand details come from Django settings (SITE_NAME / AUTHOR_*), so a
+    missing value never breaks the tool — the button always renders and the
+    attribution block only includes the pieces that are available.
     """
     from django.conf import settings
     from django.utils.html import escape
@@ -218,33 +125,32 @@ def _build_pdf_branding(links=None):
 
     parts = ['<section class="tool-pdf-attribution">', '<div class="tool-pdf-rule"></div>']
     if business:
-        parts.append('<p class="biz">' + business + '</p>')
+        parts.append('<p class="biz">' + business + "</p>")
     if author:
         parts.append("<h2>Created by " + author + "</h2>")
     if bio:
         parts.append("<p>" + bio + "</p>")
     meta = []
     if url:
-        meta.append('<a href="' + url_safe + '">' + url_safe + '</a>')
+        meta.append('<a href="' + url_safe + '">' + url_safe + "</a>")
     if about_safe:
         meta.append('<a href="' + about_safe + '">About</a>')
     if meta:
         parts.append('<p class="meta">' + " &nbsp;&bull;&nbsp; ".join(meta) + "</p>")
-    # Links the tool author put on the page (e.g. "buttons"), reprinted as
-    # plain text + URL so they survive being saved as a PDF.
     if links:
         parts.append('<div class="tool-pdf-links">')
         parts.append('<p class="links-title">Links referenced in this tool</p>')
         parts.append("<ul>")
         for label, link_url in links:
             parts.append(
-                '<li><span class="lbl">' + escape(label) + '</span><br>'
-                '<a href="' + escape(link_url) + '">' + escape(link_url) + '</a></li>'
+                '<li><span class="lbl">' + escape(label) + "</span><br>"
+                '<a href="' + escape(link_url) + '">' + escape(link_url) + "</a></li>"
             )
         parts.append("</ul></div>")
-    source = business or url_safe or "Inspirational Guidance"
-    parts.append('<p class="meta">You received this from ' + source +
-                 '. Thank you for your support.</p>')
+    source = business or url_safe or getattr(settings, "SITE_NAME", "our site")
+    parts.append(
+        '<p class="meta">You received this from ' + source + ". Thank you for your support.</p>"
+    )
     parts.append("</section>")
     attribution = "".join(parts)
 
@@ -289,164 +195,173 @@ def _build_pdf_branding(links=None):
     return style + button + attribution
 
 
-def _purchase_gate(request, tool):
-    """
-    Enforce the purchase wall for a tool that is sold via a shop product.
-
-    Returns an HttpResponse to send instead (redirect) when the visitor may NOT
-    see the tool, or None when access is allowed. Free tools (no linked product)
-    and staff always pass.
-    """
-    if _staff_preview(request) or tool.user_has_access(request.user):
-        return None
-
-    product = tool.linked_product
-    if not request.user.is_authenticated:
-        messages.info(request, "Please sign in to access your purchased tool.")
-        login_url = f"{reverse('accounts:login')}?next={request.path}"
-        return redirect(login_url)
-
-    # Authenticated but hasn't bought it — send them to the product page to buy.
-    if product is not None and product.status == "publish" and product.is_active:
-        messages.info(
-            request,
-            "This tool is part of a product. Purchase it to unlock access.",
-        )
-        return redirect("shop:product_detail", slug=product.slug)
-    raise Http404("Tool not available.")
-
-
-@login_required
-@require_POST
-def save_tool_result(request):
-    """
-    API endpoint called by uploaded HTML tools to persist a result to the
-    user's dashboard.
-
-    Expects JSON body:
-        {
-            "tool_slug": "values-compass",
-            "tool_title": "Core Values Tool",   // optional
-            "label": "My top 3 values",
-            "data": { ... }                      // any JSON the tool needs
+# ---------------------------------------------------------------------------
+# Results capture (for the "download PDF" print view and the save-to-
+# dashboard flow)
+#
+# The tool renders in a sandboxed iframe with NO allow-same-origin, so its JS
+# runs in an opaque origin the parent can't read. This tiny script lives inside
+# the iframe and, when the parent asks (postMessage), snapshots the tool's
+# current results and posts them back up.
+# ---------------------------------------------------------------------------
+_CAPTURE_SCRIPT = b"""<script>(function(){
+  function findOutputRoot(root){
+    var el = root.querySelector('[data-tool-output]');
+    if (el) return el;
+    var selectors = ['#tool-output','#tool-results','.tool-output','.tool-results','#results','#output'];
+    for (var i=0;i<selectors.length;i++){
+      el = root.querySelector(selectors[i]);
+      if (el) return el;
+    }
+    return null;
+  }
+  function snapshot(){
+    var live=document.querySelectorAll('input,textarea,select');
+    var clone=document.body.cloneNode(true);
+    var copy=clone.querySelectorAll('input,textarea,select');
+    for(var i=0;i<live.length&&i<copy.length;i++){
+      var l=live[i],c=copy[i];
+      try{
+        if(l.tagName==='SELECT'){
+          if(c.options&&c.options[l.selectedIndex]){c.options[l.selectedIndex].setAttribute('selected','selected');}
+        }else if(l.type==='checkbox'||l.type==='radio'){
+          if(l.checked){c.setAttribute('checked','checked');}else{c.removeAttribute('checked');}
+        }else if(l.tagName==='TEXTAREA'){
+          c.textContent=l.value;
+        }else{
+          c.setAttribute('value',l.value);
         }
+      }catch(e){}
+    }
+    var junk=clone.querySelectorAll('script,style,noscript,.tool-pdf-btn,.tool-pdf-attribution,.tool-pdf-style');
+    for(var j=0;j<junk.length;j++){junk[j].parentNode&&junk[j].parentNode.removeChild(junk[j]);}
+    var outputEl = findOutputRoot(clone);
+    var liveOutputEl = outputEl ? findOutputRoot(document) : null;
+    var html = outputEl ? outputEl.innerHTML : clone.innerHTML;
+    var text = (liveOutputEl ? liveOutputEl.innerText : (document.body.innerText||'')).replace(/\\n{3,}/g,'\\n\\n').trim();
+    return {html:html,text:text};
+  }
+  window.addEventListener('message',function(e){
+    var d=e.data||{};
+    if(d&&d.__toolCaptureRequest){
+      var s=snapshot();
+      parent.postMessage({__toolResults:{id:d.__toolCaptureRequest,html:s.html,text:s.text}},'*');
+    }
+  });
+})();</script>"""
 
-    Returns:
-        200  { "ok": true, "id": <int> }
-        400  { "ok": false, "error": "<reason>" }
+
+def tool_list(request):
     """
-    try:
-        payload = json.loads(request.body)
-    except (json.JSONDecodeError, ValueError):
-        return JsonResponse({"ok": False, "error": "Invalid JSON."}, status=400)
+    Public index of all live tools (free and paid).
 
-    tool_slug = (payload.get("tool_slug") or "").strip()[:200]
-    tool_title = (payload.get("tool_title") or "").strip()[:200]
-    label = (payload.get("label") or "").strip()[:300]
-    data = payload.get("data", {})
-
-    if not tool_slug or not label:
-        return JsonResponse(
-            {"ok": False, "error": "tool_slug and label are required."}, status=400
-        )
-    if not isinstance(data, (dict, list)):
-        data = {}
-
-    result = ToolSavedResult.objects.create(
-        user=request.user,
-        tool_slug=tool_slug,
-        tool_title=tool_title,
-        label=label,
-        data=data,
-    )
-    return JsonResponse({"ok": True, "id": result.pk})
-
-
-@login_required
-@require_POST
-def generate_compass_statement(request):
+    Paid tools only appear here once they're linked to a sellable product —
+    otherwise a visitor would have nothing to buy. When a paid tool IS linked,
+    its card sends visitors straight to the product page (not the tool's own
+    paywalled page), since that's where they actually complete the purchase.
     """
-    Calls Anthropic to generate a personalised compass statement for the user's
-    top 3 values. Called from premium uploaded HTML tools via fetch.
+    visible_tools = []
+    for tool in HostedTool.objects.filter(published=True):
+        if not tool.is_visible_on_list:
+            continue
+        if tool.access == HostedTool.ACCESS_PAID:
+            product = tool.get_sale_product()
+            tool.list_product = product
+            tool.list_url = product.get_absolute_url()
+            tool.list_image_url = tool.image.url if tool.image else product.get_image_url()
+            tool.list_description = strip_tags(tool.description) or strip_tags(product.description or "")
+        else:
+            tool.list_product = None
+            tool.list_url = tool.get_absolute_url()
+            tool.list_image_url = tool.image.url if tool.image else None
+            tool.list_description = strip_tags(tool.description)
+        visible_tools.append(tool)
 
-    Expects JSON: { "values": ["Value1", "Value2", "Value3"] }
-    Returns:      { "ok": true, "statement": "..." }
-               or { "ok": false, "error": "..." }
-    """
+    context = {"tools": visible_tools}
+    return render(request, "tools/tool_list.html", context)
+
+
+def _saving_enabled(tool):
+    """Whether the "Save to my dashboard" button should be offered for this
+    tool at all — both the site-wide switch and this tool's own switch must
+    be on. Does not depend on whether the visitor is logged in; that's a
+    separate concern handled in the template/JS."""
+    if not tool.allow_saving:
+        return False
     try:
-        payload = json.loads(request.body)
-    except (json.JSONDecodeError, ValueError):
-        return JsonResponse({"ok": False, "error": "Invalid JSON."}, status=400)
+        from shop.models import SiteSettings
 
-    raw_values = payload.get("values", [])
-    if not raw_values or not isinstance(raw_values, list):
-        return JsonResponse({"ok": False, "error": "values list required."}, status=400)
-
-    values = [str(v).strip()[:60] for v in raw_values[:3] if str(v).strip()]
-    if not values:
-        return JsonResponse({"ok": False, "error": "No valid values supplied."}, status=400)
-
-    from django.conf import settings as _settings
-    api_key = getattr(_settings, "ANTHROPIC_API_KEY", None)
-    if not api_key:
-        return JsonResponse({"ok": False, "error": "AI not configured."}, status=503)
-
-    try:
-        import anthropic as _anthropic
-        client = _anthropic.Anthropic(api_key=api_key)
-        names = ", ".join(values)
-        prompt = (
-            f"You are a warm, insightful life coach. A woman has just identified her top "
-            f"core values as: {names}.\n\n"
-            f"Write a single short paragraph (3–4 sentences, no more than 80 words total) "
-            f"that serves as her personal values compass statement. It must:\n"
-            f"- Feel intimate and specific to these exact values — not generic\n"
-            f"- Reference each value naturally by name\n"
-            f"- End with a practical decision-making question she can ask herself at a crossroads\n"
-            f"- Use warm, direct second-person language (\"you\", \"your\")\n"
-            f"- Have no bullet points, no headers — just the paragraph."
-        )
-        message = client.messages.create(
-            model="claude-haiku-4-5-20251001",
-            max_tokens=200,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        statement = message.content[0].text.strip()
-        return JsonResponse({"ok": True, "statement": statement})
-
+        s = SiteSettings.get_settings()
     except Exception:
-        return JsonResponse(
-            {"ok": False, "error": "Could not generate statement. Please try again."},
-            status=500,
-        )
+        s = None
+    return bool(s is None or getattr(s, "tools_saving_enabled", True))
 
 
-def hosted_tool_detail(request, slug):
+def _newsletter_box_context(request, tool, unlocked):
+    """Whether (and with what copy) to show the opt-in "email me my results"
+    box under a tool. Only free, unlocked tools qualify, only when the owner
+    has turned the feature on in Site Settings, and only for logged-out
+    visitors — a signed-in visitor gets the "save to dashboard" box instead."""
+    if not (unlocked and tool.access == HostedTool.ACCESS_FREE):
+        return {"show_newsletter_box": False}
+    if request.user.is_authenticated:
+        return {"show_newsletter_box": False}
+    try:
+        from shop.models import SiteSettings
+
+        s = SiteSettings.get_settings()
+    except Exception:
+        s = None
+    if not (s and getattr(s, "tools_newsletter_enabled", False)):
+        return {"show_newsletter_box": False}
+    return {
+        "show_newsletter_box": True,
+        "newsletter_title": (s.tools_newsletter_title or "").strip() or "Get your results by email",
+        "newsletter_message": (s.tools_newsletter_message or "").strip(),
+    }
+
+
+def _tool_meta_description(tool):
+    """Plain-text meta description for a tool's page."""
+    raw = strip_tags(tool.description or "").strip() or strip_tags(tool.more_info_description or "").strip()
+    text = " ".join(raw.split())
+    if not text:
+        return tool.title
+    if len(text) > 160:
+        text = text[:157].rstrip() + "..."
+    return text
+
+
+def tool_detail(request, slug):
     """
-    Public wrapper page for an uploaded tool. Shows site chrome (nav/footer)
-    and embeds the artifact in a sandboxed iframe pointing at the raw view.
-
-    If the tool is sold via a shop product, it is purchase-gated: only the
-    buyer (or staff) gets through; everyone else is sent to sign in / buy.
+    Public wrapper page for a single tool. Shows site chrome (nav/footer) and
+    embeds the artifact in a sandboxed iframe pointing at the raw view below.
     """
     if _staff_preview(request):
         tool = get_object_or_404(HostedTool, slug=slug)
     else:
         tool = get_object_or_404(HostedTool, slug=slug, published=True)
 
-    blocked = _purchase_gate(request, tool)
-    if blocked is not None:
-        return blocked
-    return render(request, "tools/hosted_tool_detail.html", {"tool": tool})
+    unlocked = tool.is_unlocked_for(request.user)
+    context = {
+        "tool": tool,
+        "unlocked": unlocked,
+        "show_save_box": unlocked and _saving_enabled(tool),
+        "meta_description": _tool_meta_description(tool),
+    }
+    if not unlocked:
+        context["product"] = tool.get_sale_product()
+    context.update(_newsletter_box_context(request, tool, unlocked))
+    return render(request, "tools/tool_detail.html", context)
 
 
 @xframe_options_sameorigin
-def hosted_tool_raw(request, slug):
+def tool_raw(request, slug):
     """
     Serve the raw artifact HTML so its JavaScript executes.
 
     Security model:
-      - The file lives in secure_storage, so it is not directly web-served;
+      - The file lives in SecureStorage, so it is not directly web-served;
         this view is the only way to reach it.
       - It is only ever loaded inside the sandboxed iframe on the detail page
         (sandbox WITHOUT allow-same-origin => opaque origin => the artifact
@@ -460,9 +375,8 @@ def hosted_tool_raw(request, slug):
     else:
         tool = get_object_or_404(HostedTool, slug=slug, published=True)
 
-    blocked = _purchase_gate(request, tool)
-    if blocked is not None:
-        return blocked
+    if not tool.is_unlocked_for(request.user):
+        raise Http404("This tool requires purchase.")
 
     if not tool.html_file:
         raise Http404("No file attached to this tool.")
@@ -473,18 +387,6 @@ def hosted_tool_raw(request, slug):
     except (FileNotFoundError, ValueError):
         raise Http404("Tool file missing on server.")
 
-    # Inject the CSRF token so uploaded tools can call our own API endpoints
-    # (e.g. /tools/api/save-result/ or /tools/api/generate-compass/) via fetch
-    # without depending on cookie-read access (which varies by CSRF_COOKIE_HTTPONLY).
-    from django.middleware.csrf import get_token
-    csrf_token = get_token(request)
-    csrf_inject = (
-        b"<script>window.__CSRF=" + json.dumps(csrf_token).encode("utf-8") + b";</script>"
-    )
-
-    # Inject a tiny height-reporter so the parent page can size the iframe to
-    # the content (no inner scroll). Runs inside the sandbox via allow-scripts;
-    # only posts a number, so it needs no same-origin access.
     reporter = (
         b"<script>(function(){"
         b"var t;"
@@ -503,17 +405,15 @@ def hosted_tool_raw(request, slug):
         b"setTimeout(r,300);setTimeout(r,1200);"
         b"})();</script>"
     )
-    # Branded "Download PDF" button + attribution page (appears only in the
-    # saved/printed PDF). Reprint links so they survive being saved: first the
-    # explicit link the owner added on the tool (URL name + URL link), then any
-    # links the author put inside the artifact itself, de-duplicated.
+
     tool_links = _harvest_tool_links(html)
     if tool.link_text and tool.link_url:
         tool_links = [(tool.link_text, tool.link_url)] + [
             link for link in tool_links if link[1] != tool.link_url
         ]
     branding = _build_pdf_branding(tool_links).encode("utf-8")
-    injected = csrf_inject + reporter + branding
+
+    injected = reporter + _CAPTURE_SCRIPT + branding
 
     if b"</body>" in html:
         head, sep, tail = html.rpartition(b"</body>")
@@ -525,3 +425,190 @@ def hosted_tool_raw(request, slug):
     response["Content-Security-Policy"] = "frame-ancestors 'self'"
     response["X-Content-Type-Options"] = "nosniff"
     return response
+
+
+# ---------------------------------------------------------------------------
+# Sanitising a browser-supplied results snapshot (shared by both flows below)
+# ---------------------------------------------------------------------------
+
+def _sanitize_results_html(raw):
+    """Light defence-in-depth on the snapshot the browser sends back. The
+    content is this site's own tool, only ever shown back to the person who
+    produced it, so this just strips things that have no place in saved
+    output: <script>/<style> blocks, inline event handlers and javascript:
+    URLs."""
+    if not raw:
+        return ""
+    html = raw[:MAX_RESULTS_HTML_BYTES]
+    html = re.sub(r"(?is)<script\b.*?</script>", "", html)
+    html = re.sub(r"(?is)<style\b.*?</style>", "", html)
+    html = re.sub(r"(?is)<noscript\b.*?</noscript>", "", html)
+    html = re.sub(r"(?is)\son\w+\s*=\s*\"[^\"]*\"", "", html)
+    html = re.sub(r"(?is)\son\w+\s*=\s*'[^']*'", "", html)
+    html = re.sub(r"(?is)(href|src)\s*=\s*\"\s*javascript:[^\"]*\"", r'\1="#"', html)
+    html = re.sub(r"(?is)(href|src)\s*=\s*'\s*javascript:[^']*'", r"\1='#'", html)
+    return html
+
+
+# ---------------------------------------------------------------------------
+# "Email me my results" — the opt-in box under a free tool for logged-out
+# visitors. This project has no connected email-marketing platform, so
+# unlike the self-hosted version this only sends the email; it does not
+# subscribe the visitor to a mailing list.
+# ---------------------------------------------------------------------------
+
+def _send_results_email(tool, name, to_email, results_html, results_text):
+    from django.conf import settings as dj_settings
+    from django.core.mail import EmailMultiAlternatives
+    from django.template.loader import render_to_string
+
+    context = {
+        "tool": tool,
+        "name": name,
+        "results_html": results_html,
+        "results_text": results_text,
+        "site_name": getattr(dj_settings, "SITE_NAME", ""),
+    }
+    html_body = render_to_string("tools/email/tool_results.html", context)
+    text_body = (results_text or "").strip() or strip_tags(html_body)
+    business = getattr(dj_settings, "SITE_NAME", "") or "our site"
+    text_body = f"Here are your results from {tool.title}.\n\n{text_body}\n\nSent by {business}."
+
+    subject = f"Your results from {tool.title}"
+    msg = EmailMultiAlternatives(
+        subject, text_body, dj_settings.DEFAULT_FROM_EMAIL, [to_email]
+    )
+    msg.attach_alternative(html_body, "text/html")
+    msg.send()
+
+
+@require_POST
+def email_results(request, slug):
+    """
+    Handle the "email me my results" box under a free tool. Results are
+    always shown on screen anyway, so this only runs when someone actively
+    opts in.
+    """
+    if _staff_preview(request):
+        tool = get_object_or_404(HostedTool, slug=slug)
+    else:
+        tool = get_object_or_404(HostedTool, slug=slug, published=True)
+
+    if tool.access != HostedTool.ACCESS_FREE:
+        raise Http404()
+    try:
+        from shop.models import SiteSettings
+
+        s = SiteSettings.get_settings()
+    except Exception:
+        s = None
+    if not (s and getattr(s, "tools_newsletter_enabled", False)):
+        raise Http404()
+
+    email = (request.POST.get("email") or "").strip()
+    try:
+        validate_email(email)
+    except ValidationError:
+        return JsonResponse(
+            {"ok": False, "error": "Please enter a valid email address."}, status=400
+        )
+    name = (request.POST.get("name") or "").strip()[:120]
+    results_html = _sanitize_results_html(request.POST.get("results_html") or "")
+    results_text = (request.POST.get("results_text") or "")[:MAX_RESULTS_TEXT_BYTES]
+
+    try:
+        _send_results_email(tool, name, email, results_html, results_text)
+    except Exception as exc:
+        logger.error("Failed to email tool results to %s: %s", email, exc, exc_info=True)
+        return JsonResponse(
+            {"ok": False, "error": "We couldn't send the email just now. Please try again shortly."},
+            status=502,
+        )
+
+    return JsonResponse({"ok": True, "message": "Sent! Check your inbox for your results."})
+
+
+# ---------------------------------------------------------------------------
+# Save to dashboard: persist a results snapshot to the visitor's own account
+#
+# Reuses the same iframe -> parent -> server path as email_results above: the
+# sandboxed tool has no way to reach this endpoint itself (opaque origin, no
+# allow-same-origin), so the parent page (tool_detail.html) is what asks the
+# iframe for a snapshot via postMessage and POSTs it here on the visitor's
+# behalf, with their real session.
+# ---------------------------------------------------------------------------
+
+@login_required
+@require_POST
+def save_result(request, slug):
+    """
+    Save a snapshot of a tool's results to request.user's dashboard.
+
+    Expects POST body (form-encoded, matching email_results' shape):
+        label         - required, short name the visitor sees on their dashboard
+        results_html  - optional, sanitised the same way email_results() sanitises it
+        results_text  - optional
+        data          - optional, JSON string; only meaningful for a tool that
+                        cooperates via the __toolSave postMessage contract
+
+    Returns 200 {"ok": true, "id": <pk>} or 4xx {"ok": false, "error": "..."}.
+    """
+    if _staff_preview(request):
+        tool = get_object_or_404(HostedTool, slug=slug)
+    else:
+        tool = get_object_or_404(HostedTool, slug=slug, published=True)
+
+    if not _saving_enabled(tool):
+        raise Http404()
+
+    if not tool.is_unlocked_for(request.user):
+        return JsonResponse(
+            {"ok": False, "error": "You don't have access to this tool."}, status=403
+        )
+
+    label = (request.POST.get("label") or "").strip()[:300]
+    if not label:
+        return JsonResponse({"ok": False, "error": "label is required."}, status=400)
+
+    results_html = _sanitize_results_html(request.POST.get("results_html") or "")
+    results_text = (request.POST.get("results_text") or "")[:MAX_RESULTS_TEXT_BYTES]
+
+    data = {}
+    raw_data = request.POST.get("data")
+    if raw_data:
+        if len(raw_data.encode("utf-8")) > MAX_SAVED_RESULT_DATA_BYTES:
+            return JsonResponse({"ok": False, "error": "That result is too large to save."}, status=400)
+        try:
+            parsed = json.loads(raw_data)
+        except (json.JSONDecodeError, ValueError):
+            parsed = None
+        if isinstance(parsed, dict):
+            data = parsed
+
+    if not (label and (results_html or results_text or data)):
+        return JsonResponse({"ok": False, "error": "Nothing to save."}, status=400)
+
+    existing = SavedToolResult.objects.filter(user=request.user, tool=tool).count()
+    if existing >= MAX_SAVED_RESULTS_PER_TOOL:
+        return JsonResponse(
+            {
+                "ok": False,
+                "error": (
+                    f"You've saved the maximum of {MAX_SAVED_RESULTS_PER_TOOL} results "
+                    "for this tool. Delete an old one from your dashboard first."
+                ),
+            },
+            status=400,
+        )
+
+    result = SavedToolResult.objects.create(
+        user=request.user,
+        tool=tool,
+        tool_title=tool.title,
+        tool_slug=tool.slug,
+        label=label,
+        data=data,
+        results_html=results_html,
+        results_text=results_text,
+    )
+    return JsonResponse({"ok": True, "id": result.pk})

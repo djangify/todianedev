@@ -40,8 +40,6 @@ urlpatterns = [
     # ----------------------------------------------------------------
     path("shop/", include("shop.urls", namespace="shop")),
     path("tools/", include("tools.urls", namespace="tools")),
-    # AI coach bots (attached to purchased products) — same /guides/ mount as IG.
-    path("guides/", include("bots.urls", namespace="bots")),
 
     # Redirects: studio → /projects/
     path("studio/", RedirectView.as_view(url="/portfolio/", permanent=True)),

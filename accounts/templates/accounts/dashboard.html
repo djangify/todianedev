@@ -33,7 +33,7 @@
 
   <h2 class="text-xl font-semibold mb-4">Your wishlist</h2>
   {% if favourites %}
-  <div class="grid gap-4 sm:grid-cols-2">
+  <div class="grid gap-4 sm:grid-cols-2 mb-12">
     {% for product in favourites %}
     <a href="{{ product.get_absolute_url }}" class="block border border-gray-200 rounded-xl p-4 hover:shadow-md transition">
       <p class="font-medium">{{ product.title }}</p>
@@ -41,7 +41,41 @@
     {% endfor %}
   </div>
   {% else %}
-  <p class="text-gray-500">No saved products yet.</p>
+  <p class="text-gray-500 mb-12">No saved products yet.</p>
+  {% endif %}
+
+  <h2 id="saved-results" class="text-xl font-semibold mb-4">Saved tool results</h2>
+  {% if saved_results %}
+  <div class="grid gap-4 sm:grid-cols-2">
+    {% for result in saved_results %}
+    <div class="border border-gray-200 rounded-xl p-4 flex flex-col">
+      <p class="font-medium mb-1">{{ result.label }}</p>
+      <p class="text-xs text-gray-500 mb-3">
+        {% if result.tool %}
+          From <a href="{{ result.tool.get_absolute_url }}" class="underline hover:no-underline">{{ result.tool_title|default:result.tool.title }}</a>
+        {% else %}
+          From {{ result.tool_title|default:"a tool that's since been removed" }}
+        {% endif %}
+        &middot; {{ result.created|date:"j M Y" }}
+      </p>
+      <div class="mt-auto flex items-center gap-3">
+        <a href="{% url 'accounts:saved_result_detail' result.pk %}" class="text-sm font-medium text-teal-700 hover:underline">View</a>
+        <form method="post" action="{% url 'accounts:saved_result_delete' result.pk %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{% url 'accounts:dashboard' %}#saved-results">
+          <button type="submit" class="text-sm text-red-600 hover:underline"
+                  onclick="return confirm('Delete this saved result? This can\'t be undone.');">
+            Delete
+          </button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-gray-500">
+    You haven't saved any tool results yet. <a href="{% url 'tools:list' %}" class="text-teal-700 underline">Browse tools</a>.
+  </p>
   {% endif %}
 </section>
 {% endblock %}

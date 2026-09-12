@@ -1,0 +1,395 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tool.title }} — Diane Corriette{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+{% block content %}
+
+{% if request.GET.preview == "1" and request.user.is_staff and not tool.published %}
+<div class="bg-yellow-100 text-yellow-900 text-center py-3 px-6 font-bold">
+    ⚠️ DRAFT Preview — this tool is not published and is only visible to staff
+</div>
+{% endif %}
+
+<section class="max-w-6xl mx-auto px-4 py-8">
+    <header class="mb-6">
+        {% if tool.access == "paid" %}
+        <span class="inline-block mb-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">Paid tool</span>
+        {% else %}
+        <span class="inline-block mb-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">Free tool</span>
+        {% endif %}
+        <h1 class="text-3xl font-bold">{{ tool.title }}</h1>
+        {% if tool.description %}
+        <div class="mt-2 text-gray-600">{{ tool.description|safe }}</div>
+        {% endif %}
+        {% if tool.show_link_top %}
+        <p class="mt-4">
+            <a href="{{ tool.link_url }}"
+               class="inline-flex items-center gap-1 bg-teal-700 text-white px-4 py-2 rounded-lg hover:bg-teal-800 transition font-medium">
+                {{ tool.link_text }}
+            </a>
+        </p>
+        {% endif %}
+    </header>
+
+    {% if show_save_box %}
+    <!--
+      "Save to your dashboard" explainer, shown at the top of the tool (above
+      the results) so visitors know the option exists before they start. Copy
+      differs by auth state; the actual Save control lives further down, next
+      to the results themselves, since there's nothing to save yet here.
+    -->
+    <div class="mb-8 rounded-lg p-6 sm:p-8 bg-teal-50">
+        <div class="max-w-6xl mx-auto text-center">
+            {% if request.user.is_authenticated %}
+            <h2 class="text-xl sm:text-2xl font-bold mb-2 text-teal-800">Save your results</h2>
+            <p class="text-gray-700">
+                Use the tool below to get your results, then click <strong>Save to my dashboard</strong> under your results to keep a copy you can find again any time. Find every saved result any time in your <a href="{% url 'accounts:dashboard' %}" class="underline text-teal-700">dashboard</a>.
+            </p>
+            {% else %}
+            <h2 class="text-xl sm:text-2xl font-bold mb-2 text-teal-800">Save your results to your dashboard</h2>
+            <p class="text-gray-700">
+                <a href="{% url 'account_signup' %}?next={{ request.path }}" class="underline text-teal-700">Register</a> for a free account, or log in, and you can save a copy of your results to come back to any time in your dashboard. Once you're logged in, click <strong>Save to my dashboard</strong> under your results.
+            </p>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if unlocked %}
+    <!--
+      Sandboxed iframe: the artifact's JS runs in an opaque origin (no
+      allow-same-origin), so it cannot touch this site's cookies/session/DOM.
+    -->
+    <div class="w-full rounded-lg overflow-hidden border border-gray-200 shadow-sm bg-white">
+        <iframe
+            id="tool-frame"
+            src="{{ tool.get_raw_url }}{% if request.GET.preview == '1' %}?preview=1{% endif %}"
+            title="{{ tool.title }}"
+            loading="lazy"
+            sandbox="allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads"
+            style="width:100%; min-height:400px; border:0; display:block;"
+        ></iframe>
+    </div>
+
+    {% if show_newsletter_box %}
+    <div class="mt-8 max-w-2xl mx-auto">
+        <div class="rounded-lg bg-white p-6 sm:p-8 text-center border-2 border-dashed border-amber-300">
+            <h2 class="text-xl sm:text-2xl font-bold mb-2 text-amber-700">{{ newsletter_title }}</h2>
+            {% if newsletter_message %}
+            <p class="text-gray-600 mb-5 max-w-xl mx-auto">{{ newsletter_message }}</p>
+            {% endif %}
+            <form id="tool-newsletter-form" class="space-y-3 max-w-md mx-auto text-left">
+                <div>
+                    <label for="tool-nl-name" class="block text-sm font-medium text-gray-700 mb-1">Name <span class="text-gray-400 font-normal">(optional)</span></label>
+                    <input type="text" id="tool-nl-name" name="name" autocomplete="name"
+                           class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                </div>
+                <div>
+                    <label for="tool-nl-email" class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
+                    <input type="email" id="tool-nl-email" name="email" required autocomplete="email"
+                           class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                </div>
+                <p id="tool-nl-status" class="text-sm hidden" role="status" aria-live="polite"></p>
+                <button type="submit" id="tool-nl-submit"
+                        class="w-full px-5 py-2.5 rounded-lg font-medium transition bg-amber-500 text-white hover:bg-amber-600 disabled:opacity-60">
+                    Send my results
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if show_save_box %}
+    <div class="mt-8 max-w-6xl mx-auto">
+        <div class="rounded-lg bg-gray-50 p-6 sm:p-8 text-center" data-tool-save-box data-tool-slug="{{ tool.slug }}">
+            {% if request.user.is_authenticated %}
+            <h2 class="text-xl sm:text-2xl font-bold mb-2 text-teal-800">Save these results</h2>
+            <p class="text-gray-600 mb-5 max-w-4xl mx-auto">
+                Keep a copy of what you made here so you can find it again in your dashboard.
+            </p>
+            <form id="tool-save-form" class="space-y-3 max-w-md mx-auto text-left">
+                <div>
+                    <label for="tool-save-label" class="block text-sm font-medium text-gray-700 mb-1">
+                        Name this result <span class="text-gray-400 font-normal">(optional)</span>
+                    </label>
+                    <input type="text" id="tool-save-label" name="label" maxlength="300"
+                           placeholder="e.g. My top 3 values"
+                           class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                </div>
+                <p id="tool-save-status" class="text-sm hidden" role="status" aria-live="polite"></p>
+                <button type="submit" id="tool-save-submit"
+                        class="w-full px-5 py-2.5 rounded-lg font-medium transition bg-teal-700 text-white hover:bg-teal-800 disabled:opacity-60">
+                    Save to my dashboard
+                </button>
+            </form>
+            {% else %}
+            <h2 class="text-xl sm:text-2xl font-bold mb-2 text-teal-800">Save these results</h2>
+            <p class="text-gray-600 mb-5 max-w-4xl mx-auto">
+                Sign in (or register — it's free) to save a copy of what you made here.
+            </p>
+            <p id="tool-save-status" class="text-sm mb-3 hidden" role="status" aria-live="polite"></p>
+            <button type="button" id="tool-save-signin"
+                    class="inline-block px-5 py-2.5 rounded-lg font-medium transition bg-teal-700 text-white hover:bg-teal-800">
+                Sign in to save your results
+            </button>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    <script>
+    (function () {
+        var frame = document.getElementById("tool-frame");
+        if (!frame) return;
+
+        var CSRF = "{{ csrf_token }}";
+
+        // Size the iframe to its content (no inner scroll).
+        window.addEventListener("message", function (e) {
+            if (e.source !== frame.contentWindow) return;
+            var h = (e.data || {}).__toolHeight;
+            if (typeof h === "number" && h > 0 && h < 50000) {
+                frame.style.height = h + "px";
+            }
+        });
+
+        // Ask the sandboxed iframe for a snapshot of its current results, then
+        // run cb({html,text}). Falls back to empty results after a short wait so
+        // a visitor action (sign-up, save) still goes through even if the tool
+        // never answers. Shared by the newsletter box and the save box below.
+        function withResults(cb) {
+            var id = "cap_" + Date.now() + "_" + Math.random().toString(36).slice(2);
+            var done = false;
+            function onMsg(e) {
+                if (e.source !== frame.contentWindow) return;
+                var r = (e.data || {}).__toolResults;
+                if (r && r.id === id) {
+                    done = true;
+                    window.removeEventListener("message", onMsg);
+                    cb({ html: r.html || "", text: r.text || "" });
+                }
+            }
+            window.addEventListener("message", onMsg);
+            try { frame.contentWindow.postMessage({ __toolCaptureRequest: id }, "*"); } catch (err) {}
+            setTimeout(function () {
+                if (!done) { window.removeEventListener("message", onMsg); cb({ html: "", text: "" }); }
+            }, 1200);
+        }
+
+        {% if show_newsletter_box %}
+        var form    = document.getElementById("tool-newsletter-form");
+        var nameEl  = document.getElementById("tool-nl-name");
+        var emailEl = document.getElementById("tool-nl-email");
+        var nlStatusEl = document.getElementById("tool-nl-status");
+        var nlSubmit  = document.getElementById("tool-nl-submit");
+        var NL_ENDPOINT = "{% url 'tools:email_results' slug=tool.slug %}";
+
+        function setNlStatus(msg, ok) {
+            nlStatusEl.textContent = msg;
+            nlStatusEl.className = "text-sm " + (ok ? "text-green-600" : "text-red-600");
+            nlStatusEl.classList.remove("hidden");
+        }
+
+        function sendNewsletter(results) {
+            var body = new URLSearchParams();
+            body.append("name", (nameEl.value || "").trim());
+            body.append("email", (emailEl.value || "").trim());
+            body.append("results_html", results.html);
+            body.append("results_text", results.text);
+
+            fetch(NL_ENDPOINT, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": CSRF,
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: body.toString(),
+            })
+            .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+            .then(function (res) {
+                if (res.ok && res.j.ok) {
+                    setNlStatus(res.j.message || "Sent! Check your inbox.", true);
+                    form.reset();
+                } else {
+                    setNlStatus((res.j && res.j.error) || "Something went wrong. Please try again.", false);
+                }
+            })
+            .catch(function () { setNlStatus("Network error. Please try again.", false); })
+            .finally(function () { nlSubmit.disabled = false; });
+        }
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            if (!(emailEl.value || "").trim()) { setNlStatus("Please enter your email address.", false); return; }
+            nlSubmit.disabled = true;
+            setNlStatus("Sending…", true);
+            withResults(sendNewsletter);
+        });
+        {% endif %}
+
+        {% if show_save_box %}
+        (function () {
+            var PENDING_KEY = "djangify_pending_tool_save";
+            var TOOL_SLUG = "{{ tool.slug|escapejs }}";
+            var TOOL_TITLE = "{{ tool.title|escapejs }}";
+            var SAVE_ENDPOINT = "{% url 'tools:save_result' slug=tool.slug %}";
+            var DASHBOARD_URL = "{% url 'accounts:dashboard' %}";
+            var statusEl = document.getElementById("tool-save-status");
+
+            function setSaveStatus(msg, ok) {
+                if (!statusEl) return;
+                statusEl.textContent = msg;
+                statusEl.className = "text-sm mb-3 " + (ok ? "text-green-600" : "text-red-600");
+                statusEl.classList.remove("hidden");
+            }
+
+            function showSaved(container) {
+                if (!container) return;
+                container.innerHTML =
+                    '<p class="text-green-600 font-medium">Saved — ' +
+                    '<a href="' + DASHBOARD_URL + '" class="underline">view it in your dashboard</a></p>';
+            }
+
+            function postSave(label, results, data) {
+                var body = new URLSearchParams();
+                body.append("label", label || TOOL_TITLE);
+                body.append("results_html", (results && results.html) || "");
+                body.append("results_text", (results && results.text) || "");
+                if (data) { body.append("data", JSON.stringify(data)); }
+                return fetch(SAVE_ENDPOINT, {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": CSRF,
+                        "X-Requested-With": "XMLHttpRequest",
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: body.toString(),
+                }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); });
+            }
+
+            var saveForm = document.getElementById("tool-save-form");
+            if (saveForm) {
+                var labelEl = document.getElementById("tool-save-label");
+                var saveSubmit = document.getElementById("tool-save-submit");
+                saveForm.addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    saveSubmit.disabled = true;
+                    setSaveStatus("Saving…", true);
+                    withResults(function (results) {
+                        postSave((labelEl.value || "").trim(), results, null)
+                            .then(function (res) {
+                                if (res.ok && res.j.ok) {
+                                    showSaved(saveForm.closest("div"));
+                                } else {
+                                    setSaveStatus((res.j && res.j.error) || "Something went wrong. Please try again.", false);
+                                    saveSubmit.disabled = false;
+                                }
+                            })
+                            .catch(function () {
+                                setSaveStatus("Network error. Please try again.", false);
+                                saveSubmit.disabled = false;
+                            });
+                    });
+                });
+            }
+
+            function stashAndRedirectToSignup(label, results, data) {
+                try {
+                    localStorage.setItem(PENDING_KEY, JSON.stringify({
+                        tool_slug: TOOL_SLUG,
+                        label: label || TOOL_TITLE,
+                        html: (results && results.html) || "",
+                        text: (results && results.text) || "",
+                        data: data || null,
+                        ts: Date.now(),
+                    }));
+                } catch (err) { /* localStorage unavailable — sign-in still works, just without carrying results */ }
+                window.location.href = "{% url 'account_signup' %}?next=" + encodeURIComponent(window.location.pathname);
+            }
+
+            var signinBtn = document.getElementById("tool-save-signin");
+            if (signinBtn) {
+                signinBtn.addEventListener("click", function () {
+                    signinBtn.disabled = true;
+                    setSaveStatus("One moment…", true);
+                    withResults(function (results) { stashAndRedirectToSignup(TOOL_TITLE, results, null); });
+                });
+            }
+
+            // Optional structured channel: a cooperating tool can request a save
+            // itself by posting parent.postMessage({ __toolSave: { label, data } }, "*").
+            // The tool can only *request* a save; this parent page — with the
+            // visitor already present — is what actually performs it.
+            window.addEventListener("message", function (e) {
+                if (e.source !== frame.contentWindow) return;
+                var payload = (e.data || {}).__toolSave;
+                if (!payload || typeof payload !== "object") return;
+                var label = (payload.label ? String(payload.label) : TOOL_TITLE).slice(0, 300);
+                var data = (payload.data && typeof payload.data === "object") ? payload.data : null;
+                {% if request.user.is_authenticated %}
+                setSaveStatus("Saving…", true);
+                postSave(label, { html: "", text: "" }, data)
+                    .then(function (res) {
+                        var container = saveForm ? saveForm.closest("div") : null;
+                        if (res.ok && res.j.ok) {
+                            showSaved(container);
+                        } else {
+                            setSaveStatus((res.j && res.j.error) || "Something went wrong. Please try again.", false);
+                        }
+                    })
+                    .catch(function () { setSaveStatus("Network error. Please try again.", false); });
+                {% else %}
+                stashAndRedirectToSignup(label, { html: "", text: "" }, data);
+                {% endif %}
+            });
+        })();
+        {% endif %}
+    })();
+    </script>
+    {% else %}
+    <!-- Paywall: this tool is paid and the visitor hasn't bought it. -->
+    <div class="max-w-xl mx-auto text-center border border-gray-200 rounded-lg shadow-sm bg-white p-8">
+        <div class="text-4xl mb-3">🔒</div>
+        <h2 class="text-xl font-semibold mb-2">This is a paid tool</h2>
+        <p class="text-gray-600 mb-6">Buy once and use it right here any time — nothing to download.</p>
+        {% if product %}
+        <a href="{% url 'shop:product_detail' slug=product.slug %}"
+           class="inline-block px-6 py-3 rounded-lg font-medium transition bg-teal-700 text-white hover:bg-teal-800">
+            Unlock for {{ site_settings.currency_symbol|default:"£" }}{{ product.current_price|floatformat:2 }}
+        </a>
+        {% else %}
+        <p class="text-gray-500">This tool isn't available for purchase yet.</p>
+        {% endif %}
+        {% if not request.user.is_authenticated %}
+        <p class="mt-4 text-sm text-gray-500">
+            Already bought it?
+            <a href="{% url 'account_login' %}?next={{ request.path }}" class="text-teal-700 underline">Log in</a> to open it.
+        </p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if tool.has_more_info %}
+    <section class="mt-10 max-w-3xl mx-auto">
+        {% if tool.more_info_title %}
+        <h2 class="text-2xl font-bold mb-3 text-teal-800">{{ tool.more_info_title }}</h2>
+        {% endif %}
+        {% if tool.more_info_description %}
+        <div class="text-gray-700">{{ tool.more_info_description|safe }}</div>
+        {% endif %}
+    </section>
+    {% endif %}
+
+    {% if tool.show_link_bottom %}
+    <footer class="mt-6 text-center">
+        <a href="{{ tool.link_url }}"
+           class="inline-flex items-center gap-1 bg-teal-700 text-white px-4 py-2 rounded-lg hover:bg-teal-800 transition font-medium">
+            {{ tool.link_text }}
+        </a>
+    </footer>
+    {% endif %}
+</section>
+
+{% endblock %}

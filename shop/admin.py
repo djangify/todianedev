@@ -555,6 +555,23 @@ class SiteSettingsAdmin(admin.ModelAdmin):
                 ),
             },
         ),
+        (
+            "Hosted Tools",
+            {
+                "fields": (
+                    "tools_saving_enabled",
+                    "tools_newsletter_enabled",
+                    "tools_newsletter_title",
+                    "tools_newsletter_message",
+                ),
+                "description": (
+                    "Site-wide switches for the /tools/ hosted-tool pages. Saving "
+                    "also needs 'Let visitors save their results' ticked on the "
+                    "individual tool. The newsletter box only shows to logged-out "
+                    "visitors on free tools."
+                ),
+            },
+        ),
     )
 
     def has_add_permission(self, request):

@@ -20,7 +20,3 @@ django-oauth-toolkit==3.3.0
 mcp==1.28.1
 starlette==1.3.1
 uvicorn[standard]==0.49.0
-# AI coach bots: Claude API + PDF knowledge extraction + session-report PDFs
-anthropic
-pypdf==4.3.1
-reportlab==4.5.1

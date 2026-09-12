@@ -223,6 +223,102 @@
 
     {% include 'partials/_pwa_install.html' %}
 
+    {% if request.user.is_authenticated %}
+    <!--
+      Resume a pending "save to my dashboard" from before sign-up.
+
+      A guest who clicks "Sign in to save your results" on a tool page stashes
+      a snapshot in localStorage and is sent to sign up. They may not land
+      back on that exact tool page afterwards, so this runs site-wide, on
+      every page, and completes the save wherever they end up.
+    -->
+    <script>
+    (function () {
+      var PENDING_KEY = "djangify_pending_tool_save";
+      var raw;
+      try { raw = localStorage.getItem(PENDING_KEY); } catch (err) { return; }
+      if (!raw) return;
+      var pending;
+      try { pending = JSON.parse(raw); } catch (err) { pending = null; }
+      if (!pending || !pending.tool_slug) {
+        try { localStorage.removeItem(PENDING_KEY); } catch (err) {}
+        return;
+      }
+      // A week-old stash is more likely stale/abandoned than wanted.
+      if (!pending.ts || (Date.now() - pending.ts) > 7 * 24 * 60 * 60 * 1000) {
+        try { localStorage.removeItem(PENDING_KEY); } catch (err) {}
+        return;
+      }
+
+      function toast(html) {
+        var t = document.createElement("div");
+        t.setAttribute("role", "status");
+        t.setAttribute("aria-live", "polite");
+        t.style.cssText =
+          "position:fixed;left:50%;bottom:20px;transform:translateX(-50%);" +
+          "z-index:70;max-width:calc(100% - 32px);background:#1a1a1a;color:#fff;" +
+          "font-family:system-ui,-apple-system,sans-serif;font-size:.9rem;" +
+          "padding:11px 16px;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.25);" +
+          "opacity:0;transition:opacity .3s ease;";
+        t.innerHTML = html;
+        document.body.appendChild(t);
+        requestAnimationFrame(function () { t.style.opacity = "1"; });
+        setTimeout(function () {
+          t.style.opacity = "0";
+          setTimeout(function () { t.remove(); }, 350);
+        }, 7000);
+      }
+
+      var saveUrl = "{% url 'tools:save_result' slug='PENDING_SLUG_PLACEHOLDER' %}".replace(
+        "PENDING_SLUG_PLACEHOLDER", encodeURIComponent(pending.tool_slug)
+      );
+      var dashboardUrl = "{% url 'accounts:dashboard' %}#saved-results";
+
+      var body = new URLSearchParams();
+      body.append("label", pending.label || "");
+      body.append("results_html", pending.html || "");
+      body.append("results_text", pending.text || "");
+      if (pending.data) { body.append("data", JSON.stringify(pending.data)); }
+
+      fetch(saveUrl, {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": "{{ csrf_token }}",
+          "X-Requested-With": "XMLHttpRequest",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: body.toString(),
+      })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          // A definitive answer (saved, or a real reason it can't be) —
+          // clear the stash either way. Retrying forever on a 403/404
+          // (feature turned off, tool gone, no access) would just nag on
+          // every page for something that isn't going to complete.
+          try { localStorage.removeItem(PENDING_KEY); } catch (err) {}
+
+          if (res.ok && res.j.ok) {
+            var label = pending.label ? '"' + pending.label + '"' : "your result";
+            toast(
+              "Saved " + label + " to your dashboard. " +
+              '<a href="' + dashboardUrl + '" style="color:#8ab4ff;text-decoration:underline;">View</a>'
+            );
+            var box = document.querySelector('[data-tool-slug="' + pending.tool_slug.replace(/"/g, '') + '"]');
+            if (box) {
+              box.innerHTML =
+                '<p class="text-green-600 font-medium">Saved — ' +
+                '<a href="' + dashboardUrl + '" class="underline">view it in your dashboard</a></p>';
+            }
+          }
+        })
+        .catch(function () {
+          // Network hiccup — leave the stash in place so the next page load
+          // tries again, rather than silently losing it.
+        });
+    })();
+    </script>
+    {% endif %}
+
     {% block extra_js %}{% endblock %}
   </body>
 </html>
