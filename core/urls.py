@@ -41,4 +41,5 @@ urlpatterns = [
         name="owning_your_platform",
     ),
     path("robots.txt", views.robots_txt, name="robots_txt"),
+    path("llms.txt", views.llms_txt, name="llms_txt"),
 ]

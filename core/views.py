@@ -4,6 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 from django.views.decorators.http import require_GET
 from blog.models import Post, Category
+from shop.models import Product
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django.http import Http404
@@ -119,9 +120,76 @@ def robots_txt(request):
         "",
         f"Sitemap: {sitemap_url}",
         "",
+        f"# llms.txt (plain-Markdown site summary for AI systems): {site_url}/llms.txt",
+        "",
         "# --- Brand Context ---",
         "# todiane.com - portfolio and writing by Django developer Diane Corriette.",
         "# Specialising in self-hosted, offline-first software and ecommerce tools.",
     ]
 
     return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
+@require_GET
+def llms_txt(request):
+    """
+    llms.txt: a plain-Markdown summary of the site for AI systems (ChatGPT,
+    Claude, Perplexity, etc.) to read directly, instead of having to parse
+    HTML. Auto-generated from live products (with their Product Knowledge,
+    where filled in) and published posts. Emerging convention (llmstxt.org),
+    separate from robots.txt, which only says what may be crawled, not what
+    the site actually is.
+    """
+    import html as html_lib
+
+    from django.utils.html import strip_tags
+
+    site_url = request.build_absolute_uri("/").rstrip("/")
+
+    lines = [
+        "# Diane Corriette, The Coach Who Codes",
+        "",
+        "> A Personal Growth Coach who learned to code at 57 and founded "
+        "Djangify, an independent eCommerce platform, documenting the "
+        "build-in-public journey of a life coach becoming a developer.",
+        "",
+    ]
+
+    products = Product.objects.filter(status="publish", is_active=True).order_by(
+        "order", "-created"
+    )
+    if products.exists():
+        lines.append("## Products")
+        for p in products:
+            url = f"{site_url}{p.get_absolute_url()}"
+            knowledge = p.get_knowledge()
+            problem = (knowledge.problem_solved if knowledge else "").strip()
+            desc = problem or (p.description or "")
+            desc = html_lib.unescape(strip_tags(desc)).strip()
+            desc = " ".join(desc.split())[:200]
+            price = f"£{p.current_price}"
+            bit = f"- [{p.title}]({url})"
+            if desc:
+                bit += f": {desc}"
+            if price:
+                bit += f" ({price})"
+            lines.append(bit)
+        lines.append("")
+
+    posts = Post.objects.filter(
+        status="published", publish_date__lte=timezone.now()
+    ).order_by("-publish_date")[:50]
+    if posts:
+        lines.append("## Articles")
+        for post in posts:
+            url = f"{site_url}{post.get_absolute_url()}"
+            desc = (post.get_meta_description or "").strip()
+            bit = f"- [{post.title}]({url})"
+            if desc:
+                bit += f": {desc}"
+            lines.append(bit)
+        lines.append("")
+
+    return HttpResponse(
+        "\n".join(lines).strip() + "\n", content_type="text/markdown; charset=utf-8"
+    )
