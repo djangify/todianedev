@@ -283,7 +283,7 @@ TINYMCE_DEFAULT_CONFIG = {
 # DJANGIFY eCOMMERCE SITE BUILDER — shop / tools / MCP
 # ================================================================
 
-SITE_NAME = env("SITE_NAME", default="todiane.com")
+SITE_NAME = env("SITE_NAME", default="dianecorriette.com")
 
 # --- Shop / cart ---
 CART_SESSION_ID = "cart"

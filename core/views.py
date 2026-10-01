@@ -99,7 +99,7 @@ def robots_txt(request):
     sitemap_url = f"{site_url}/sitemap.xml"
 
     lines = [
-        "# robots.txt for todiane.com",
+        "# robots.txt for dianecorriette.com",
         "# Enables modern search and AI engines to crawl public sections.",
         "",
         "User-agent: *",
@@ -123,7 +123,7 @@ def robots_txt(request):
         f"# llms.txt (plain-Markdown site summary for AI systems): {site_url}/llms.txt",
         "",
         "# --- Brand Context ---",
-        "# todiane.com - portfolio and writing by Django developer Diane Corriette.",
+        "# dianecorriette.com - portfolio and writing by Django developer Diane Corriette.",
         "# Specialising in self-hosted, offline-first software and ecommerce tools.",
     ]
 

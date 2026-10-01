@@ -37,10 +37,10 @@ class PortfolioSitemap(Sitemap):
     priority = 0.7
 
     def items(self):
-        return Portfolio.objects.filter(published=True)
+        return Portfolio.objects.filter(status="published")
 
     def lastmod(self, obj):
-        return obj.updated if hasattr(obj, "updated") else None
+        return obj.updated_at
 
 
 class InfoPageSitemap(Sitemap):
@@ -51,7 +51,7 @@ class InfoPageSitemap(Sitemap):
         return InfoPage.objects.filter(published=True)
 
     def lastmod(self, obj):
-        return obj.updated if hasattr(obj, "updated") else None
+        return obj.last_updated
 
 
 sitemaps = {
