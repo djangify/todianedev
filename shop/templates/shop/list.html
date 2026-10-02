@@ -5,10 +5,10 @@
 
 <div class="container mx-auto bg-white px-6 py-12">
     <h1 class="text-3xl text-center mb-4 font-semibold">
-        Custom Django Development and Email Coaching
+        Diane Corriette - Software Developer
     </h1>
-    <h2 class="text-2xl text-center mb-10 font-accent">
-        I'm a Life Coach who learned to code at 57 and, with the help of AI, founded Djangify. Hire me to build your Django site, or work with me by email.
+    <h2 class="text-1xl max-w-4xl mx-auto text-center mb-10 font-accent">
+        Available for freelance work, specialising in software development, ecommerce and AI. See my Portfolio for examples of my work.  
     </h2>
     <!--search bar-->
     <form method="get" action="." class="max-w-xl mx-auto mb-8">
@@ -22,7 +22,7 @@
             value="{{ request.GET.q }}"
             class="w-full px-4 py-3 text-sm focus:outline-none"
             />
-            <button type="submit" class="bg-teal-700 text-white px-6 font-semibold text-sm hover:bg-teal-800">
+            <button type="submit" class="bg-brand-primary text-white px-6 font-semibold text-sm hover:bg-brand-dark">
             Search
             </button>
         </div>
@@ -34,7 +34,7 @@
         <!-- Mobile Filter Button (hidden on larger screens) -->
         <button id="filterToggle" 
                 data-collapse-toggle="categories-grid"
-                class="lg:hidden w-full mb-4 px-4 py-2 bg-teal-700 text-white rounded-lg flex items-center justify-between">
+                class="lg:hidden w-full mb-4 px-4 py-2 bg-brand-primary text-white rounded-lg flex items-center justify-between">
             <span>Filter by Category</span>
             <svg class="w-5 h-5 transition-transform" id="filterIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -46,14 +46,14 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                 <!-- All Products Tab -->
                 <a href="{% url 'shop:product_list' %}" 
-                   class="text-center text-teal-700 hover:bg-blue-100 px-4 py-2 rounded-lg {% if not current_category %}bg-slate-100 font-semibold{% endif %}">
+                   class="text-center text-brand-primary hover:bg-brand-light px-4 py-2 rounded-lg {% if not current_category %}bg-slate-100 font-semibold{% endif %}">
                     All Products
                 </a>
                 
                 <!-- Dynamic Category Tabs -->
                 {% for category in categories %}
                 <a href="{{ category.get_absolute_url }}" 
-                   class="text-center text-teal-700 hover:bg-slate-100 px-4 py-2 rounded-lg {% if current_category and current_category.id == category.id %}bg-slate-100 font-semibold{% endif %}">
+                   class="text-center text-brand-primary hover:bg-slate-100 px-4 py-2 rounded-lg {% if current_category and current_category.id == category.id %}bg-slate-100 font-semibold{% endif %}">
                     {{ category.name }}
                 </a>
                 {% endfor %}
@@ -116,7 +116,7 @@
 
                 {% for num in products.paginator.page_range %}
                 {% if products.number == num %}
-                <span class="px-4 py-2 bg-teal-700 text-white border rounded">{{ num }}</span> 
+                <span class="px-4 py-2 bg-brand-primary text-white border rounded">{{ num }}</span> 
                 {% else %}
                 <a href="?page={{ num }}" class="px-4 py-2 bg-gray-100 border rounded hover:bg-gray-200">{{ num }}</a>
                 {% endif %}

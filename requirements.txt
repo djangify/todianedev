@@ -10,7 +10,7 @@ gunicorn
 Pillow
 stripe
 beautifulsoup4
-adminita
+adminita==0.2.0
 
 # --- Djangify eCommerce Site Builder: shop, tools & Claude MCP connector ---
 djangorestframework
