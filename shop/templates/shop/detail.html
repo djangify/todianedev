@@ -8,7 +8,7 @@
   {% else %}
     <meta property="og:description" content="{{ product.description|striptags|truncatewords:25 }}" />
   {% endif %}
-  <meta property="og:image" content="{{ product.get_image_url|default:'https://inspirationalguidance.com/static/images/placeholder.png' }}" />
+  <meta property="og:image" content="{{ product.get_image_url|default:'https://www.dianecorriette.com/static/images/dianecorriette.webp' }}" />
   <meta property="og:url" content="{{ request.build_absolute_uri }}" />
   <meta property="og:type" content="product" />
 
@@ -20,7 +20,7 @@
   {% else %}
     <meta name="twitter:description" content="{{ product.description|striptags|truncatewords:25 }}" />
   {% endif %}
-  <meta name="twitter:image" content="{{ product.get_image_url|default:'https://inspirationalguidance.com/static/images/ig-header-logo.png' }}" />
+  <meta name="twitter:image" content="{{ product.get_image_url|default:'https://www.dianecorriette.com/static/images/dianecorriette.webp' }}" />
 {% endblock %}
 
 {% block schema %}

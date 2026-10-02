@@ -1,4 +1,4 @@
-"""MCP tool implementations for Inspirational Guidance.
+"""MCP tool implementations for this site.
 
 Thin, safe wrappers over the site's own Django models. The write tools cover the
 blog (the ``news.Post`` model) — create, edit and SEO — plus read helpers so
