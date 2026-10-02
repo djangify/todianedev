@@ -67,7 +67,7 @@ def send_admin_new_order_email(order):
         to_email = [settings.DEFAULT_FROM_EMAIL]
 
         message = (
-            f"A new order has been completed on dianecorriette.com.\n\n"
+            f"A new order has been completed on Inspirational Guidance.\n\n"
             f"Order ID: {order.order_id}\n"
             f"Customer: {order.email}\n"
             f"Status: {order.status}\n"

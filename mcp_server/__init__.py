@@ -1,4 +1,4 @@
-"""Claude MCP connector for this site.
+"""Inspirational Guidance MCP connector.
 
 Lets the site owner connect this site to Claude as a custom connector. Django
 (django-oauth-toolkit) is the OAuth Authorization Server; a small ASGI sidecar

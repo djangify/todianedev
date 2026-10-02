@@ -7,10 +7,10 @@ the main gunicorn/Django stack:
 
 Env:
   MCP_OAUTH_ISSUER   base URL of the Django Authorization Server (this site),
-                     e.g. https://www.dianecorriette.com — Claude
+                     e.g. https://www.inspirationalguidance.com — Claude
                      discovers the OAuth endpoints from here.
   MCP_RESOURCE_URL   public URL of this sidecar's /mcp endpoint,
-                     e.g. https://www.dianecorriette.com/mcp
+                     e.g. https://www.inspirationalguidance.com/mcp
   MCP_DEV_TOKEN      optional — a static token for local/Inspector testing.
                      Leave unset in real deployments.
   MCP_ALLOWED_HOSTS  optional — comma-separated Host allowlist; when set, DNS
@@ -125,7 +125,7 @@ mcp.add_tool(
 
 
 async def health(_request: Request) -> JSONResponse:
-    return JSONResponse({"status": "ok", "service": "todiane-mcp"})
+    return JSONResponse({"status": "ok", "service": "inspirational-mcp"})
 
 
 # The streamable-HTTP Starlette app carries the session-manager lifespan and the
