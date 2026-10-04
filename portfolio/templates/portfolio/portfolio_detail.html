@@ -84,21 +84,21 @@
     {% if portfolio.overview %}
     <div class="space-y-4">
       <h2 class="text-2xl font-semibold text-[color:var(--color-font-main)]">Overview</h2>
-      <div class="prose max-w-none">{{ portfolio.overview|safe }}</div>
+      <div class="prose page-content max-w-none">{{ portfolio.overview|safe }}</div>
     </div>
     {% endif %}
 
     {% if portfolio.technical_details %}
     <div class="space-y-4">
       <h2 class="text-2xl mt-8 font-semibold text-[color:var(--color-font-main)]">Technical Details</h2>
-      <div class="prose max-w-none">{{ portfolio.technical_details|safe }}</div>
+      <div class="prose page-content max-w-none">{{ portfolio.technical_details|safe }}</div>
     </div>
     {% endif %}
 
     {% if portfolio.results %}
     <div class="space-y-4 mt-8 ">
       <h2 class="text-2xl font-semibold text-[color:var(--color-font-main)]">Results</h2>
-      <div class="prose max-w-none">{{ portfolio.results|safe }}</div>
+      <div class="prose page-content max-w-none">{{ portfolio.results|safe }}</div>
     </div>
     {% endif %}
   </article>
