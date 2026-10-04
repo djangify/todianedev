@@ -262,15 +262,21 @@ TINYMCE_DEFAULT_CONFIG = {
     "paste_as_text": False,
     # Allow required HTML (style added for image alignment)
     "valid_elements": (
-        "p,br,b,strong,i,em,u,s,strike,sub,sup,"
-        "h1,h2,h3,h4,h5,h6,"
-        "ul,ol,li,"
-        "a[href|target|title],"
+        "p[class|style],br,b,strong,i,em,u,s,strike,sub,sup,"
+        "h1[id|class],h2[id|class],h3[id|class],h4[id|class],h5[id|class],h6[id|class],"
+        "ul[class],ol[class],li[class],"
+        "a[href|target|title|id|name|rel|class|style],"
         "img[src|alt|title|width|height|class|style],"
-        "table[border|cellspacing|cellpadding],thead,tbody,tr,"
-        "th[colspan|rowspan],td[colspan|rowspan],"
-        "blockquote,pre,code,"
-        "div[class|style],span[class|style],"
+        # Content blocks: class/style allowed on tables so the .cb-table styling survives
+        "table[border|cellspacing|cellpadding|class|style],caption,thead[class],tbody[class],"
+        "tr[class|style],th[colspan|rowspan|scope|class|style],td[colspan|rowspan|class|style],"
+        "blockquote[class],pre[class],code[class],"
+        "div[id|class|style],span[class|style],"
+        "section[id|class|style],figure[class],figcaption,details[class],summary,"
+        "iframe[src|width|height|frameborder|allow|allowfullscreen|title|loading|class|style],"
+        "video[src|width|height|controls|poster|preload|class|style],"
+        "audio[src|controls|preload|class|style],"
+        "source[src|type],"
         "hr"
     ),
     # URL handling
