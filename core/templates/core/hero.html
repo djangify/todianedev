@@ -62,16 +62,26 @@
     <!-- Email Signup -->
     <div class="flex items-center justify-center mb-10 lg:mb-0">
       <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8 lg:p-10 border border-[color:var(--color-brand-primary)]/10">
-        <h2 class="text-2xl lg:text-3xl font-bold text-[color:var(--color-brand-primary)] mb-3">My Newsletter</h2>
+        <h2 class="text-2xl lg:text-3xl font-bold text-[color:var(--color-brand-primary)] mb-3">Follow along</h2>
         <p class="text-[color:var(--color-font-main)] leading-relaxed mb-6">
-          I share what I'm learning about growing an independent digital business and using AI to assist me. Register to follow along.
+          I'm a life coach who learned to code. I sell digital products and share what I'm learning about building a one-person business with AI as my assistant. Register to follow along.
         </p>
 
-        <!-- MailerLite embedded form (todiane.com) -->
-        <div id="mlb2-45803591" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-45803591">
+        <!-- MailerLite embedded form (Djangify list) -->
+        <div id="mlb2-43397754" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-43397754">
           <div class="ml-form-embedWrapper embedForm">
             <div class="ml-form-embedBody row-form">
-              <form class="ml-block-form flex flex-col gap-3" action="https://assets.mailerlite.com/jsonp/2151711/forms/198255161992283428/subscribe" data-code="" method="post" target="_blank">
+              <form class="ml-block-form flex flex-col gap-3" action="https://assets.mailerlite.com/jsonp/2151711/forms/192166905200510183/subscribe" data-code="" method="post" target="_blank">
+                <label for="signup-name" class="sr-only">First name</label>
+                <input
+                  id="signup-name"
+                  aria-label="name"
+                  type="text"
+                  name="fields[name]"
+                  autocomplete="given-name"
+                  placeholder="First name"
+                  class="form-control w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand-primary)] text-[color:var(--color-font-main)]"
+                />
                 <label for="signup-email" class="sr-only">Email address</label>
                 <input
                   id="signup-email"
@@ -95,7 +105,7 @@
               </form>
             </div>
             <div class="ml-form-successBody row-success" style="display:none">
-              <p class="text-[color:var(--color-brand-primary)] font-semibold text-center py-3">Thank you — check your inbox to confirm your subscription.</p>
+              <p class="text-[color:var(--color-brand-primary)] font-semibold text-center py-3">Thank you, check your inbox to confirm your subscription.</p>
             </div>
           </div>
         </div>
@@ -114,14 +124,14 @@
 
   <!-- MailerLite webforms -->
   <script>
-    function ml_webform_success_45803591() {
+    function ml_webform_success_43397754() {
       var $ = ml_jQuery || jQuery;
-      $('.ml-subscribe-form-45803591 .row-success').show();
-      $('.ml-subscribe-form-45803591 .row-form').hide();
+      $('.ml-subscribe-form-43397754 .row-success').show();
+      $('.ml-subscribe-form-43397754 .row-form').hide();
     }
   </script>
   <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
   <script>
-    fetch("https://assets.mailerlite.com/jsonp/2151711/forms/198255161992283428/takel")
+    fetch("https://assets.mailerlite.com/jsonp/2151711/forms/192166905200510183/takel")
   </script>
 </div>

@@ -193,7 +193,7 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
-ADMIN_EMAIL = "hello@todiane.com"
+ADMIN_EMAIL = "djangify@gmail.com"
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
@@ -207,6 +207,28 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="hello@todiane.com")
 
+BRAVO_API_KEY = env("BRAVO_API_KEY")
+BRAVO_GROUP_ID = env("BRAVO_GROUP_ID")
+
+# Marketing list (Brevo): people who confirm their email and tick "keep me updated"
+# join the Djangify list (list 4). These read the existing BRAVO_* values in .env.
+def _brevo_key(value):
+    """Brevo shows keys either as xkeysib-... or as a base64 wrapper of
+    {"api_key": "xkeysib-..."}. The API only accepts the raw xkeysib-... form."""
+    value = (value or "").strip()
+    if value.startswith("eyJ"):
+        import base64
+        import json
+
+        try:
+            return json.loads(base64.b64decode(value + "=" * (-len(value) % 4)))["api_key"]
+        except Exception:  # noqa: BLE001
+            return value
+    return value
+
+
+BREVO_API_KEY = _brevo_key(env("BREVO_API_KEY", default=BRAVO_API_KEY))
+BREVO_LIST_ID = env.int("BREVO_LIST_ID", default=int(BRAVO_GROUP_ID))
 
 # ================================================================
 # TINYMCE CONFIGURATION (Self-hosted, FREE plugins only)

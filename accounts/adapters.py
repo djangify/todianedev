@@ -21,5 +21,12 @@ class CustomAccountAdapter(DefaultAccountAdapter):
 
         if commit:
             user.save()
+            # Marketing consent: the signup form has an untick-by-default
+            # "keep me updated" box. Only people who tick it can be added to the
+            # mailing list (after they confirm their email address).
+            profile = getattr(user, "profile", None)
+            if profile is not None:
+                profile.is_subscribed = bool(request.POST.get("subscribe"))
+                profile.save(update_fields=["is_subscribed"])
 
         return user
