@@ -1,7 +1,7 @@
 {% load static %}{
   "id": "/?source=pwa",
-  "name": "ToDiane — The Coach Who Codes",
-  "short_name": "ToDiane",
+  "name": "Diane Corriette — The Coach Who Codes",
+  "short_name": "Diane Corriette",
   "description": "The Coach Who Codes. I'm building an independent digital business using software I built myself and AI as my assistant. Follow along if you are curious about how to use AI in your own business.",
   "start_url": "/?source=pwa",
   "scope": "/",

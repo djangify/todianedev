@@ -1,4 +1,4 @@
-{% load static %}// ToDiane — The Coach Who Codes — service worker (installable PWA + offline blog reading)
+{% load static %}// Diane Corriette — The Coach Who Codes — service worker (installable PWA + offline blog reading)
 // Bump CACHE_VERSION whenever you want every installed app to refresh its caches.
 const CACHE_VERSION = 'todiane-pwa-v1';
 const BLOG_CACHE = 'todiane-blog-v1';

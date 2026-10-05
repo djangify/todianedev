@@ -1,6 +1,6 @@
 {% load static %}
 <!-- PWA install invite banner -->
-<div id="pwa-install-banner" role="dialog" aria-label="Add ToDiane to your phone"
+<div id="pwa-install-banner" role="dialog" aria-label="Add Diane Corriette to your phone"
   style="display:none; position:fixed; left:50%; transform:translateX(-50%); bottom:1rem; z-index:9999;
          max-width:420px; width:calc(100% - 2rem); background:#ffffff; border:1px solid #e2e8f0;
          border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,0.18); padding:14px 16px; font-family:inherit;">
@@ -9,7 +9,7 @@
          style="border-radius:10px; flex:0 0 auto;">
     <div style="flex:1 1 auto; min-width:0;">
       <div style="font-weight:700; color:#0f172a; font-size:15px; display:flex; align-items:center; gap:6px;">
-        <span>Add the ToDiane app</span>
+        <span>Add the Diane Corriette app</span>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4c1d95" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;">
           <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"></path>
@@ -60,7 +60,7 @@
       );
     }
     function dismissed() { return safeGet(DISMISS_KEY) === "1"; }
-    // ToDiane's cookie banner stores localStorage "cookieConsent" = "accepted" | "declined".
+    // Diane Corriette's cookie banner stores localStorage "cookieConsent" = "accepted" | "declined".
     function cookiesHandled() {
       var c = safeGet("cookieConsent");
       return c === "accepted" || c === "declined";
