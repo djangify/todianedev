@@ -1,0 +1,254 @@
+<!--
+  CONTENT BOX: Product Grid (six cards, centre featured card)
+
+  HOW TO USE
+  1. In the editor, click the Source (<>) button.
+  2. Paste everything from the <style> tag down to the last </div>.
+  3. Click OK / Save.
+
+  NOTHING ELSE IS NEEDED. No Tailwind, no scripts, no template tags.
+  Everything is scoped to .pgrid so it can't affect the rest of the page.
+
+  TO CUSTOMISE
+  - Colours: change the four values under ".pgrid { ... }" below.
+  - Text and links: edit them directly in the HTML below.
+  - Add a card: copy any <div class="pgrid-card ..."> block and paste it
+    inside a column. Remove one by deleting its block.
+  - Card colour: change the class "pgrid-green" to pgrid-rose, pgrid-purple
+    or pgrid-plain.
+-->
+<style>
+  .pgrid {
+    --pg-primary: #1f4d3a;   /* headings, big number, button */
+    --pg-accent:  #2f7a5a;   /* button hover, link hover */
+    --pg-text:    #374151;   /* body text */
+    --pg-border:  #d9e2dc;   /* plain card border */
+    max-width: 72rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    color: var(--pg-text);
+    font-family: inherit;
+  }
+  .pgrid *, .pgrid *::before, .pgrid *::after { box-sizing: border-box; }
+
+  .pgrid-label {
+    margin: 0 0 .25rem;
+    font-size: .875rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--pg-accent);
+  }
+  .pgrid-heading {
+    margin: 0 0 1.5rem;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 600;
+    color: var(--pg-text);
+  }
+
+  .pgrid-cols { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  .pgrid-col  { display: flex; flex-direction: column; gap: 1rem; }
+
+  .pgrid-card {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    padding: 1.5rem;
+    text-align: center;
+    background: #fff;
+    border: 1px solid var(--pg-border);
+    border-radius: .75rem;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .pgrid-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .12);
+  }
+  .pgrid-card > * { position: relative; }  /* keep content above the corner circle */
+
+  /* colour variants */
+  .pgrid-green  { background: linear-gradient(135deg, #ecfdf5, #fff); border-color: #a7f3d033; --tint: #d1fae5; --ink: #059669; }
+  .pgrid-rose   { background: linear-gradient(135deg, #fff1f2, #fff); border-color: #fecdd333; --tint: #ffe4e6; --ink: #e11d48; }
+  .pgrid-purple { background: linear-gradient(135deg, #faf5ff, #fff); border-color: #e9d5ff66; --tint: #f3e8ff; --ink: #9333ea; }
+  .pgrid-plain  { --tint: #eef3f0; --ink: var(--pg-primary); }
+
+  /* decorative circle in the top-right corner */
+  .pgrid-card::before {
+    content: "";
+    position: absolute;
+    top: -2rem; right: -2rem;
+    width: 8rem; height: 8rem;
+    border-radius: 50%;
+    background: var(--tint);
+    opacity: .6;
+    transition: transform .5s ease;
+  }
+  .pgrid-card:hover::before { transform: scale(1.5); }
+
+  .pgrid-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem; height: 3rem;
+    margin: 0 auto 1rem;
+    border-radius: 1rem;
+    background: var(--tint);
+    color: var(--ink);
+    transition: transform .3s ease;
+  }
+  .pgrid-card:hover .pgrid-icon { transform: scale(1.1); }
+  .pgrid-icon svg { width: 1.75rem; height: 1.75rem; }
+
+  .pgrid-card h3 {
+    margin: 0 0 .5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--pg-primary);
+  }
+  .pgrid-card p { margin: 0 0 1rem; font-size: 1rem; line-height: 1.6; }
+
+  .pgrid-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+    font-weight: 500;
+    color: var(--pg-primary);
+    text-decoration: none;
+    transition: color .2s ease;
+  }
+  .pgrid-link:hover { color: var(--pg-accent); }
+  .pgrid-link svg { width: 1rem; height: 1rem; }
+
+  /* featured (tall centre) card */
+  .pgrid-featured { flex: 1.6; }
+  .pgrid-rule {
+    width: 6rem; height: .25rem;
+    margin: 0 auto 1.5rem;
+    border-radius: 999px;
+    background: var(--pg-primary);
+  }
+  .pgrid-kicker {
+    margin: 0 0 .5rem !important;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--pg-primary);
+  }
+  .pgrid-stat {
+    margin: 0 0 .5rem !important;
+    font-size: 4rem;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--pg-primary);
+  }
+  .pgrid-featured p.pgrid-sub { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+  .pgrid-btn {
+    display: inline-block;
+    padding: .75rem 1.5rem;
+    border: 1px solid var(--pg-accent);
+    border-radius: .375rem;
+    background: var(--pg-primary);
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background .2s ease;
+  }
+  .pgrid-btn:hover { background: var(--pg-accent); color: #fff; }
+
+  @media (min-width: 768px) {
+    .pgrid { padding: 0 1.5rem; }
+    .pgrid-heading { font-size: 2rem; }
+    .pgrid-cols { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .pgrid-col  { gap: 1.5rem; }
+    .pgrid-card { padding: 2rem; }
+    .pgrid-stat { font-size: 4.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pgrid-card, .pgrid-card::before, .pgrid-icon { transition: none; }
+    .pgrid-card:hover, .pgrid-card:hover .pgrid-icon, .pgrid-card:hover::before { transform: none; }
+  }
+</style>
+
+<div class="pgrid">
+  <p class="pgrid-label">Self-Hosting Advocate</p>
+  <h2 class="pgrid-heading">I built the systems I use to run my business</h2>
+
+  <div class="pgrid-cols">
+
+    <!-- COLUMN 1 -->
+    <div class="pgrid-col">
+
+      <div class="pgrid-card pgrid-green">
+        <div class="pgrid-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        </div>
+        <h3>Djangify eCommerce System</h3>
+        <p>A complete self-hosted eCommerce system for professionals who sell knowledge, expertise and digital products. Anything from PDFs to audio and art. Includes a shop, blog, linkhub, space for documentation and more.</p>
+        <a class="pgrid-link" href="/djangify/">More On Djangify
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <div class="pgrid-card pgrid-plain">
+        <div class="pgrid-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+        </div>
+        <h3>Invoice Generator</h3>
+        <p>Create professional PDF invoices in seconds with your own self-hosted invoice generator. Available on GitHub. Open source. Appreciate a star!</p>
+        <a class="pgrid-link" href="/invoice-generator/">More Invoice Info
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+      </div>
+
+    </div>
+
+    <!-- COLUMN 2 (featured card + one card) -->
+    <div class="pgrid-col">
+
+      <div class="pgrid-card pgrid-plain pgrid-featured">
+        <div class="pgrid-rule"></div>
+        <p class="pgrid-kicker">Portfolio</p>
+        <p class="pgrid-stat">18</p>
+        <p class="pgrid-sub">Applications</p>
+        <p>From eCommerce to educational platforms - I design and build tools with one question in mind: will this still be useful a year from now? I’m only interested in creating practical things people can rely on.</p>
+        <a class="pgrid-btn" href="/portfolio/">View My Work</a>
+      </div>
+
+      <div class="pgrid-card pgrid-rose">
+        <div class="pgrid-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+        </div>
+        <h3>Adminita</h3>
+        <p>Easy to install. Modern Django Admin Theme. Available from PyPI.</p>
+        <a class="pgrid-link" href="https://adminita.todiane.com" target="_blank" rel="noopener">More On Adminita
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" stroke-width="2"/></svg></a>
+      </div>
+
+    </div>
+
+    <!-- COLUMN 3 -->
+    <div class="pgrid-col">
+
+      <div class="pgrid-card pgrid-purple">
+        <div class="pgrid-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        </div>
+        <h3>DeskLedger</h3>
+        <p>Desk Ledger is a privacy-first bookkeeping software app for UK sole traders. Run locally or self-host.</p>
+        <a class="pgrid-link" href="/deskledger/">More Desk Ledger Info
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <div class="pgrid-card pgrid-plain">
+        <div class="pgrid-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
+        </div>
+        <h3>Content Planning Studio</h3>
+        <p>A downloadable workspace app that turns a finished product into a 90-day traffic and sales plan — three linked 30-day phases telling you exactly what to focus on each day. No guesswork, no monthly fee.</p>
+        <a class="pgrid-link" href="/portfolio/content-planning-studio/">See how I drive traffic
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
